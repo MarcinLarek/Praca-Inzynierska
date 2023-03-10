@@ -10,7 +10,10 @@
 
 ## Temat projektu
 
-### “Projekt turowej gry action rpg”
+Projekt turowej gry action rpg
+
+## Opis projektu
+
 Planujemy stworzyć działający projekt gry, który będzie rodzajem
 technologicznego demo,pozwalającym na praktyczne zaprezentowanie działania
 naszych technologii. Będzie to jednocześnie podłoże do dalszego rozwijania gry
@@ -33,13 +36,9 @@ oddziału będzie miał swój własny sprzęt wpływający na jego statystyki. P
 rozgrywki będzie również możliwość zdobycia lepszego ekwipunku. Po powrocie do
 bazy będziemy mogli sprzedać zbędny "łup" u handlarza.  
 
-## Opis projektu
-
-Tu wpisz opis projektu
-
 ## Status projektu
 
-- [ ] Ustalenie tematu
+- [X] Ustalenie tematu
 - [ ] Ustalenie celów projektu
 - [ ] Sporządzenie harmonogramu pracy i indywidualnych zasad zaliczenia seminarium
 - [ ] Realizacja projektu
