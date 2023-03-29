@@ -216,7 +216,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6230760576594608553, guid: 36285e93bba026546a788cbec6d48a5d, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6230760576594608553, guid: 36285e93bba026546a788cbec6d48a5d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -294,7 +294,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &901399220
 MonoBehaviour:
@@ -333,3 +333,17 @@ MonoBehaviour:
   - {fileID: 2673647865548792246, guid: f19b4cd5436954c41adbd492ce5a8785, type: 3}
   - {fileID: 7883305535195675485, guid: 139013ec3bd02e44291a035f83e79568, type: 3}
   closedRoom: {fileID: 7704725731372482707, guid: cde6a976d59bb5d4e8c3e82b6d155c35, type: 3}
+  rooms: []
+  waitTime: 3
+  bossroom:
+  - {fileID: 7704725731372482707, guid: 73f33a17a59289049ad10f85eaa30597, type: 3}
+  - {fileID: 7827080619850558504, guid: 6dd11f2cbc13e804494c3316854af3af, type: 3}
+  - {fileID: 867414658772483044, guid: 4e5cdeb01f75cae458942df50aa483be, type: 3}
+  - {fileID: 6360279257075718254, guid: 5003b6b3194786c4d952e76a0c59038f, type: 3}
+  - {fileID: 1864380014025839111, guid: 41022a019e5f7d64c8f7d43565fcb190, type: 3}
+  - {fileID: 4835931371617406774, guid: d71b0293f91339c40a2d966ba7210f06, type: 3}
+  - {fileID: 4391503827687941095, guid: 029a06f472ffbd34fa7d8218ea548b06, type: 3}
+  - {fileID: 4735799148642795721, guid: 9b6d3a25412668c46963f85adc788da1, type: 3}
+  - {fileID: 7883305535195675485, guid: 8d713e40042412e43b9697df779f0052, type: 3}
+  - {fileID: 6602576227054168235, guid: a7f3cd58f12fda344b10026de2292483, type: 3}
+  - {fileID: 2673647865548792246, guid: fc3c87d33c4d2614792f46e457c5e798, type: 3}
