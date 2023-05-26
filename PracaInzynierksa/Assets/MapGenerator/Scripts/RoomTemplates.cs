@@ -26,7 +26,7 @@ public class RoomTemplates : MonoBehaviour
             // Poniewa¿ bierzemy najnowszy wygenrowany pokój z naszej listy wygenerwoanych pokoi (Najnowszy bedzie najdalej), musimy sprawdziæ czy nie jest to pusty
             // pokój, który s³u¿y do zamykania dziur na kosmos. Jeœli tak jest to bierzemy przedostatni (zmieniamy rooms.count -1 na rooms.count -2)
             // G³ówny opis tego co siê dzieje jest w elsie. Ten pierwszy warunek jest analogiczny z t¹ ró¿nic¹ ¿e bierzemy inny pokój z listy
-            if (rooms[rooms.Count - 1].name == "closedRoom")
+            if (rooms[rooms.Count - 1].name == "closedRoom(Clone)")
             {
                 string clone = "(Clone)";
                 string bossroomname = "Boss-" + rooms[rooms.Count - 2].name.Replace(clone, ""); 
