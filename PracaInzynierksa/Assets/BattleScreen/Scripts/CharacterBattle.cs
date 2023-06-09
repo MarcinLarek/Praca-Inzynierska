@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class CharacterBattle : MonoBehaviour
 {
+    // W tym pliku obslugujemy postac w czasie walki
     private CharacterBase characterBase;
+    private Character character;
     private State state;
-    private Vector3 slideTargetPosition;
-    private Action onSlideComplete;
+    private GameObject slectionCircleGameObject;
     private enum State
     {
         Idle,
@@ -16,77 +17,45 @@ public class CharacterBattle : MonoBehaviour
         Busy,
     }
 
+    void OnMouseDown()
+    {
+        // this object was clicked - do something
+        Destroy(this.gameObject);
+    }
+
     private void Awake()
     {
         characterBase = GetComponent<CharacterBase>();
+        character = GetComponent<Character>();
         state = State.Idle;
+        slectionCircleGameObject = transform.Find("SelectionCircle").gameObject;
+        HideSelectionCircle();
     }
 
     //W tej funkcji ustawiamy wyglad spritow w odpowiednich druzynach. Animacje, odwrocenie, wyglad, tekstury itp.
     //Pozniej sie to oczywiscie bardziej rozbuduje.
     public void Setup(bool isPlayerTeam)
     {
-        if (isPlayerTeam)
-        {
-            characterBase.ChangeSpriteColor(Color.blue);
-        }
-        else
-        {
-            characterBase.ChangeSpriteColor(Color.red);
-        }
+        characterBase.ChangeSpriteImage(isPlayerTeam);
     }
 
     private void Update()
     {
-     switch(state)
-        {
-            case State.Idle:
-                break;
-            case State.Busy:
-                break;
-            case State.Sliding:
-                float slideSpeed = 10f;
-                transform.position += (slideTargetPosition - GetPosition()) * slideSpeed * Time.deltaTime;
-                float reachedDistance = 1f;
-                if (Vector3.Distance(GetPosition(), slideTargetPosition) < reachedDistance)
-                {
-                    //arrived at Slide Target Position
-                    transform.position = slideTargetPosition;
-                    onSlideComplete();
-                }
-                break;
-        }
     }
 
-    public Vector3 GetPosition()
-    {
-        return transform.position;
-    }
 
     public void Attack(CharacterBattle targetCharacterBattle, Action onAttackComplete)
     {
-        Vector3 startingPosition = GetPosition();
-        Vector3 slideTargetPosition = targetCharacterBattle.GetPosition() + (GetPosition() - targetCharacterBattle.GetPosition()).normalized *10f;
 
-        //Podchodzimy do typa co go chcemy ciachnac
-        SlideToPosition(slideTargetPosition, () =>
-        {
-            state = State.Busy;
-            // Implementujemy atak
-
-            // Wracamy na start
-            SlideToPosition(startingPosition, () =>
-            {
-                state = State.Idle; 
-                onAttackComplete(); //koncyzmy atak
-            });
-        });
     }
 
-    private void SlideToPosition(Vector3 slideTargetPosition, Action onSlideComplete)
+    public void HideSelectionCircle()
     {
-        this.slideTargetPosition = slideTargetPosition;
-        this.onSlideComplete = onSlideComplete;
-        state = State.Sliding;
+        slectionCircleGameObject.SetActive(false);
+    }
+
+    public void ShowSelectonCircle()
+    {
+        slectionCircleGameObject.SetActive(true);
     }
 }

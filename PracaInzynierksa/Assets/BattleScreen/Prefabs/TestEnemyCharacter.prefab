@@ -97,9 +97,9 @@ GameObject:
   - component: {fileID: 1918740004145290923}
   - component: {fileID: 6971680022758511322}
   - component: {fileID: -3976992276216104789}
-  - component: {fileID: 2887831394980487780}
+  - component: {fileID: 8864456758990345721}
   m_Layer: 10
-  m_Name: Character
+  m_Name: TestEnemyCharacter
   m_TagString: CharacterInBattle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -211,10 +211,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea63d4dfb9a4f24ab1d4b7e6c8809d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charactername: 
-  classname: 0
+  charactername: Enemy
+  classname: 2
   isplayerteam: 0
---- !u!61 &2887831394980487780
+--- !u!61 &8864456758990345721
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

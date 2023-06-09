@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BattleHandler : MonoBehaviour
 {
+    //Ten plik nadzoruje przebieg walki
     private static BattleHandler instance;
     public static BattleHandler GetInstance()
     {
@@ -12,17 +13,26 @@ public class BattleHandler : MonoBehaviour
 
     [SerializeField] private Transform pfCharacterBattle;
 
-    private CharacterBattle playerCharacterBattle;
-    private CharacterBattle enemyCharacterBattle;
-    private CharacterBattle activeCharacterBattle;
+    public List<GameObject> charactersList;
+    public List<GameObject> charactersListinbattle;
+    private GameObject activeCharacter;
+
+    private int turn = 0;
+
     private State state;
     private enum State
     {
         WaitingForPlayer,
         Busy,
     }
-
-
+    public enum LanePosition
+    {
+        Middle,
+        Up,
+        Down,
+        Top,
+        Bottom,
+    }
 
     private void Awake()
     {
@@ -31,64 +41,152 @@ public class BattleHandler : MonoBehaviour
 
     private void Start()
     {
-        playerCharacterBattle = SpawnCharacter(true);
-        enemyCharacterBattle = SpawnCharacter(false);
-        SetActiveCharacterBattle(playerCharacterBattle);
+        CharacterSpawner();
         state = State.WaitingForPlayer;
+        SetActiveCharacter();
     }
 
     private void Update()
     {
-        if(state == State.WaitingForPlayer)
+
+    }
+    private void CharacterSpawner()
+    {
+        int positionPlayer = 0;
+        int positionEnemy = 0;
+        foreach (GameObject singlecharacter in charactersList)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            Character character = singlecharacter.GetComponent<Character>();
+
+            if (character.isplayerteam)
             {
-                state = State.Busy;//Zmiana "tury" na ture przeciwnika
-                playerCharacterBattle.Attack(enemyCharacterBattle, () =>
+                switch (positionPlayer)
                 {
-                    ChooseNextActiveCharacter(); // Zmiana tury na ture gracza po wykonaniu akcji atak
-                });
+                    case 0:
+                        SpawnCharacter(character.isplayerteam, LanePosition.Middle, singlecharacter);
+                        break;
+                    case 1:
+                        SpawnCharacter(character.isplayerteam, LanePosition.Up, singlecharacter);
+                        break;
+                    case 2:
+                        SpawnCharacter(character.isplayerteam, LanePosition.Down, singlecharacter);
+                        break;
+                    case 3:
+                        SpawnCharacter(character.isplayerteam, LanePosition.Top, singlecharacter);
+                        break;
+                    case 4:
+                        SpawnCharacter(character.isplayerteam, LanePosition.Bottom, singlecharacter);
+                        break;
+                }
+                positionPlayer++;
+            }
+            else
+            {
+                switch (positionEnemy)
+                {
+                    case 0:
+                        SpawnCharacter(character.isplayerteam, LanePosition.Middle, singlecharacter);
+                        break;
+                    case 1:
+                        SpawnCharacter(character.isplayerteam, LanePosition.Up, singlecharacter);
+                        break;
+                    case 2:
+                        SpawnCharacter(character.isplayerteam, LanePosition.Down, singlecharacter);
+                        break;
+                    case 3:
+                        SpawnCharacter(character.isplayerteam, LanePosition.Top, singlecharacter);
+                        break;
+                    case 4:
+                        SpawnCharacter(character.isplayerteam, LanePosition.Bottom, singlecharacter);
+                        break;
+                }
+                positionEnemy++;
             }
         }
     }
-    private CharacterBattle SpawnCharacter(bool isPlayerTeam)
+    private CharacterBattle SpawnCharacter(bool isPlayerTeam, LanePosition lanePosition, GameObject singlecharacter)
     {
-        Vector3 position;
+        Vector3 position = new Vector3(0, 0); ;
         if (isPlayerTeam)
         {
-            position = new Vector3(-50, 0);
+            position = new Vector3(-100, -30);
+
+            switch (lanePosition)
+            {
+                case LanePosition.Top:
+                    position = new Vector3(position.x + 60, position.y + 5);
+                    break;
+                case LanePosition.Up:
+                    position = new Vector3(position.x + 20, position.y + 5);
+                    break;
+                case LanePosition.Middle:
+                    position = new Vector3(position.x, position.y);
+                    break;
+                case LanePosition.Down:
+                    position = new Vector3(position.x + 40, position.y - 5);
+                    break;
+                case LanePosition.Bottom:
+                    position = new Vector3(position.x + 80, position.y - 5);
+                    break;
+            }
         }
         else
         {
-            position = new Vector3(+50, 0);
+            position = new Vector3(+100, -30);
+
+            switch (lanePosition)
+            {
+                case LanePosition.Top:
+                    position = new Vector3(position.x - 60, position.y + 5);
+                    break;
+                case LanePosition.Up:
+                    position = new Vector3(position.x - 20, position.y + 5);
+                    break;
+                case LanePosition.Middle:
+                    position = new Vector3(position.x, position.y);
+                    break;
+                case LanePosition.Down:
+                    position = new Vector3(position.x - 40, position.y - 5);
+                    break;
+                case LanePosition.Bottom:
+                    position = new Vector3(position.x - 80, position.y - 5);
+                    break;
+            }
         }
-        Transform characterTransform = Instantiate(pfCharacterBattle,position, Quaternion.identity);
+
+            
+
+        GameObject characterTransform = Instantiate(singlecharacter, position, Quaternion.identity);
         CharacterBattle characterBattle = characterTransform.GetComponent<CharacterBattle>();
         characterBattle.Setup(isPlayerTeam);
+        charactersListinbattle.Add(characterTransform);
 
         return characterBattle;
     }
-
-    private void SetActiveCharacterBattle(CharacterBattle characterBattle)
+    private void SetActiveCharacter()
     {
-        activeCharacterBattle = characterBattle;
-    }
-    private void ChooseNextActiveCharacter()
-    {
-        if (activeCharacterBattle == playerCharacterBattle)
+        if (charactersList.Count > 0)
         {
-            SetActiveCharacterBattle(enemyCharacterBattle);
-            state = State.Busy;
+            activeCharacter = charactersListinbattle[turn];
+            // Perform any actions or logic for the active character here
+            CharacterBattle activeCharacterBattle = activeCharacter.GetComponent<CharacterBattle>();
+            activeCharacterBattle.ShowSelectonCircle();
 
-            enemyCharacterBattle.Attack(playerCharacterBattle, () =>
-            {
-                ChooseNextActiveCharacter(); // Zmiana tury na ture gracza po wykonaniu akcji atak
-            });
+            Debug.Log("Active Character: " + activeCharacter.name);
+            Debug.Log(charactersListinbattle);
         }
-        else
-        {
-            SetActiveCharacterBattle(playerCharacterBattle);
-            state = State.WaitingForPlayer;
-        }
+
     }
+
+    public void EndTurn()
+    {
+        turn++;
+        if (turn >= charactersListinbattle.Count)
+        {
+            turn = 0;
+        }
+
+        SetActiveCharacter();
+    }
+
 }
