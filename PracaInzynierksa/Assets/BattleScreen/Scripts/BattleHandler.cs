@@ -16,15 +16,10 @@ public class BattleHandler : MonoBehaviour
     public List<GameObject> charactersList;
     public List<GameObject> charactersListinbattle;
     private GameObject activeCharacter;
+    public GameObject selectedCharacter;
 
     private int turn = 0;
 
-    private State state;
-    private enum State
-    {
-        WaitingForPlayer,
-        Busy,
-    }
     public enum LanePosition
     {
         Middle,
@@ -42,7 +37,6 @@ public class BattleHandler : MonoBehaviour
     private void Start()
     {
         CharacterSpawner();
-        state = State.WaitingForPlayer;
         SetActiveCharacter();
     }
 
@@ -50,13 +44,16 @@ public class BattleHandler : MonoBehaviour
     {
 
     }
+
+    //Funckja obslugujaca spawnowanie wszystkich postaci. Obsluguje od 2 do 10 postaci, po 5 na team.
+    //Jesli damy wiecej niz 5 na team to beda respic "na sobie" 
     private void CharacterSpawner()
     {
         int positionPlayer = 0;
         int positionEnemy = 0;
         foreach (GameObject singlecharacter in charactersList)
         {
-            Character character = singlecharacter.GetComponent<Character>();
+            CharacterStats character = singlecharacter.GetComponent<CharacterStats>();
 
             if (character.isplayerteam)
             {
@@ -104,6 +101,9 @@ public class BattleHandler : MonoBehaviour
             }
         }
     }
+
+    //Tutaj funkcja odpowiadajaca za respienie jednej, poszczegolnej postaci
+    //Glownie ustala sie tutaj jej pozycje na mapie, ewentualnie mozna dodac tutaj obslug skali
     private CharacterBattle SpawnCharacter(bool isPlayerTeam, LanePosition lanePosition, GameObject singlecharacter)
     {
         Vector3 position = new Vector3(0, 0); ;
@@ -163,19 +163,15 @@ public class BattleHandler : MonoBehaviour
 
         return characterBattle;
     }
+
     private void SetActiveCharacter()
     {
         if (charactersList.Count > 0)
         {
             activeCharacter = charactersListinbattle[turn];
-            // Perform any actions or logic for the active character here
             CharacterBattle activeCharacterBattle = activeCharacter.GetComponent<CharacterBattle>();
-            activeCharacterBattle.ShowSelectonCircle();
-
-            Debug.Log("Active Character: " + activeCharacter.name);
-            Debug.Log(charactersListinbattle);
+            activeCharacterBattle.ShowActiveCircle();
         }
-
     }
 
     public void EndTurn()
@@ -189,4 +185,18 @@ public class BattleHandler : MonoBehaviour
         SetActiveCharacter();
     }
 
+    public void AttackButton()
+    {
+        if(selectedCharacter!= null)
+        {
+            activeCharacter.GetComponent<CharacterBattle>().Attack(selectedCharacter.GetComponent<CharacterBattle>());
+
+        }
+        else
+        {
+            Debug.Log("Nie wybrano celu");
+        }
+        
+
+    }
 }

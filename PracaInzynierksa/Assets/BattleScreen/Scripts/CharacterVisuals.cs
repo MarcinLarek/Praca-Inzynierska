@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterBase : MonoBehaviour
+public class CharacterVisuals : MonoBehaviour
 {
     //Tutaj sie wstawi obsluge animacji tekstur itp
 
