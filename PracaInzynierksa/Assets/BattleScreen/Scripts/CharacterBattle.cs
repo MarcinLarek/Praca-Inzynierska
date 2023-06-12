@@ -1,7 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CharacterBattle : MonoBehaviour
 {
@@ -9,8 +13,11 @@ public class CharacterBattle : MonoBehaviour
 
     private CharacterVisuals characterVisuals;
     private CharacterStats characterStats;
+
     private GameObject slectionCircleGameObject;
     private GameObject activeCircleGameObject;
+    private GameObject healthbar;
+
     BattleHandler battleHandler = BattleHandler.GetInstance();
 
     //Gdy klikamy na postac wywolywana jest ta funkcja.
@@ -27,12 +34,22 @@ public class CharacterBattle : MonoBehaviour
         characterStats = GetComponent<CharacterStats>();
         slectionCircleGameObject = transform.Find("SelectionCircle").gameObject;
         activeCircleGameObject = transform.Find("ActiveCircle").gameObject;
+        healthbar = transform.Find("HealthBar").gameObject;
         HideActiveCircle();
         HideSelectionCircle();
     }
 
+    private void Start()
+    {
+        
+    }
+    private void Update()
+    {
+        healthbar.GetComponent<TextMeshPro>().text = characterStats.health + "/" + characterStats.maxHealth;
+    }
+
     //Przelaczamy obecnie wybrana postac
-    private void ToggleSelectedCharacter()
+    public void ToggleSelectedCharacter()
     {
         if (battleHandler.selectedCharacter != null)
         {// Sprawdzamy czy juz jakas postac jest wybrana
@@ -82,16 +99,6 @@ public class CharacterBattle : MonoBehaviour
         characterVisuals.ChangeSpriteImage(isPlayerTeam);
     }
 
-    private void Update()
-    {
-    }
-
-
-    public void Attack(CharacterBattle targetCharacterBattle)
-    {
-
-    }
-
     public void HideSelectionCircle()
     {
         slectionCircleGameObject.SetActive(false);
@@ -110,5 +117,31 @@ public class CharacterBattle : MonoBehaviour
     public void ShowActiveCircle()
     {
         activeCircleGameObject.SetActive(true);
+    }
+
+    //////////
+    //COMBAT//
+    //////////
+
+    public void Attack(CharacterBattle targetCharacterBattle)
+    {
+        Debug.Log($"{this.gameObject.name} attack {targetCharacterBattle.name}");
+        Debug.Log("Roling 2d10");
+        int roll1 = Random.Range(1, 10);
+        int roll2 = Random.Range(1, 10);
+        int damage = roll1 + roll2;
+        Debug.Log($"Results: {roll1} + {roll2} = {damage}");
+        targetCharacterBattle.GetComponent<CharacterStats>().health -= damage;
+        CheckIfKilled(targetCharacterBattle.GetComponent<CharacterStats>());
+
+    }
+
+    private void CheckIfKilled(CharacterStats targetCharacterStats)
+    {
+        if(targetCharacterStats.health <= 0)
+        {
+            targetCharacterStats.isalive = false;
+            targetCharacterStats.gameObject.GetComponent<CharacterVisuals>().ChangeSpriteColor(Color.red);
+        }
     }
 }

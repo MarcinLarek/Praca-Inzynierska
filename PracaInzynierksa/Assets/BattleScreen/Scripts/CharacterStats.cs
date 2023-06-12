@@ -10,6 +10,7 @@ public class CharacterStats : MonoBehaviour
     public string charactername;
     public Classes classname;
     public bool isplayerteam;
+    public bool isalive = true;
     public int maxHealth;
     public int health;
     public int maxActionPoints;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CharacterVisuals : MonoBehaviour
@@ -8,9 +9,8 @@ public class CharacterVisuals : MonoBehaviour
     //Tutaj sie wstawi obsluge animacji tekstur itp
 
     private SpriteRenderer spriteRenderer;
-    public Sprite PlayerTeamSprite;
-    public Sprite EnemyTeamSprite;
-
+    public Sprite playerTeamSprite;
+    public Sprite enemyTeamSprite;
 
     private void Awake()
     {
@@ -32,11 +32,11 @@ public class CharacterVisuals : MonoBehaviour
         {
             if (isplayerTeam)
             {
-                spriteRenderer.sprite = PlayerTeamSprite;
+                spriteRenderer.sprite = playerTeamSprite;
             }
             else
             {
-                spriteRenderer.sprite = EnemyTeamSprite;
+                spriteRenderer.sprite = enemyTeamSprite;
             }
         }
     }
