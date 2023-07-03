@@ -58,7 +58,9 @@ public class BattleHandler : MonoBehaviour
         {
             CharacterStats character = singlecharacter.GetComponent<CharacterStats>();
 
-            if (character.isplayerteam)
+            if (character.isplayerteam) 
+                //Prosty warunek sprawdzajaczy druzyne. Pozniej w zaleznosci od ilosci postaci w druznie spawnujemy je kolejno
+                //Zaczynajac od srodka
             {
                 switch (positionPlayer)
                 {
@@ -106,7 +108,7 @@ public class BattleHandler : MonoBehaviour
     }
 
     //Tutaj funkcja odpowiadajaca za respienie jednej, poszczegolnej postaci
-    //Glownie ustala sie tutaj jej pozycje na mapie, ewentualnie mozna dodac tutaj obslug skali
+    //Glownie ustala sie tutaj jej pozycje na mapie, ewentualnie mozna dodac tutaj obsluge skali
     private CharacterBattle SpawnCharacter(bool isPlayerTeam, LanePosition lanePosition, GameObject singlecharacter)
     {
         Vector3 position = new Vector3(0, 0); ;
@@ -263,12 +265,16 @@ public class BattleHandler : MonoBehaviour
         int listId = 0;
         do
         {
+            // Losujemy losowa liczbe od 0 do ilosci postaci w bitwie
+            // Jesli postac jest martwa, albo jest to postac z druzyny komputera to losujemy ponownie
             listId = Random.Range(0, charactersListinbattle.Count);
             if(charactersListinbattle[listId].GetComponent<CharacterStats>().isplayerteam == true && charactersListinbattle[listId].GetComponent<CharacterStats>().isalive == true)
             {
                 break;
             }
         } while (true);
+        // Jesli trafiamy na zywa postac gracza wykonujemy akcje komputera
+        // Obecnie po prostu zwykly atak, pozniej mozna tutaj dac jakies bardzeij skomplikowane AI 
         characterToAttack = charactersListinbattle[listId];
         activeCharacter.GetComponent<CharacterBattle>().Attack(characterToAttack.GetComponent<CharacterBattle>());
         EndTurn();
@@ -278,8 +284,16 @@ public class BattleHandler : MonoBehaviour
     {
         if(selectedCharacter!= null)
         {
-            activeCharacter.GetComponent<CharacterBattle>().Attack(selectedCharacter.GetComponent<CharacterBattle>());
-            EndTurn();
+            if(selectedCharacter.GetComponent<CharacterStats>().isplayerteam && activeCharacter.GetComponent<CharacterStats>().isplayerteam)
+            {
+                Debug.Log("Cant shoot teammates");
+            }
+            else
+            {
+                activeCharacter.GetComponent<CharacterBattle>().Attack(selectedCharacter.GetComponent<CharacterBattle>());
+                EndTurn();
+            }
+            
 
         }
         else

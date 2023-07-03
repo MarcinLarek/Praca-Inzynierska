@@ -9,8 +9,8 @@ public class CharacterVisuals : MonoBehaviour
     //Tutaj sie wstawi obsluge animacji tekstur itp
 
     private SpriteRenderer spriteRenderer;
-    public Sprite playerTeamSprite;
-    public Sprite enemyTeamSprite;
+    public Sprite characterSprite;
+
 
     private void Awake()
     {
@@ -28,17 +28,7 @@ public class CharacterVisuals : MonoBehaviour
 
     public void ChangeSpriteImage(bool isplayerTeam)
     {
-        if (spriteRenderer != null)
-        {
-            if (isplayerTeam)
-            {
-                spriteRenderer.sprite = playerTeamSprite;
-            }
-            else
-            {
-                spriteRenderer.sprite = enemyTeamSprite;
-            }
-        }
+        spriteRenderer.sprite = characterSprite;
     }
 
 }

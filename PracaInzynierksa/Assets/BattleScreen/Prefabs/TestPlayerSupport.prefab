@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: -3976992276216104789}
   - component: {fileID: -3393864668293507667}
   m_Layer: 10
-  m_Name: TestPlayerCharacter
+  m_Name: TestPlayerSupport
   m_TagString: CharacterInBattle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,8 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db94b2d96247963409028480ea99f95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTeamSprite: {fileID: 21300000, guid: c8cd06f6881d46245a3ad15fdd0272d6, type: 3}
-  enemyTeamSprite: {fileID: 21300000, guid: 085a578922fc4db4ca84947426038d61, type: 3}
+  characterSprite: {fileID: 21300000, guid: e7568fb78a0baa7409a8cad614248d2e, type: 3}
 --- !u!114 &6971680022758511322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,9 +296,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea63d4dfb9a4f24ab1d4b7e6c8809d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charactername: Ally
-  classname: 0
+  charactername: Player Support
+  classname: 1
   isplayerteam: 1
+  isalive: 1
   maxHealth: 20
   health: 20
   maxActionPoints: 10

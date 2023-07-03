@@ -5,7 +5,6 @@ using TMPro;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class CharacterBattle : MonoBehaviour
 {
@@ -69,6 +68,12 @@ public class CharacterBattle : MonoBehaviour
                     CharacterBattle oldSelectedCharacter = battleHandler.selectedCharacter.GetComponent<CharacterBattle>();
                     oldSelectedCharacter.HideSelectionCircle();
 
+
+                    if (characterStats.isalive == false)
+                    {
+                        Debug.Log("Martwa postac");
+                        return;
+                    }
                     battleHandler.selectedCharacter = this.gameObject;
                     ShowSelectionCircle();
                 }
@@ -83,6 +88,12 @@ public class CharacterBattle : MonoBehaviour
             }
             else
             {
+
+                if (characterStats.isalive == false)
+                {
+                    Debug.Log("Martwa postac");
+                    return;
+                }
                 battleHandler.selectedCharacter = this.gameObject;
                 slectionCircleGameObject.SetActive(true);
             }
@@ -125,13 +136,9 @@ public class CharacterBattle : MonoBehaviour
 
     public void Attack(CharacterBattle targetCharacterBattle)
     {
-        Debug.Log($"{this.gameObject.name} attack {targetCharacterBattle.name}");
-        Debug.Log("Roling 2d10");
-        int roll1 = Random.Range(1, 10);
-        int roll2 = Random.Range(1, 10);
-        int damage = roll1 + roll2;
-        Debug.Log($"Results: {roll1} + {roll2} = {damage}");
-        targetCharacterBattle.GetComponent<CharacterStats>().health -= damage;
+        Debug.Log(characterStats.charactername + " attacks " + targetCharacterBattle.GetComponent<CharacterStats>().charactername);
+        int damage = characterStats.CalculateDamage();
+        targetCharacterBattle.GetComponent<CharacterStats>().RecieveDamage(damage);
         CheckIfKilled(targetCharacterBattle.GetComponent<CharacterStats>());
 
     }
