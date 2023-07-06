@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 using Random = UnityEngine.Random;
 
@@ -20,6 +23,7 @@ public class BattleHandler : MonoBehaviour
     public List<GameObject> charactersListinbattle;
     private GameObject activeCharacter;
     public GameObject selectedCharacter;
+    public GameObject ActionPointsDisplay;
 
     private int turn = 0;
 
@@ -45,7 +49,7 @@ public class BattleHandler : MonoBehaviour
 
     private void Update()
     {
-
+        ActionPointsDisplay.GetComponent<TextMeshProUGUI>().text = $"Action Points: {activeCharacter.GetComponent<CharacterStats>().actionPoints}/{activeCharacter.GetComponent<CharacterStats>().maxActionPoints}";
     }
 
     //Funkcja obslugujaca spawnowanie wszystkich postaci. Obsluguje od 2 do 10 postaci, po 5 na team.
@@ -284,22 +288,47 @@ public class BattleHandler : MonoBehaviour
     {
         if(selectedCharacter!= null)
         {
-            if(selectedCharacter.GetComponent<CharacterStats>().isplayerteam && activeCharacter.GetComponent<CharacterStats>().isplayerteam)
+            if (activeCharacter.GetComponent<CharacterStats>().actionPoints < 3)
             {
-                Debug.Log("Cant shoot teammates");
+                Debug.Log("You don't have at least 3 action points");
             }
             else
             {
-                activeCharacter.GetComponent<CharacterBattle>().Attack(selectedCharacter.GetComponent<CharacterBattle>());
-                EndTurn();
+                if (selectedCharacter.GetComponent<CharacterStats>().isplayerteam && activeCharacter.GetComponent<CharacterStats>().isplayerteam)
+                {
+                    Debug.Log("Cant shoot teammates");
+                }
+                else
+                {
+                    activeCharacter.GetComponent<CharacterBattle>().Attack(selectedCharacter.GetComponent<CharacterBattle>());
+                    activeCharacter.GetComponent<CharacterStats>().actionPoints -= 3;
+                }
             }
-            
-
         }
         else
         {
             Debug.Log("Nie wybrano celu");
         }
+    }
+
+    public void EndTurnButton()
+    {
+        activeCharacter.GetComponent<CharacterStats>().actionPoints = activeCharacter.GetComponent<CharacterStats>().maxActionPoints;
+        EndTurn();
+    }
+
+    public void GiveActionPoint()
+    {
+        if (activeCharacter.GetComponent<CharacterStats>().actionPoints < 3)
+        {
+            Debug.Log("You don't have at least 3 action points");
+        }
+        else
+        {
+            activeCharacter.GetComponent<CharacterStats>().actionPoints -= 3;
+            selectedCharacter.GetComponent<CharacterStats>().actionPoints += 1;
+        }
+            
     }
 
 }

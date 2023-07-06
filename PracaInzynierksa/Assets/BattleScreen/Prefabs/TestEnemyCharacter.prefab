@@ -218,8 +218,8 @@ MonoBehaviour:
   isalive: 1
   maxHealth: 20
   health: 20
-  maxActionPoints: 10
-  actionPoints: 10
+  maxActionPoints: 5
+  actionPoints: 5
   strength: 5
   endurance: 5
   agility: 5
