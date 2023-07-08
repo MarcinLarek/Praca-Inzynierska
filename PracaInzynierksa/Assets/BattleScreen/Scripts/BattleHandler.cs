@@ -24,6 +24,7 @@ public class BattleHandler : MonoBehaviour
     private GameObject activeCharacter;
     public GameObject selectedCharacter;
     public GameObject ActionPointsDisplay;
+    private CharacterStats.Classes activecharacterclass;
 
     private int turn = 0;
 
@@ -38,13 +39,14 @@ public class BattleHandler : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        instance = this; // Singleton
     }
 
     private void Start()
     {
         CharacterSpawner();
         SetActiveCharacter();
+        activeCharacter.GetComponent<ClassAbilities>().PrepareButtons(activecharacterclass);
     }
 
     private void Update()
@@ -173,6 +175,7 @@ public class BattleHandler : MonoBehaviour
         return characterBattle;
     }
 
+    //Ustalamy ktora postac ma teraz ture
     private void SetActiveCharacter()
     {
         if (charactersList.Count > 0)
@@ -201,6 +204,7 @@ public class BattleHandler : MonoBehaviour
                 {
                     stupidalivecheck = false;
                     activeCharacter = charactersListinbattle[turn];
+                    activecharacterclass = activeCharacter.GetComponent<CharacterStats>().classname;
                 }
             }
             //Tutaj koniec tego sprawdzamia. Wszystko co do gory trzeba jakos przeniesc do EndTurn()
@@ -239,19 +243,21 @@ public class BattleHandler : MonoBehaviour
         }
         ////////////////////////////////////////////////////////
 
-
+        //Podnosimy ture. Jesli numer tury jest wiekszy niz ilosc postaci to zerujemy i zaczynamy nowa kolejke
         turn++;
         if (turn >= charactersListinbattle.Count)
         {
             turn = 0;
         }
 
+        //Jesli jakas postac byla zaznaczona przez gracza na koniec tury to ja odznaczamy
         if (selectedCharacter != null)
         {
             selectedCharacter.GetComponent<CharacterBattle>().ToggleSelectedCharacter();
         }
         SetActiveCharacter();
 
+        //Jesli aktywna postacia jest komputer odpalamy AI komputera
         if(activeCharacter.GetComponent<CharacterStats>().isplayerteam == false)
         {
             Debug.Log("Komputer - " + activeCharacter.name);
@@ -260,6 +266,10 @@ public class BattleHandler : MonoBehaviour
             {
                 ComputerTurn();
             }
+        }
+        else // Jesli nie to updatujemy UI
+        {
+            activeCharacter.GetComponent<ClassAbilities>().PrepareButtons(activeCharacter.GetComponent<CharacterStats>().classname);
         }
     }
 
@@ -317,7 +327,7 @@ public class BattleHandler : MonoBehaviour
         EndTurn();
     }
 
-    public void GiveActionPoint()
+    public void GiveActionPointButton()
     {
         if (activeCharacter.GetComponent<CharacterStats>().actionPoints < 3)
         {
@@ -331,4 +341,18 @@ public class BattleHandler : MonoBehaviour
             
     }
 
+    public void AbilitiOneButton()
+    {
+        activeCharacter.GetComponent<ClassAbilities>().AbilityDistributor(activecharacterclass, 1);
+    }
+
+    public void AbilitTwoButton()
+    {
+        activeCharacter.GetComponent<ClassAbilities>().AbilityDistributor(activecharacterclass, 2);
+    }
+
+    public void AbilitiThreeButton()
+    {
+        activeCharacter.GetComponent<ClassAbilities>().AbilityDistributor(activecharacterclass, 3);
+    }
 }
