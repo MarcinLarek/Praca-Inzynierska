@@ -143,7 +143,7 @@ public class CharacterBattle : MonoBehaviour
 
     }
 
-    private void CheckIfKilled(CharacterStats targetCharacterStats)
+    public void CheckIfKilled(CharacterStats targetCharacterStats)
     {
         if(targetCharacterStats.health <= 0)
         {

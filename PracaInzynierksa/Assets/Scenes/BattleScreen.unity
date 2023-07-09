@@ -900,7 +900,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1516195769}
         m_TargetAssemblyTypeName: BattleHandler, Assembly-CSharp
-        m_MethodName: GiveActionPoint
+        m_MethodName: GiveActionPointButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
