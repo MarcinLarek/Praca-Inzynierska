@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 using Random = UnityEngine.Random;
 
@@ -20,6 +23,8 @@ public class BattleHandler : MonoBehaviour
     public List<GameObject> charactersListinbattle;
     private GameObject activeCharacter;
     public GameObject selectedCharacter;
+    public GameObject ActionPointsDisplay;
+    private CharacterStats.Classes activecharacterclass;
 
     private int turn = 0;
 
@@ -34,18 +39,19 @@ public class BattleHandler : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        instance = this; // Singleton
     }
 
     private void Start()
     {
         CharacterSpawner();
         SetActiveCharacter();
+        activeCharacter.GetComponent<ClassAbilities>().PrepareButtons(activecharacterclass);
     }
 
     private void Update()
     {
-
+        ActionPointsDisplay.GetComponent<TextMeshProUGUI>().text = $"Action Points: {activeCharacter.GetComponent<CharacterStats>().actionPoints}/{activeCharacter.GetComponent<CharacterStats>().maxActionPoints}";
     }
 
     //Funkcja obslugujaca spawnowanie wszystkich postaci. Obsluguje od 2 do 10 postaci, po 5 na team.
@@ -169,6 +175,7 @@ public class BattleHandler : MonoBehaviour
         return characterBattle;
     }
 
+    //Ustalamy ktora postac ma teraz ture
     private void SetActiveCharacter()
     {
         if (charactersList.Count > 0)
@@ -197,6 +204,7 @@ public class BattleHandler : MonoBehaviour
                 {
                     stupidalivecheck = false;
                     activeCharacter = charactersListinbattle[turn];
+                    activecharacterclass = activeCharacter.GetComponent<CharacterStats>().classname;
                 }
             }
             //Tutaj koniec tego sprawdzamia. Wszystko co do gory trzeba jakos przeniesc do EndTurn()
@@ -235,19 +243,21 @@ public class BattleHandler : MonoBehaviour
         }
         ////////////////////////////////////////////////////////
 
-
+        //Podnosimy ture. Jesli numer tury jest wiekszy niz ilosc postaci to zerujemy i zaczynamy nowa kolejke
         turn++;
         if (turn >= charactersListinbattle.Count)
         {
             turn = 0;
         }
 
+        //Jesli jakas postac byla zaznaczona przez gracza na koniec tury to ja odznaczamy
         if (selectedCharacter != null)
         {
             selectedCharacter.GetComponent<CharacterBattle>().ToggleSelectedCharacter();
         }
         SetActiveCharacter();
 
+        //Jesli aktywna postacia jest komputer odpalamy AI komputera
         if(activeCharacter.GetComponent<CharacterStats>().isplayerteam == false)
         {
             Debug.Log("Komputer - " + activeCharacter.name);
@@ -256,6 +266,10 @@ public class BattleHandler : MonoBehaviour
             {
                 ComputerTurn();
             }
+        }
+        else // Jesli nie to updatujemy UI
+        {
+            activeCharacter.GetComponent<ClassAbilities>().PrepareButtons(activeCharacter.GetComponent<CharacterStats>().classname);
         }
     }
 
@@ -284,17 +298,22 @@ public class BattleHandler : MonoBehaviour
     {
         if(selectedCharacter!= null)
         {
-            if(selectedCharacter.GetComponent<CharacterStats>().isplayerteam && activeCharacter.GetComponent<CharacterStats>().isplayerteam)
+            if (activeCharacter.GetComponent<CharacterStats>().actionPoints < 3)
             {
-                Debug.Log("Cant shoot teammates");
+                Debug.Log("You don't have at least 3 action points");
             }
             else
             {
-                activeCharacter.GetComponent<CharacterBattle>().Attack(selectedCharacter.GetComponent<CharacterBattle>());
-                EndTurn();
+                if (selectedCharacter.GetComponent<CharacterStats>().isplayerteam && activeCharacter.GetComponent<CharacterStats>().isplayerteam)
+                {
+                    Debug.Log("Cant shoot teammates");
+                }
+                else
+                {
+                    activeCharacter.GetComponent<CharacterBattle>().Attack(selectedCharacter.GetComponent<CharacterBattle>());
+                    activeCharacter.GetComponent<CharacterStats>().actionPoints -= 3;
+                }
             }
-            
-
         }
         else
         {
@@ -302,4 +321,38 @@ public class BattleHandler : MonoBehaviour
         }
     }
 
+    public void EndTurnButton()
+    {
+        activeCharacter.GetComponent<CharacterStats>().actionPoints = activeCharacter.GetComponent<CharacterStats>().maxActionPoints;
+        EndTurn();
+    }
+
+    public void GiveActionPointButton()
+    {
+        if (activeCharacter.GetComponent<CharacterStats>().actionPoints < 3)
+        {
+            Debug.Log("You don't have at least 3 action points");
+        }
+        else
+        {
+            activeCharacter.GetComponent<CharacterStats>().actionPoints -= 3;
+            selectedCharacter.GetComponent<CharacterStats>().actionPoints += 1;
+        }
+            
+    }
+
+    public void AbilitiOneButton()
+    {
+        activeCharacter.GetComponent<ClassAbilities>().AbilityDistributor(activecharacterclass, 1);
+    }
+
+    public void AbilitTwoButton()
+    {
+        activeCharacter.GetComponent<ClassAbilities>().AbilityDistributor(activecharacterclass, 2);
+    }
+
+    public void AbilitiThreeButton()
+    {
+        activeCharacter.GetComponent<ClassAbilities>().AbilityDistributor(activecharacterclass, 3);
+    }
 }

@@ -7,7 +7,7 @@ public class CharacterStats : MonoBehaviour
 {
     //To plik od statysytk i informacji postaci. Te statystyki bedzie sie przenosic miedzy scenami
 
-
+    //Main stats
     public string charactername;
     public Classes classname;
     public bool isplayerteam;
@@ -21,40 +21,13 @@ public class CharacterStats : MonoBehaviour
     public int agility;
     public int luck;
     public int inteligence;
+    //other stats
+    public int bonusDamage;
     public enum Classes
     {
         DMG,
         SUPPORT,
         TANK,
-    }
-
-    public int CalculateDamage()
-    {
-        int damage = 0;
-        switch (classname)
-        {
-            case Classes.DMG:
-                int DMGroll1 = Random.Range(1, 10);
-                int DMGroll2 = Random.Range(1, 10);
-                damage = DMGroll1 + DMGroll2 + 4;
-                Debug.Log($"{charactername} rolling 2d10+4  - {DMGroll1}, {DMGroll2} - Total roll - {damage}");
-                break;
-            case Classes.SUPPORT:
-                int SUProll1 = Random.Range(1, 8);
-                int SUProll2 = Random.Range(1, 8);
-                damage = SUProll1 + SUProll2;
-                Debug.Log($"{charactername} rolling 2d8  - {SUProll1}, {SUProll2} - Total roll - {damage}");
-                break;
-            case Classes.TANK:
-                int TANroll1 = Random.Range(1, 4);
-                int TANroll2 = Random.Range(1, 4);
-                int TANroll3 = Random.Range(1, 4);
-                damage = TANroll1 + TANroll2 + TANroll3;
-                Debug.Log($"{charactername} rolling 3d4  - {TANroll1}, {TANroll2}, {TANroll3} - Total roll - {damage}");
-                break;
-        }
-        Debug.Log(charactername + " deals " + damage + " damage");
-        return damage;
     }
 
     public void RecieveDamage(int damage)
@@ -76,6 +49,67 @@ public class CharacterStats : MonoBehaviour
         this.health -= finaldamage;
         Debug.Log(charactername + " blocks " + (damage - finaldamage) + " out of " + damage + " total damage");
 
+    }
+
+    public int CalculateDamage()
+    {
+        int damage = 0;
+        switch (classname)
+        {
+            case Classes.DMG:
+                damage = CalculateDamageForDMG();
+                break;
+            case Classes.SUPPORT:
+                damage = CalculateDamageForSupport();
+                break;
+            case Classes.TANK:
+                damage = CalculateDamageForTank();
+                break;
+        }
+        Debug.Log(charactername + " deals " + damage + " damage");
+
+        damage += CheckBonusDamage();
+
+        return damage;
+    }
+
+    private int CalculateDamageForDMG()
+    {
+        int roll1 = Random.Range(1, 10);
+        int roll2 = Random.Range(1, 10);
+        int damage = roll1 + roll2 + 4;
+        Debug.Log($"{charactername} rolling 2d10+4  - {roll1}, {roll2} - Total roll - {damage}");
+        return damage;
+    }
+    private int CalculateDamageForSupport()
+    {
+        int roll1 = Random.Range(1, 8);
+        int roll2 = Random.Range(1, 8);
+        int damage = roll1 + roll2;
+        Debug.Log($"{charactername} rolling 2d8  - {roll1}, {roll2} - Total roll - {damage}");
+        return damage;
+    }
+
+    private int CalculateDamageForTank()
+    {
+        int TANroll1 = Random.Range(1, 4);
+        int TANroll2 = Random.Range(1, 4);
+        int TANroll3 = Random.Range(1, 4);
+        int damage = TANroll1 + TANroll2 + TANroll3;
+        Debug.Log($"{charactername} rolling 3d4  - {TANroll1}, {TANroll2}, {TANroll3} - Total roll - {damage}");
+        return damage;
+    }
+    
+    private int CheckBonusDamage()
+    {
+        if(bonusDamage > 0)
+        {
+            Debug.Log($"Adding {bonusDamage} as bonus damage");
+            int returnvalue = bonusDamage;
+            bonusDamage = 0;
+            return returnvalue;
+        }
+        return 0;
     }
 
 }

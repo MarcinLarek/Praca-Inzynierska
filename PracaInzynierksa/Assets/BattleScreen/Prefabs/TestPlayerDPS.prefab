@@ -182,6 +182,7 @@ GameObject:
   - component: {fileID: 6971680022758511322}
   - component: {fileID: -3976992276216104789}
   - component: {fileID: -3393864668293507667}
+  - component: {fileID: 6054053882221684674}
   m_Layer: 10
   m_Name: TestPlayerDPS
   m_TagString: CharacterInBattle
@@ -302,8 +303,8 @@ MonoBehaviour:
   isalive: 1
   maxHealth: 20
   health: 20
-  maxActionPoints: 10
-  actionPoints: 10
+  maxActionPoints: 5
+  actionPoints: 5
   strength: 5
   endurance: 5
   agility: 5
@@ -335,6 +336,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &6054053882221684674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4714675202154540973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c99c2931cfbeb44ebab39f9edb91454, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6923752124011403975
 GameObject:
   m_ObjectHideFlags: 0
