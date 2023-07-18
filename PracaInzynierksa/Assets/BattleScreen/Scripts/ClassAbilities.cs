@@ -302,7 +302,7 @@ public class ClassAbilities : MonoBehaviour
                         int roll = Random.Range(1, 20);
                         Debug.Log($"Blind Fire success on {singlecharacterstats.name} Rolling 1d20: {roll} Total Damage: {roll+5}");
                         singlecharacterstats.RecieveDamage(roll+5);
-                        battlehandler.selectedCharacter.GetComponent<CharacterBattle>().CheckIfKilled(singlecharacterstats);
+                        singlecharacterstats.GetComponent<CharacterBattle>().CheckIfKilled(singlecharacterstats);
                     }
                     else
                     {
