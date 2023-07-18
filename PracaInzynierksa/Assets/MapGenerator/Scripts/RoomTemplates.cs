@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class RoomTemplates : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class RoomTemplates : MonoBehaviour
     public float waitTime;
     private bool spawnedBoss;
     public GameObject[] bossroom; // Tablica z dostêpnymi pomieszczeniamy koñcowymi (pomieszczenia z bossem, ale w sumie nie musi go tam byæ. Zalezy od prefabu)
+
+    public List<GameObject> encountersList;
 
     private void Update()
     {
@@ -58,6 +61,10 @@ public class RoomTemplates : MonoBehaviour
                     }
                 }
             }
+
+            // Respimy srodek pomieszczen. (Obecnie pointy do wejscia do walki)
+            generateEncounters();
+
         } 
         else if (waitTime >= 0)
         {
@@ -65,4 +72,22 @@ public class RoomTemplates : MonoBehaviour
         }
 
     }
+
+    private void generateEncounters()
+    {
+        foreach (GameObject room in rooms)
+        {
+            if(room.name != "closedRoom(Clone)")
+            {
+                int chance = Random.Range(1, 10);
+                if (chance <= 5)
+                {
+                    GameObject encounterToSpawn = encountersList[Random.Range(0, encountersList.Count)];
+                    Vector2 roomposition = room.transform.position;
+                    GameObject spawnedMarker = Instantiate(encounterToSpawn, roomposition, encounterToSpawn.transform.rotation);
+                }
+            }
+        }
+    }
+
 }

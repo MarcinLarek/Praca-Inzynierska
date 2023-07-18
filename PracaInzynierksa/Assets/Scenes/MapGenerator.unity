@@ -486,7 +486,7 @@ MonoBehaviour:
   - {fileID: 7883305535195675485, guid: 139013ec3bd02e44291a035f83e79568, type: 3}
   closedRoom: {fileID: 7704725731372482707, guid: cde6a976d59bb5d4e8c3e82b6d155c35, type: 3}
   rooms: []
-  waitTime: 3
+  waitTime: 4
   bossroom:
   - {fileID: 7704725731372482707, guid: 73f33a17a59289049ad10f85eaa30597, type: 3}
   - {fileID: 7827080619850558504, guid: 6dd11f2cbc13e804494c3316854af3af, type: 3}
@@ -499,3 +499,5 @@ MonoBehaviour:
   - {fileID: 7883305535195675485, guid: 8d713e40042412e43b9697df779f0052, type: 3}
   - {fileID: 6602576227054168235, guid: a7f3cd58f12fda344b10026de2292483, type: 3}
   - {fileID: 2673647865548792246, guid: fc3c87d33c4d2614792f46e457c5e798, type: 3}
+  encountersList:
+  - {fileID: 7848555665889758057, guid: 5f95cefa49d48ca4b847f7fcaefd42fe, type: 3}
