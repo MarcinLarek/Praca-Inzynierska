@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 using Random = UnityEngine.Random;
@@ -239,6 +240,7 @@ public class BattleHandler : MonoBehaviour
             Debug.Log("----------KONIEC-----------");
             Debug.Log("---------/-----------------");
             Debug.Log("########/##################");
+            SceneManager.LoadScene(sceneName: "MapGenerator");
             return;
         }
         ////////////////////////////////////////////////////////
