@@ -15,6 +15,21 @@ EditorBuildSettings:
     path: Assets/Scenes/MissionSelection.unity
     guid: 0d10faa28c1d8524abe1019680e1572c
   - enabled: 1
+    path: Assets/Scenes/Inventory.unity
+    guid: ceeac36ddc9d78e428a1eaeb84372aec
+  - enabled: 1
+    path: Assets/Scenes/Trade.unity
+    guid: 86d12c898fc57e54aa5ca3d99fdfee7a
+  - enabled: 1
+    path: Assets/Scenes/CrewRecruitment.unity
+    guid: 950f73b944c562143b5cab09d0b1d127
+  - enabled: 1
+    path: Assets/Scenes/CrewUpgrade.unity
+    guid: 5d5632026da810a479f79b6702d2ebb4
+  - enabled: 1
+    path: Assets/Scenes/ShipUpgrade.unity
+    guid: b2f9e78791180774a92a651ad9c666eb
+  - enabled: 1
     path: Assets/Scenes/MapGenerator.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
