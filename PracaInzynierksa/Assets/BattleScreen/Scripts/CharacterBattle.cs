@@ -111,6 +111,10 @@ public class CharacterBattle : MonoBehaviour
     public void Setup(bool isPlayerTeam)
     {
         characterVisuals.ChangeSpriteImage(isPlayerTeam);
+        if(characterStats.isalive == false)
+        {
+            characterVisuals.ChangeSpriteColor(Color.red);
+        }
     }
 
     public void HideSelectionCircle()
