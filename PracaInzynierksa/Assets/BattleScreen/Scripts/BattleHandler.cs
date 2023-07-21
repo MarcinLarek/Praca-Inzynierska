@@ -367,6 +367,7 @@ public class BattleHandler : MonoBehaviour
         }
         else
         {
+            MapGeneratorHandler.GetInstance().RemoveGeneratedScene();
             SceneManager.LoadScene(sceneName: "MainHub");
         }
     }

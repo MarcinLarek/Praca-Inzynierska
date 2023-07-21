@@ -85,4 +85,19 @@ public class MapGeneratorHandler : MonoBehaviour
 
         player.SetActive(true);
     }
+
+    public void RemoveGeneratedScene()
+    {
+        foreach(GameObject room in rooms)
+        {
+            Destroy(room);
+        }
+        foreach(GameObject encounter in encountersList)
+        {
+            Destroy(encounter);
+        }
+
+        rooms.Clear();
+        encountersList.Clear();
+    }
 }
