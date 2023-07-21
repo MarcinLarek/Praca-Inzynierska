@@ -188,7 +188,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db94b2d96247963409028480ea99f95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterSprite: {fileID: 21300000, guid: 085a578922fc4db4ca84947426038d61, type: 3}
+  characterSpriteDPS: {fileID: 21300000, guid: c8cd06f6881d46245a3ad15fdd0272d6, type: 3}
+  characterSpriteTANK: {fileID: 21300000, guid: bf8ee280b40c72b488c1d9cb6b3df9d9, type: 3}
+  characterSpriteSUPPORT: {fileID: 21300000, guid: e7568fb78a0baa7409a8cad614248d2e, type: 3}
+  characterSpriteDRONE: {fileID: 21300000, guid: 085a578922fc4db4ca84947426038d61, type: 3}
 --- !u!114 &6971680022758511322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,6 +229,7 @@ MonoBehaviour:
   agility: 5
   luck: 5
   inteligence: 5
+  bonusDamage: 0
 --- !u!61 &8864456758990345721
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -264,6 +268,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c99c2931cfbeb44ebab39f9edb91454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityOneButton: {fileID: 0}
+  abilityTwoButton: {fileID: 0}
+  abilityThreeButton: {fileID: 0}
 --- !u!1 &5146918992306435370
 GameObject:
   m_ObjectHideFlags: 0

@@ -50,6 +50,9 @@ public class CharacterBattle : MonoBehaviour
     //Przelaczamy obecnie wybrana postac
     public void ToggleSelectedCharacter()
     {
+        slectionCircleGameObject = transform.Find("SelectionCircle").gameObject;
+        activeCircleGameObject = transform.Find("ActiveCircle").gameObject;
+
         if (battleHandler.selectedCharacter != null)
         {// Sprawdzamy czy juz jakas postac jest wybrana
             if (battleHandler.selectedCharacter == this.gameObject)

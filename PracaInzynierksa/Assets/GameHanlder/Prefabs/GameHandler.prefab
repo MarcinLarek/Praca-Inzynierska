@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7295956601417761965}
   - component: {fileID: 2676470930761675179}
   - component: {fileID: 9142467553942118599}
+  - component: {fileID: -1454731583807297312}
   m_Layer: 0
   m_Name: GameHandler
   m_TagString: Untagged
@@ -89,3 +90,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84039167a622e1b4c80fb322e257651b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-1454731583807297312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815067631230938642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad8364725a3705d4f8612452e9899834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCharactersList:
+  - {fileID: 4682686029560386879, guid: ec7b358e85c2f4c45a80d600e0d9987e, type: 3}
+  - {fileID: 4682686029560386879, guid: ec7b358e85c2f4c45a80d600e0d9987e, type: 3}
+  - {fileID: 4682686029560386879, guid: ec7b358e85c2f4c45a80d600e0d9987e, type: 3}
+  enemyCharactersList: []

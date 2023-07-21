@@ -26,6 +26,9 @@ public class BattleHandler : MonoBehaviour
     public GameObject selectedCharacter;
     public GameObject ActionPointsDisplay;
     private CharacterStats.Classes activecharacterclass;
+    private BattleScreenHandler battleScreenHandler;
+    public GameObject enemySpawnPrefab;
+    public GameObject playerSpawnPrefab;
 
     private int turn = 0;
 
@@ -40,11 +43,13 @@ public class BattleHandler : MonoBehaviour
 
     private void Awake()
     {
+        battleScreenHandler = BattleScreenHandler.GetInstance();
         instance = this; // Singleton
     }
 
     private void Start()
     {
+        PrepareCharacterList();
         CharacterSpawner();
         SetActiveCharacter();
         activeCharacter.GetComponent<ClassAbilities>().PrepareButtons(activecharacterclass);
@@ -57,6 +62,20 @@ public class BattleHandler : MonoBehaviour
 
     //Funkcja obslugujaca spawnowanie wszystkich postaci. Obsluguje od 2 do 10 postaci, po 5 na team.
     //Jesli damy wiecej niz 5 na team to beda respic "na sobie" 
+    private void PrepareCharacterList()
+    {
+        foreach (GameObject playerCharacter in battleScreenHandler.playerCharactersList)
+        {
+            charactersList.Add(playerCharacter);
+        }
+
+        foreach (GameObject enemyCharacter in battleScreenHandler.enemyCharactersList)
+        {
+            charactersList.Add(enemyCharacter);
+        }
+
+    }
+
     private void CharacterSpawner()
     {
         int positionPlayer = 0;
@@ -166,14 +185,43 @@ public class BattleHandler : MonoBehaviour
             }
         }
 
-            
+        GameObject spawnedCharacter;
 
-        GameObject characterTransform = Instantiate(singlecharacter, position, Quaternion.identity);
-        CharacterBattle characterBattle = characterTransform.GetComponent<CharacterBattle>();
+
+        //Spawnimy odpowiedni prefab gaemobjectu postaci do walki w zaleznosci od przeciwnik/swoj
+        //Mozna to zas ogarnac na jednym prefabie ale to pozniej
+        if (isPlayerTeam)
+        {
+            spawnedCharacter = Instantiate(playerSpawnPrefab, position, Quaternion.identity);
+        }
+        else
+        {
+            spawnedCharacter = Instantiate(enemySpawnPrefab, position, Quaternion.identity);
+        }
+
+        //Kopiujemy statystyki naszej postaci przyciagnietej z GameHandlera do tej na planszy
+        AssignStats(spawnedCharacter.GetComponent<CharacterStats>(), singlecharacter.GetComponent<CharacterStats>());
+        CharacterBattle characterBattle = spawnedCharacter.GetComponent<CharacterBattle>();
         characterBattle.Setup(isPlayerTeam);
-        charactersListinbattle.Add(characterTransform);
-
+        charactersListinbattle.Add(spawnedCharacter);
         return characterBattle;
+    }
+
+    private void AssignStats(CharacterStats toCharacter, CharacterStats fromCharacter)
+    {
+        toCharacter.charactername = fromCharacter.charactername;
+        toCharacter.classname = fromCharacter.classname;
+        toCharacter.isplayerteam = fromCharacter.isplayerteam;
+        toCharacter.isalive = fromCharacter.isalive;
+        toCharacter.maxHealth = fromCharacter.maxHealth;
+        toCharacter.health = fromCharacter.health;
+        toCharacter.maxActionPoints = fromCharacter.maxActionPoints;
+        toCharacter.actionPoints = fromCharacter.actionPoints;
+        toCharacter.strength = fromCharacter.strength;
+        toCharacter.endurance = fromCharacter.endurance;
+        toCharacter.agility = fromCharacter.agility;
+        toCharacter.luck = fromCharacter.luck;
+        toCharacter.agility = fromCharacter.agility;
     }
 
     //Ustalamy ktora postac ma teraz ture
@@ -233,16 +281,17 @@ public class BattleHandler : MonoBehaviour
         Debug.Log("Alive Players: " + playerAliveCounter);
         Debug.Log("Alive Enemies: " + enemyAliveCounter);
 
-        if (playerAliveCounter == 0 || enemyAliveCounter == 0)
+        if (playerAliveCounter == 0)
         {
-            Debug.Log("#################/#########");
-            Debug.Log("----------------/----------");
-            Debug.Log("----------KONIEC-----------");
-            Debug.Log("---------/-----------------");
-            Debug.Log("########/##################");
-            SceneManager.LoadScene(sceneName: "MapGenerator");
+            BattleEnd(false);
             return;
         }
+        if (enemyAliveCounter == 0)
+        {
+            BattleEnd(true);
+            return;
+        }
+
         ////////////////////////////////////////////////////////
 
         //Podnosimy ture. Jesli numer tury jest wiekszy niz ilosc postaci to zerujemy i zaczynamy nowa kolejke
@@ -294,6 +343,32 @@ public class BattleHandler : MonoBehaviour
         characterToAttack = charactersListinbattle[listId];
         activeCharacter.GetComponent<CharacterBattle>().Attack(characterToAttack.GetComponent<CharacterBattle>());
         EndTurn();
+    }
+
+    private void BattleEnd(bool playerWin)
+    {
+        //Przenosimy dane z walki (HP i inne statystyki) do statysytk postaci w gameHandlerze
+        foreach (GameObject enemy in battleScreenHandler.enemyCharactersList)
+        {
+            Destroy(enemy);
+        }
+        battleScreenHandler.enemyCharactersList.Clear();
+        foreach (GameObject playerCharacter in battleScreenHandler.playerCharactersList)
+        {
+            // U W A G A
+            // Poki co szukamy po imieniu. Bedzie problem jesli 2 postaci beda mialy takie samo imie.
+            // Pozniej trzeba dodac jaki unikalny identyfikator.
+            GameObject stats = charactersListinbattle.Find((x) => x.GetComponent<CharacterStats>().charactername == playerCharacter.GetComponent<CharacterStats>().charactername);
+            AssignStats(playerCharacter.GetComponent<CharacterStats>(), stats.GetComponent<CharacterStats>());
+        }
+        if (playerWin)
+        {
+            SceneManager.LoadScene(sceneName: "MapGenerator");
+        }
+        else
+        {
+            SceneManager.LoadScene(sceneName: "MainHub");
+        }
     }
 
     public void AttackButton()

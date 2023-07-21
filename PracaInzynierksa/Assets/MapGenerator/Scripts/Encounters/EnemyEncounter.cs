@@ -6,11 +6,30 @@ using UnityEngine.SceneManagement;
 
 public class EnemyEncounter : MonoBehaviour
 {
+    public GameObject enmyInfoPrefab;
+    private int enemyCounter;
+    private BattleScreenHandler battleScreenHandler;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.name == "Player")
         {
             MoveToBattleScene();
+        }
+    }
+
+    private void Awake()
+    {
+        enemyCounter = Random.Range(1, 5);
+        battleScreenHandler = BattleScreenHandler.GetInstance();
+    }
+
+    private void GenerateEnemies()
+    {
+        GameObject enemy;
+        for(int i = 0; i < enemyCounter; i++)
+        {
+            enemy = Instantiate(enmyInfoPrefab, Vector3.zero, Quaternion.identity);
+            battleScreenHandler.enemyCharactersList.Add(enemy);
         }
     }
 
@@ -55,6 +74,7 @@ public class EnemyEncounter : MonoBehaviour
         }
         //Zmieniamy wartosc mapGenerated na true znajdujaca sie w naszym GameHandlerze aby scena BattleScreen wiedzia
         //ze powracamy do niej ze sceny walki a nie wchodzimy na czysto z misji.
+        GenerateEnemies();
         instance.mapGenerated = true;
         SceneManager.LoadScene(sceneName: "BattleScreen");
     }
