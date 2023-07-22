@@ -137,7 +137,7 @@ public class BattleHandler : MonoBehaviour
     //Glownie ustala sie tutaj jej pozycje na mapie, ewentualnie mozna dodac tutaj obsluge skali
     private CharacterBattle SpawnCharacter(bool isPlayerTeam, LanePosition lanePosition, GameObject singlecharacter)
     {
-        Vector3 position = new Vector3(0, 0); ;
+        Vector3 position = new Vector3(0, 0);
         if (isPlayerTeam)
         {
             position = new Vector3(-100, -30);
@@ -368,6 +368,7 @@ public class BattleHandler : MonoBehaviour
         else
         {
             MapGeneratorHandler.GetInstance().RemoveGeneratedScene();
+            Destroy(MapGeneratorHandler.GetInstance().player);
             SceneManager.LoadScene(sceneName: "MainHub");
         }
     }

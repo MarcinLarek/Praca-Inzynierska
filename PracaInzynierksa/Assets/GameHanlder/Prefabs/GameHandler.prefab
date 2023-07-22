@@ -102,8 +102,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad8364725a3705d4f8612452e9899834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCharactersList:
-  - {fileID: 4682686029560386879, guid: ec7b358e85c2f4c45a80d600e0d9987e, type: 3}
-  - {fileID: 4682686029560386879, guid: ec7b358e85c2f4c45a80d600e0d9987e, type: 3}
-  - {fileID: 4682686029560386879, guid: ec7b358e85c2f4c45a80d600e0d9987e, type: 3}
+  playerCharactersList: []
   enemyCharactersList: []
