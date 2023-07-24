@@ -342,8 +342,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1516195769}
-        m_TargetAssemblyTypeName: BattleHandler, Assembly-CSharp
+      - m_Target: {fileID: 1595347897}
+        m_TargetAssemblyTypeName: UIScripts, Assembly-CSharp
         m_MethodName: AbilitiOneButton
         m_Mode: 1
         m_Arguments:
@@ -898,8 +898,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1516195769}
-        m_TargetAssemblyTypeName: BattleHandler, Assembly-CSharp
+      - m_Target: {fileID: 1595347897}
+        m_TargetAssemblyTypeName: UIScripts, Assembly-CSharp
         m_MethodName: GiveActionPointButton
         m_Mode: 1
         m_Arguments:
@@ -1032,8 +1032,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1516195769}
-        m_TargetAssemblyTypeName: BattleHandler, Assembly-CSharp
+      - m_Target: {fileID: 1595347897}
+        m_TargetAssemblyTypeName: UIScripts, Assembly-CSharp
         m_MethodName: AttackButton
         m_Mode: 1
         m_Arguments:
@@ -1301,8 +1301,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1516195769}
-        m_TargetAssemblyTypeName: BattleHandler, Assembly-CSharp
+      - m_Target: {fileID: 1595347897}
+        m_TargetAssemblyTypeName: UIScripts, Assembly-CSharp
         m_MethodName: AbilitTwoButton
         m_Mode: 1
         m_Arguments:
@@ -1381,20 +1381,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pfCharacterBattle: {fileID: 4771975577072521894, guid: 91b9ae581d7586345926c9ce148e3ff8, type: 3}
-  charactersList:
-  - {fileID: 4714675202154540973, guid: 7e0027f2d42078f4f9f553aa0698e32b, type: 3}
-  - {fileID: 4714675202154540973, guid: 7e0027f2d42078f4f9f553aa0698e32b, type: 3}
-  - {fileID: 4714675202154540973, guid: 5a930399d34e80745a97430bb29558e9, type: 3}
-  - {fileID: 4714675202154540973, guid: 5a930399d34e80745a97430bb29558e9, type: 3}
-  - {fileID: 4714675202154540973, guid: 7366e02a31afffd40bc34c0c55711000, type: 3}
-  - {fileID: 4714675202154540973, guid: e705e2bc4f0d7a94c82ef84d6fb39707, type: 3}
-  - {fileID: 4714675202154540973, guid: e705e2bc4f0d7a94c82ef84d6fb39707, type: 3}
-  - {fileID: 4714675202154540973, guid: e705e2bc4f0d7a94c82ef84d6fb39707, type: 3}
-  - {fileID: 4714675202154540973, guid: e705e2bc4f0d7a94c82ef84d6fb39707, type: 3}
-  - {fileID: 4714675202154540973, guid: e705e2bc4f0d7a94c82ef84d6fb39707, type: 3}
+  charactersList: []
   charactersListinbattle: []
+  activeCharacter: {fileID: 0}
   selectedCharacter: {fileID: 0}
   ActionPointsDisplay: {fileID: 150312791}
+  activecharacterclass: 0
+  enemySpawnPrefab: {fileID: 4714675202154540973, guid: e705e2bc4f0d7a94c82ef84d6fb39707, type: 3}
+  playerSpawnPrefab: {fileID: 4714675202154540973, guid: 5a930399d34e80745a97430bb29558e9, type: 3}
 --- !u!4 &1516195770
 Transform:
   m_ObjectHideFlags: 0
@@ -1422,6 +1416,7 @@ GameObject:
   - component: {fileID: 1595347895}
   - component: {fileID: 1595347894}
   - component: {fileID: 1595347893}
+  - component: {fileID: 1595347897}
   m_Layer: 5
   m_Name: UI Layout
   m_TagString: Untagged
@@ -1517,6 +1512,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1595347897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595347892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2325db4cee078f14ebdb3b451267d56b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionPointsDisplay: {fileID: 150312791}
 --- !u!1 &1623241420
 GameObject:
   m_ObjectHideFlags: 0
@@ -1685,8 +1693,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1516195769}
-        m_TargetAssemblyTypeName: BattleHandler, Assembly-CSharp
+      - m_Target: {fileID: 1595347897}
+        m_TargetAssemblyTypeName: UIScripts, Assembly-CSharp
         m_MethodName: EndTurnButton
         m_Mode: 1
         m_Arguments:
@@ -2089,8 +2097,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1516195769}
-        m_TargetAssemblyTypeName: BattleHandler, Assembly-CSharp
+      - m_Target: {fileID: 1595347897}
+        m_TargetAssemblyTypeName: UIScripts, Assembly-CSharp
         m_MethodName: AbilitiThreeButton
         m_Mode: 1
         m_Arguments:

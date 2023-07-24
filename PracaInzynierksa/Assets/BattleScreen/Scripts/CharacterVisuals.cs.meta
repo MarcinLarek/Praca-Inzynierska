@@ -3,7 +3,11 @@ guid: db94b2d96247963409028480ea99f95b
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - characterSpriteDPS: {instanceID: 0}
+  - characterSpriteTANK: {instanceID: 0}
+  - characterSpriteSUPPORT: {instanceID: 0}
+  - characterSpriteDRONE: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
