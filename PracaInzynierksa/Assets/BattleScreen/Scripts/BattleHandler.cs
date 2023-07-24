@@ -22,10 +22,10 @@ public class BattleHandler : MonoBehaviour
 
     public List<GameObject> charactersList;
     public List<GameObject> charactersListinbattle;
-    private GameObject activeCharacter;
+    public GameObject activeCharacter;
     public GameObject selectedCharacter;
     public GameObject ActionPointsDisplay;
-    private CharacterStats.Classes activecharacterclass;
+    public CharacterStats.Classes activecharacterclass;
     private BattleScreenHandler battleScreenHandler;
     public GameObject enemySpawnPrefab;
     public GameObject playerSpawnPrefab;
@@ -373,65 +373,4 @@ public class BattleHandler : MonoBehaviour
         }
     }
 
-    public void AttackButton()
-    {
-        if(selectedCharacter!= null)
-        {
-            if (activeCharacter.GetComponent<CharacterStats>().actionPoints < 3)
-            {
-                Debug.Log("You don't have at least 3 action points");
-            }
-            else
-            {
-                if (selectedCharacter.GetComponent<CharacterStats>().isplayerteam && activeCharacter.GetComponent<CharacterStats>().isplayerteam)
-                {
-                    Debug.Log("Cant shoot teammates");
-                }
-                else
-                {
-                    activeCharacter.GetComponent<CharacterBattle>().Attack(selectedCharacter.GetComponent<CharacterBattle>());
-                    activeCharacter.GetComponent<CharacterStats>().actionPoints -= 3;
-                }
-            }
-        }
-        else
-        {
-            Debug.Log("Nie wybrano celu");
-        }
-    }
-
-    public void EndTurnButton()
-    {
-        activeCharacter.GetComponent<CharacterStats>().actionPoints = activeCharacter.GetComponent<CharacterStats>().maxActionPoints;
-        EndTurn();
-    }
-
-    public void GiveActionPointButton()
-    {
-        if (activeCharacter.GetComponent<CharacterStats>().actionPoints < 3)
-        {
-            Debug.Log("You don't have at least 3 action points");
-        }
-        else
-        {
-            activeCharacter.GetComponent<CharacterStats>().actionPoints -= 3;
-            selectedCharacter.GetComponent<CharacterStats>().actionPoints += 1;
-        }
-            
-    }
-
-    public void AbilitiOneButton()
-    {
-        activeCharacter.GetComponent<ClassAbilities>().AbilityDistributor(activecharacterclass, 1);
-    }
-
-    public void AbilitTwoButton()
-    {
-        activeCharacter.GetComponent<ClassAbilities>().AbilityDistributor(activecharacterclass, 2);
-    }
-
-    public void AbilitiThreeButton()
-    {
-        activeCharacter.GetComponent<ClassAbilities>().AbilityDistributor(activecharacterclass, 3);
-    }
 }
