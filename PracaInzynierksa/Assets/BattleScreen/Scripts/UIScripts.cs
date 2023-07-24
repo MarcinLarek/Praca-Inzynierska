@@ -1,15 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UIScripts : MonoBehaviour
 {
     private BattleHandler battlehandler;
+    public GameObject ActionPointsDisplay;
 
     private void Awake()
     {
         battlehandler = BattleHandler.GetInstance();
     }
+
+    private void Update()
+    {
+        ActionPointsDisplay.GetComponent<TextMeshProUGUI>().text = $"Action Points: {battlehandler.activeCharacter.GetComponent<CharacterStats>().actionPoints}/{battlehandler.activeCharacter.GetComponent<CharacterStats>().maxActionPoints}";
+    }
+
     public void AttackButton()
     {
         if (battlehandler.selectedCharacter != null)
