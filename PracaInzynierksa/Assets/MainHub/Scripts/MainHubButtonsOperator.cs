@@ -13,4 +13,8 @@ public class MainHubButtonsOperator : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName: "Trade");
     }
+    public void GoToCrewManagementButton()
+    {
+        SceneManager.LoadScene(sceneName: "CrewManagement");
+    }
 }
