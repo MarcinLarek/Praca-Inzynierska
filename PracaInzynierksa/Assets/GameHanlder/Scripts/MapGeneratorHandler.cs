@@ -25,7 +25,10 @@ public class MapGeneratorHandler : MonoBehaviour
 
     //Uzywane tu i tu. W momencie generowania nowej mapy jest tutaj zwyczajny prefab, przy wchodzeni ze sceny walki
     //Przechowywujemy tutaj pozycje gracza na mapie.
+    //newPlayerPrefab uzwany TYLKO do respienia nowego znacznika gracza
+    //player uzywany do przechowywania informacji i przenoszenia znacznika miedzy scenami
     public GameObject player;
+    public GameObject newPlayerPrefab;
 
     private void Awake()
     {
@@ -56,8 +59,9 @@ public class MapGeneratorHandler : MonoBehaviour
         Vector2 roomposition = new Vector2(0, 0);
         Instantiate(spawnRoom, roomposition, spawnRoom.transform.rotation);
         Vector2 playerposition = new Vector2(-3, 0);
-        GameObject spawnedPlayer = Instantiate(player, playerposition, player.transform.rotation);
-        spawnedPlayer.name = player.name; //Tutaj usuwamy (clone) z nazwy
+        GameObject spawnedPlayer = Instantiate(newPlayerPrefab, playerposition, newPlayerPrefab.transform.rotation);
+        spawnedPlayer.name = newPlayerPrefab.name; //Tutaj usuwamy (clone) z nazwy
+        player = spawnedPlayer;
     }
 
     private void LoadSceneState()
@@ -99,5 +103,6 @@ public class MapGeneratorHandler : MonoBehaviour
 
         rooms.Clear();
         encountersList.Clear();
+        mapGenerated = false;
     }
 }

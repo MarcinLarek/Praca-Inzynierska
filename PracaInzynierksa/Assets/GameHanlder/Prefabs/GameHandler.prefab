@@ -54,6 +54,7 @@ MonoBehaviour:
   rooms: []
   encountersList: []
   player: {fileID: 1285816500404900442, guid: 60c81849a4077e046b980e464314653c, type: 3}
+  newPlayerPrefab: {fileID: 1285816500404900442, guid: 60c81849a4077e046b980e464314653c, type: 3}
 --- !u!114 &7295956601417761965
 MonoBehaviour:
   m_ObjectHideFlags: 0
