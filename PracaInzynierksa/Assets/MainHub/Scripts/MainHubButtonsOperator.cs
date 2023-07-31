@@ -9,4 +9,8 @@ public class MainHubButtonsOperator : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName: "MissionSelection");
     }
+    public void GoToTradeButton()
+    {
+        SceneManager.LoadScene(sceneName: "Trade");
+    }
 }
