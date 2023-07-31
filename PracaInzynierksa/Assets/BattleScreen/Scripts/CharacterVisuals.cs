@@ -9,7 +9,11 @@ public class CharacterVisuals : MonoBehaviour
     //Tutaj sie wstawi obsluge animacji tekstur itp
 
     private SpriteRenderer spriteRenderer;
-    public Sprite characterSprite;
+
+    public Sprite characterSpriteDPS;
+    public Sprite characterSpriteTANK;
+    public Sprite characterSpriteSUPPORT;
+    public Sprite characterSpriteDRONE;
 
 
     private void Awake()
@@ -28,7 +32,27 @@ public class CharacterVisuals : MonoBehaviour
 
     public void ChangeSpriteImage(bool isplayerTeam)
     {
-        spriteRenderer.sprite = characterSprite;
+        if (isplayerTeam)
+        {
+            switch (GetComponent<CharacterStats>().classname)
+            {
+                case (CharacterStats.Classes.DMG):
+                    spriteRenderer.sprite = characterSpriteDPS;
+                    break;
+                case (CharacterStats.Classes.TANK):
+                    spriteRenderer.sprite = characterSpriteTANK;
+                    break;
+                case (CharacterStats.Classes.SUPPORT):
+                    spriteRenderer.sprite = characterSpriteSUPPORT;
+                    break;
+            }
+        }
+        else
+        {
+            spriteRenderer.sprite = characterSpriteDRONE;
+        }
+
+        
     }
 
 }

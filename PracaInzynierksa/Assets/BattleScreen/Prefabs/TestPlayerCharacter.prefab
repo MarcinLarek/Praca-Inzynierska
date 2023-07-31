@@ -182,9 +182,9 @@ GameObject:
   - component: {fileID: 6971680022758511322}
   - component: {fileID: -3976992276216104789}
   - component: {fileID: -3393864668293507667}
-  - component: {fileID: 8941961542722826659}
+  - component: {fileID: 6054053882221684674}
   m_Layer: 10
-  m_Name: TestPlayerTank
+  m_Name: TestPlayerCharacter
   m_TagString: CharacterInBattle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -272,7 +272,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db94b2d96247963409028480ea99f95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterSprite: {fileID: 21300000, guid: bf8ee280b40c72b488c1d9cb6b3df9d9, type: 3}
+  characterSpriteDPS: {fileID: 21300000, guid: c8cd06f6881d46245a3ad15fdd0272d6, type: 3}
+  characterSpriteTANK: {fileID: 21300000, guid: bf8ee280b40c72b488c1d9cb6b3df9d9, type: 3}
+  characterSpriteSUPPORT: {fileID: 21300000, guid: e7568fb78a0baa7409a8cad614248d2e, type: 3}
+  characterSpriteDRONE: {fileID: 21300000, guid: 085a578922fc4db4ca84947426038d61, type: 3}
 --- !u!114 &6971680022758511322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,8 +300,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea63d4dfb9a4f24ab1d4b7e6c8809d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charactername: Player Tank
-  classname: 2
+  charactername: Player DPS
+  classname: 0
   isplayerteam: 1
   isalive: 1
   maxHealth: 20
@@ -310,6 +313,7 @@ MonoBehaviour:
   agility: 5
   luck: 5
   inteligence: 5
+  bonusDamage: 0
 --- !u!61 &-3393864668293507667
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -336,7 +340,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &8941961542722826659
+--- !u!114 &6054053882221684674
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -348,6 +352,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c99c2931cfbeb44ebab39f9edb91454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityOneButton: {fileID: 0}
+  abilityTwoButton: {fileID: 0}
+  abilityThreeButton: {fileID: 0}
 --- !u!1 &6923752124011403975
 GameObject:
   m_ObjectHideFlags: 0
