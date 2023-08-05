@@ -50,11 +50,13 @@ public class StatsTableUpdater : MonoBehaviour
                 transform.Find("Price").gameObject.SetActive(true);
                 transform.Find("PriceTag").gameObject.SetActive(true);
                 transform.Find("Price").gameObject.GetComponent<TextMeshProUGUI>().text = stats.price.ToString();
+                transform.Find("PurchaseCharacterButton").gameObject.SetActive(true);
             }
             else
             {
                 transform.Find("Price").gameObject.SetActive(false);
                 transform.Find("PriceTag").gameObject.SetActive(false);
+                transform.Find("PurchaseCharacterButton").gameObject.SetActive(false);
             }
         }
     }

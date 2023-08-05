@@ -17,7 +17,7 @@ public class CharacterIcon : MonoBehaviour
 
     public void SetIcon()
     {
-        switch (GetComponent<CharacterStats>().classname)
+        switch (this.GetComponent<CharacterStats>().classname)
         {
             case (CharacterStats.Classes.DMG):
                 spriteRenderer.sprite = IconDPS;

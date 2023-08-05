@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
+using UnityEngine.UIElements;
 using static CharacterStats;
 using Random = UnityEngine.Random;
 
@@ -21,6 +24,7 @@ public class CrewManager : MonoBehaviour
     {
         instance = this; // Singleton
         GenerateCharatersToRecruit();
+        GeneratePlayerCharacters();
     }
     private static string[] firstNames = {
         "John", "Jane", "Michael", "Emily", "William", "Olivia", "James", "Sophia", "Robert", "Emma",
@@ -39,7 +43,24 @@ public class CrewManager : MonoBehaviour
         return firstName + " " + lastName;
     }
 
-
+    private void AssignStats(CharacterStats toCharacter, CharacterStats fromCharacter)
+    {
+        toCharacter.charactername = fromCharacter.charactername;
+        toCharacter.classname = fromCharacter.classname;
+        toCharacter.isplayerteam = fromCharacter.isplayerteam;
+        toCharacter.isalive = fromCharacter.isalive;
+        toCharacter.maxHealth = fromCharacter.maxHealth;
+        toCharacter.health = fromCharacter.health;
+        toCharacter.maxActionPoints = fromCharacter.maxActionPoints;
+        toCharacter.actionPoints = fromCharacter.actionPoints;
+        toCharacter.strength = fromCharacter.strength;
+        toCharacter.endurance = fromCharacter.endurance;
+        toCharacter.agility = fromCharacter.agility;
+        toCharacter.luck = fromCharacter.luck;
+        toCharacter.inteligence = fromCharacter.inteligence;
+        toCharacter.experience = fromCharacter.experience;
+        toCharacter.price = fromCharacter.price;
+    }
 
     private void GenerateCharatersToRecruit()
     {
@@ -74,6 +95,63 @@ public class CrewManager : MonoBehaviour
             RecruitableCharacters.Add(spawnedCharacter);
 
         }
+
+    }
+
+    private void GeneratePlayerCharacters()
+    {
+        Vector3 position = new Vector3(350, 200);
+        foreach(GameObject playerCharacter in PlayerInfo.GetInstance().RecruitedCharacters)
+        {
+            GameObject character = CharacterTemplate;
+            GameObject spawnedCharacter = Instantiate(character, position, Quaternion.identity);
+            position.y -= 100;
+
+            spawnedCharacter.name = character.name;
+            
+
+
+            CharacterStats characterstats = spawnedCharacter.GetComponent<CharacterStats>();
+            CharacterStats playerCharacterStats = playerCharacter.GetComponent<CharacterStats>();
+
+            AssignStats(characterstats, playerCharacterStats);
+
+            Debug.Log(spawnedCharacter.GetComponent<CharacterStats>().classname.ToString());
+            spawnedCharacter.GetComponent<CharacterIcon>().SetIcon();
+
+        }
+    }
+
+    public void PurchaseCharacterButton()
+    {
+        PlayerInfo instance = PlayerInfo.GetInstance();
+        CharacterStats activeCharacterStats = activeCharacter.GetComponent<CharacterStats>();
+        if (instance.playerMoney >= activeCharacterStats.price){
+            instance.playerMoney -= activeCharacterStats.price;
+            activeCharacterStats.isplayerteam = true;
+            Vector3 position = new Vector3(350, 200);
+            if (instance.RecruitedCharacters.Count != 0)
+            {
+                position = new Vector3(instance.RecruitedCharacters.Last().transform.position.x, instance.RecruitedCharacters.Last().transform.position.y - 100);
+            }
+            GameObject spawnedCharacter = Instantiate(instance.playerCharacterPreFab, position, Quaternion.identity);
+            AssignStats(spawnedCharacter.GetComponent<CharacterStats>(), activeCharacterStats);
+            RecruitableCharacters.Remove(activeCharacter);
+            activeCharacter.transform.position = position;
+
+
+            PlayerInfo.GetInstance().RecruitedCharacters.Add(spawnedCharacter);
+        }
+        else
+        {
+            Debug.Log("insufficient money");
+        }
+        
+    }
+
+    public void MainHubButton()
+    {
+        SceneManager.LoadScene(sceneName: "MainHub");
     }
 
 }

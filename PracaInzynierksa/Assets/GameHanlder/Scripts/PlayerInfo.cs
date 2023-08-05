@@ -6,11 +6,13 @@ public class PlayerInfo : MonoBehaviour
 {
 
     private static PlayerInfo instance;
+
     public static PlayerInfo GetInstance()
     {
         return instance;
     }
 
+    public GameObject playerCharacterPreFab;
     public List<GameObject> CharactersInActiveTeam;
     public List<GameObject> RecruitedCharacters;
     public int playerMoney;
