@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BattleScreenHandler : MonoBehaviour
 {
-    public List<GameObject> playerCharactersList;
     public List<GameObject> enemyCharactersList;
 
     private static BattleScreenHandler instance;

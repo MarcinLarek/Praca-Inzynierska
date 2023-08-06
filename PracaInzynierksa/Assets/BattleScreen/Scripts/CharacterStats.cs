@@ -12,6 +12,7 @@ public class CharacterStats : MonoBehaviour
     public Classes classname;
     public bool isplayerteam;
     public bool isalive = true;
+    public bool inactiveteam; // Uzywane do sprawdzenia czy jest w obecnie wybranej druzynie
     public int maxHealth;
     public int health;
     public int maxActionPoints;
@@ -22,6 +23,9 @@ public class CharacterStats : MonoBehaviour
     public int luck;
     public int inteligence;
     //other stats
+    public int experience;
+
+    public int price;
     public int bonusDamage;
     public enum Classes
     {
@@ -89,7 +93,6 @@ public class CharacterStats : MonoBehaviour
         Debug.Log($"{charactername} rolling 2d8  - {roll1}, {roll2} - Total roll - {damage}");
         return damage;
     }
-
     private int CalculateDamageForTank()
     {
         int TANroll1 = Random.Range(1, 4);

@@ -64,7 +64,7 @@ public class BattleHandler : MonoBehaviour
     //Jesli damy wiecej niz 5 na team to beda respic "na sobie" 
     private void PrepareCharacterList()
     {
-        foreach (GameObject playerCharacter in battleScreenHandler.playerCharactersList)
+        foreach (GameObject playerCharacter in PlayerInfo.GetInstance().CharactersInActiveTeam)
         {
             charactersList.Add(playerCharacter);
         }
@@ -221,7 +221,10 @@ public class BattleHandler : MonoBehaviour
         toCharacter.endurance = fromCharacter.endurance;
         toCharacter.agility = fromCharacter.agility;
         toCharacter.luck = fromCharacter.luck;
-        toCharacter.agility = fromCharacter.agility;
+        toCharacter.inteligence = fromCharacter.inteligence;
+        toCharacter.experience = fromCharacter.experience;
+        toCharacter.price = fromCharacter.price;
+        toCharacter.inactiveteam = fromCharacter.inactiveteam;
     }
 
     //Ustalamy ktora postac ma teraz ture
@@ -353,7 +356,7 @@ public class BattleHandler : MonoBehaviour
             Destroy(enemy);
         }
         battleScreenHandler.enemyCharactersList.Clear();
-        foreach (GameObject playerCharacter in battleScreenHandler.playerCharactersList)
+        foreach (GameObject playerCharacter in PlayerInfo.GetInstance().CharactersInActiveTeam)
         {
             // U W A G A
             // Poki co szukamy po imieniu. Bedzie problem jesli 2 postaci beda mialy takie samo imie.

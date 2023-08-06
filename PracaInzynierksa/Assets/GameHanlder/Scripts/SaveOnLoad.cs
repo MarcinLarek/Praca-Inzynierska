@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class SaveOnLoad : MonoBehaviour
 {
+    public bool dontDestroy = true;
     private void Awake()
     {
-        //Upewniamy sie ze GameHandler bedzie przenoszony pomiedzy scenami.
-        DontDestroyOnLoad(this.gameObject);
+        if (dontDestroy)
+        {
+            DontDestroyOnLoad(this.gameObject);
+        }
     }
 }
