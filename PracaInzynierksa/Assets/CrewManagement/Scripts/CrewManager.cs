@@ -60,6 +60,7 @@ public class CrewManager : MonoBehaviour
         toCharacter.inteligence = fromCharacter.inteligence;
         toCharacter.experience = fromCharacter.experience;
         toCharacter.price = fromCharacter.price;
+        toCharacter.inactiveteam = fromCharacter.inactiveteam;
     }
 
     private void GenerateCharatersToRecruit()
@@ -147,6 +148,41 @@ public class CrewManager : MonoBehaviour
             Debug.Log("insufficient money");
         }
         
+    }
+
+    public void TeamSwitchButton()
+    {
+        List<GameObject> CharactersInActiveTeam = PlayerInfo.GetInstance().CharactersInActiveTeam; 
+        if (activeCharacter.GetComponent<CharacterStats>().inactiveteam == false)
+        {
+            if(CharactersInActiveTeam.Count()>=5)
+            {
+                Debug.Log("Team Limit Reached");
+            }
+            else
+            {
+                // U W A G A
+                // Poki co szukamy po imieniu. Bedzie problem jesli 2 postaci beda mialy takie samo imie.
+                // Pozniej trzeba dodac jaki unikalny identyfikator.
+                GameObject playerCharacter = PlayerInfo.GetInstance().RecruitedCharacters.Find((x) => x.GetComponent<CharacterStats>().charactername == activeCharacter.GetComponent<CharacterStats>().charactername);
+                activeCharacter.GetComponent<CharacterStats>().inactiveteam = true;
+                playerCharacter.GetComponent<CharacterStats>().inactiveteam = true;
+                CharactersInActiveTeam.Add(playerCharacter);
+                activeCharacter.GetComponent<CharacterIcon>().ToggleTeamColor();
+            }
+        }
+        else
+        {
+            // U W A G A
+            // Poki co szukamy po imieniu. Bedzie problem jesli 2 postaci beda mialy takie samo imie.
+            // Pozniej trzeba dodac jaki unikalny identyfikator.
+            GameObject playerCharacter = PlayerInfo.GetInstance().RecruitedCharacters.Find((x) => x.GetComponent<CharacterStats>().charactername == activeCharacter.GetComponent<CharacterStats>().charactername);
+
+            activeCharacter.GetComponent<CharacterStats>().inactiveteam = false;
+            playerCharacter.GetComponent<CharacterStats>().inactiveteam = false;
+            CharactersInActiveTeam.Remove(playerCharacter);
+            activeCharacter.GetComponent<CharacterIcon>().ToggleTeamColor();
+        }
     }
 
     public void MainHubButton()

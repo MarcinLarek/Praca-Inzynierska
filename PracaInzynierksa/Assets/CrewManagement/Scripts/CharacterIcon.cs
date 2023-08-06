@@ -29,10 +29,23 @@ public class CharacterIcon : MonoBehaviour
                 spriteRenderer.sprite = IconSupport;
                 break;
         }
+        ToggleTeamColor();
     }
 
     private void OnMouseDown()
     {
         CrewManager.GetInstance().activeCharacter = this.gameObject;
+    }
+
+    public void ToggleTeamColor()
+    {
+        if (this.GetComponent<CharacterStats>().inactiveteam)
+        {
+            spriteRenderer.color = Color.green;
+        }
+        else
+        {
+            spriteRenderer.color = Color.white;
+        }
     }
 }

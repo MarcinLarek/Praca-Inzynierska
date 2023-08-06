@@ -12,6 +12,7 @@ public class CharacterStats : MonoBehaviour
     public Classes classname;
     public bool isplayerteam;
     public bool isalive = true;
+    public bool inactiveteam; // Uzywane do sprawdzenia czy jest w obecnie wybranej druzynie
     public int maxHealth;
     public int health;
     public int maxActionPoints;
@@ -23,6 +24,7 @@ public class CharacterStats : MonoBehaviour
     public int inteligence;
     //other stats
     public int experience;
+
     public int price;
     public int bonusDamage;
     public enum Classes

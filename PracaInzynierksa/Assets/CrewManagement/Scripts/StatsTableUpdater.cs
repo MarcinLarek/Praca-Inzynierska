@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class StatsTableUpdater : MonoBehaviour
@@ -9,6 +10,7 @@ public class StatsTableUpdater : MonoBehaviour
     private void Awake()
     {
         instance = CrewManager.GetInstance();
+        UpdateTeamCount();
     }
 
     // Update is called once per frame
@@ -32,6 +34,10 @@ public class StatsTableUpdater : MonoBehaviour
             transform.Find("Points-Luck").gameObject.GetComponent<TextMeshProUGUI>().text = stats.luck.ToString();
             transform.Find("Points-Inteligence").gameObject.GetComponent<TextMeshProUGUI>().text = stats.inteligence.ToString();
 
+            //To Trzeba przeniesc w inne miejsce pozniej bo tutaj nie pasuje---------
+            UpdateTeamCount();
+            //-----------------------------------------------------------------------
+
             switch (stats.classname)
             {
                 case (CharacterStats.Classes.DMG):
@@ -51,13 +57,28 @@ public class StatsTableUpdater : MonoBehaviour
                 transform.Find("PriceTag").gameObject.SetActive(true);
                 transform.Find("Price").gameObject.GetComponent<TextMeshProUGUI>().text = stats.price.ToString();
                 transform.Find("PurchaseCharacterButton").gameObject.SetActive(true);
+                transform.Find("TeamSwitchButton").gameObject.SetActive(false);
             }
             else
             {
                 transform.Find("Price").gameObject.SetActive(false);
                 transform.Find("PriceTag").gameObject.SetActive(false);
                 transform.Find("PurchaseCharacterButton").gameObject.SetActive(false);
+                transform.Find("TeamSwitchButton").gameObject.SetActive(true);
+                if (activeCharacter.GetComponent<CharacterStats>().inactiveteam == true)
+                {
+                    transform.Find("TeamSwitchButton").gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Remove from team";
+                }
+                else
+                {
+                    transform.Find("TeamSwitchButton").gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Add to team";
+                }
             }
         }
+    }
+
+    private void UpdateTeamCount()
+    {
+        transform.Find("ActiveTeam").gameObject.GetComponent<TextMeshProUGUI>().text = $"Characters in Team: {PlayerInfo.GetInstance().CharactersInActiveTeam.Count.ToString()}/5";
     }
 }
