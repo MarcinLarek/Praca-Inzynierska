@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8267634638017998022}
   - component: {fileID: 8267634638017998017}
   - component: {fileID: 8267634638017998016}
-  - component: {fileID: -2006949554497302479}
   - component: {fileID: 8887152601300634531}
+  - component: {fileID: 6830166368777012300}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 8267634638017998019}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 948.98395, y: 529.7779, z: 0}
-  m_LocalScale: {x: 80, y: 80, z: 1}
+  m_LocalScale: {x: 30, y: 30, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -132,18 +132,6 @@ MonoBehaviour:
   IconDPS: {fileID: 21300000, guid: d9b0ed12833e50b45bf45d60c2a6fe59, type: 3}
   IconTank: {fileID: 21300000, guid: 32666ce9a61f47d45abba6ace5a4128b, type: 3}
   IconSupport: {fileID: 21300000, guid: 9d737062e68e65549b6ce14a2067c653, type: 3}
---- !u!114 &-2006949554497302479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8267634638017998019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6406dd4323aa9fa45b720c40905f0668, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &8887152601300634531
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -170,3 +158,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &6830166368777012300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8267634638017998019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab392da2fd3037944ba1e321558ca9f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
