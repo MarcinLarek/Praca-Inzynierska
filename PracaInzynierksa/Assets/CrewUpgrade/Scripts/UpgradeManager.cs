@@ -9,6 +9,7 @@ public class UpgradeManager : MonoBehaviour
     public GameObject CharacterTemplate;
     public GameObject activeCharacter;
     public GameObject characterPortrait;
+    public List<GameObject> playerTeamIconList;
     public Sprite portraitDPS;
     public Sprite portraitTank;
     public Sprite portraitSupport;
@@ -64,6 +65,7 @@ public class UpgradeManager : MonoBehaviour
 
             Debug.Log(spawnedCharacter.GetComponent<CharacterStats>().classname.ToString());
             spawnedCharacter.GetComponent<CharacterIcon>().SetIcon();
+            playerTeamIconList.Add(spawnedCharacter);
 
         }
 
@@ -86,6 +88,17 @@ public class UpgradeManager : MonoBehaviour
                 break;
         }
     }
+
+    public void SaveCharacterStats()
+    {
+        foreach (GameObject playerCharacter in playerTeamIconList)
+        {
+
+            GameObject stats = PlayerInfo.GetInstance().RecruitedCharacters.Find((x) => x.GetComponent<CharacterStats>().charactername == playerCharacter.GetComponent<CharacterStats>().charactername);
+            AssignStats(stats.GetComponent<CharacterStats>(), playerCharacter.GetComponent<CharacterStats>());
+        }
+        GameObject.Find("Canvas/StatsPanel/AcceptChangesButton").SetActive(false);
+    } 
 
     public void MainHubButton()
     {

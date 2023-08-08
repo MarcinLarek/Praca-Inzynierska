@@ -53,5 +53,6 @@ public class UpgradeButtonBehaviour : MonoBehaviour, IPointerClickHandler
                 break;
 
         }
+        GameObject.Find("Canvas/StatsPanel/AcceptChangesButton").SetActive(true);
     }
 }

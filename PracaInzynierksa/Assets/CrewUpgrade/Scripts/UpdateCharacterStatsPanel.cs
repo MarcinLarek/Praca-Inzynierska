@@ -7,6 +7,7 @@ using UnityEngine;
 public class UpdateCharacterStatsPanel : MonoBehaviour
 {
     private UpgradeManager instance;
+
     private void Awake()
     {
         instance = UpgradeManager.GetInstance();
@@ -123,6 +124,5 @@ public class UpdateCharacterStatsPanel : MonoBehaviour
             }
         }
 
-        
     }
 }
