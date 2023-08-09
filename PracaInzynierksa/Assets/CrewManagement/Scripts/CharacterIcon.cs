@@ -15,6 +15,7 @@ public class CharacterIcon : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    //Wczytujemy grafike ikony przypisanej do klasy
     public void SetIcon()
     {
         switch (this.GetComponent<CharacterStats>().classname)
@@ -29,10 +30,12 @@ public class CharacterIcon : MonoBehaviour
                 spriteRenderer.sprite = IconSupport;
                 break;
         }
-        ToggleTeamColor();
+        ToggleActiveTeamVisuals();
     }
 
-    public void ToggleTeamColor()
+    //Zmieniamy wyglad Ikonek postaci ktore zostaly dodane do druzyny 
+    //Obecnie po prostu zmieniamy kolor na zielony. Pozniej trzeba zrobic cos innego
+    public void ToggleActiveTeamVisuals()
     {
         if (this.GetComponent<CharacterStats>().inactiveteam)
         {

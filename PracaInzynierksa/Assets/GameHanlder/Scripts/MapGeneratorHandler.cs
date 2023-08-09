@@ -90,6 +90,9 @@ public class MapGeneratorHandler : MonoBehaviour
         player.SetActive(true);
     }
 
+    //Odpalane po skonczeniu eksploracji, czyli pokonaniu bossa/straceniu zalogi
+    //Usuwa wszystkie GameObjecty potrzebne do generowania mapy i ustawia zmienna mapGeneated na false
+    //aby nastepen wejscie do generatora respilo nam nowa mape zamiast wczytywac stara.
     public void RemoveGeneratedScene()
     {
         foreach(GameObject room in rooms)

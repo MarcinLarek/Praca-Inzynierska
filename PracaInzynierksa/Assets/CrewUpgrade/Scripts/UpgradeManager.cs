@@ -25,26 +25,6 @@ public class UpgradeManager : MonoBehaviour
         GeneratePlayerCharacters();
     }
 
-    private void AssignStats(CharacterStats toCharacter, CharacterStats fromCharacter)
-    {
-        toCharacter.charactername = fromCharacter.charactername;
-        toCharacter.classname = fromCharacter.classname;
-        toCharacter.isplayerteam = fromCharacter.isplayerteam;
-        toCharacter.isalive = fromCharacter.isalive;
-        toCharacter.maxHealth = fromCharacter.maxHealth;
-        toCharacter.health = fromCharacter.health;
-        toCharacter.maxActionPoints = fromCharacter.maxActionPoints;
-        toCharacter.actionPoints = fromCharacter.actionPoints;
-        toCharacter.strength = fromCharacter.strength;
-        toCharacter.endurance = fromCharacter.endurance;
-        toCharacter.agility = fromCharacter.agility;
-        toCharacter.luck = fromCharacter.luck;
-        toCharacter.inteligence = fromCharacter.inteligence;
-        toCharacter.experience = fromCharacter.experience;
-        toCharacter.price = fromCharacter.price;
-        toCharacter.inactiveteam = fromCharacter.inactiveteam;
-    }
-
     private void GeneratePlayerCharacters()
     {
         Vector3 position = new Vector3(-140, 70);
@@ -61,7 +41,7 @@ public class UpgradeManager : MonoBehaviour
             CharacterStats characterstats = spawnedCharacter.GetComponent<CharacterStats>();
             CharacterStats playerCharacterStats = playerCharacter.GetComponent<CharacterStats>();
 
-            AssignStats(characterstats, playerCharacterStats);
+            characterstats.CopyStats(playerCharacterStats);
 
             Debug.Log(spawnedCharacter.GetComponent<CharacterStats>().classname.ToString());
             spawnedCharacter.GetComponent<CharacterIcon>().SetIcon();
@@ -95,7 +75,7 @@ public class UpgradeManager : MonoBehaviour
         {
 
             GameObject stats = PlayerInfo.GetInstance().RecruitedCharacters.Find((x) => x.GetComponent<CharacterStats>().charactername == playerCharacter.GetComponent<CharacterStats>().charactername);
-            AssignStats(stats.GetComponent<CharacterStats>(), playerCharacter.GetComponent<CharacterStats>());
+            stats.GetComponent<CharacterStats>().CopyStats(playerCharacter.GetComponent<CharacterStats>());
         }
         GameObject.Find("Canvas/StatsPanel/AcceptChangesButton").SetActive(false);
     } 

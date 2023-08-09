@@ -53,6 +53,10 @@ public class UpdateCharacterStatsPanel : MonoBehaviour
 
     private void LvlUpButtonSwitch()
     {
+        //Znajdujemy przycisk do Upgardu zdolnosci po jego nazwie
+        //Nastepnie, jesli EXP postaci jest wiekszy niz koszt ulepszenia to ustawiamyatrybut active gameobjecut na true
+        //Jesli jest mniejszy to ustawiamy go na false, dzieki czemu nie bedziemy mogli kliknac ulepszenia
+        //Obecnie koszt ulepszenia to statysytka * 100
         GameObject activeCharacter = UpgradeManager.GetInstance().activeCharacter;
 
         if (activeCharacter)

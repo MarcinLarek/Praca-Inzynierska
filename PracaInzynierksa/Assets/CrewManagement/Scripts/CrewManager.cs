@@ -23,8 +23,8 @@ public class CrewManager : MonoBehaviour
     private void Awake()
     {
         instance = this; // Singleton
-        GenerateCharatersToRecruit();
-        GeneratePlayerCharacters();
+        GenerateCharatersToRecruit(); // Tworzymy losowe postaci do rekrutacji
+        GeneratePlayerCharacters(); // Wczytujemy liste zrekrtutowanych postaci gracza
     }
     private static string[] firstNames = {
         "John", "Jane", "Michael", "Emily", "William", "Olivia", "James", "Sophia", "Robert", "Emma",
@@ -43,31 +43,15 @@ public class CrewManager : MonoBehaviour
         return firstName + " " + lastName;
     }
 
-    private void AssignStats(CharacterStats toCharacter, CharacterStats fromCharacter)
-    {
-        toCharacter.charactername = fromCharacter.charactername;
-        toCharacter.classname = fromCharacter.classname;
-        toCharacter.isplayerteam = fromCharacter.isplayerteam;
-        toCharacter.isalive = fromCharacter.isalive;
-        toCharacter.maxHealth = fromCharacter.maxHealth;
-        toCharacter.health = fromCharacter.health;
-        toCharacter.maxActionPoints = fromCharacter.maxActionPoints;
-        toCharacter.actionPoints = fromCharacter.actionPoints;
-        toCharacter.strength = fromCharacter.strength;
-        toCharacter.endurance = fromCharacter.endurance;
-        toCharacter.agility = fromCharacter.agility;
-        toCharacter.luck = fromCharacter.luck;
-        toCharacter.inteligence = fromCharacter.inteligence;
-        toCharacter.experience = fromCharacter.experience;
-        toCharacter.price = fromCharacter.price;
-        toCharacter.inactiveteam = fromCharacter.inactiveteam;
-    }
+  
 
     private void GenerateCharatersToRecruit()
     {
+        //Pozycja od ktorej zaczynamy respic ikony postaci
         Vector3 position = new Vector3(-350, 200);
         for (int i = 0; i < recruitsAmmount; i++)
         {
+            //Dajemy losowe statystyki rekrutom
             GameObject character = CharacterTemplate;
             CharacterStats characterstats = character.GetComponent<CharacterStats>();
             characterstats.charactername = GenerateRandomName();
@@ -84,15 +68,20 @@ public class CrewManager : MonoBehaviour
             characterstats.luck = Random.Range(1, 7);
             characterstats.inteligence = Random.Range(1, 7);
 
+            //Cena kupna postaci zalezy od kombinacji jej statystyk. Mozna zrobic pozniej inny przelicznik
             characterstats.price =
                 ((characterstats.strength + characterstats.endurance + characterstats.agility +
                 characterstats.luck + characterstats.inteligence + characterstats.actionPoints) * 10) +
                 (characterstats.maxHealth * 10);
 
             GameObject spawnedCharacter = Instantiate(character, position,Quaternion.identity);
+            //Z kazda respiona ikona postaci zmieniamy pozycje do nastepnego respa na osi Y o 100
             position.y -= 100;
             spawnedCharacter.name = character.name;
+            //Ustalamy grafike wyswietlanej ikony
             spawnedCharacter.GetComponent<CharacterIcon>().SetIcon();
+            //Dodajemy zrespiona postac do listy postaci do rekrutacji
+            //Pozniej wykorzystamy ta liste aby dostepne postacie sie nie resetowaly co wejscie do sceny
             RecruitableCharacters.Add(spawnedCharacter);
 
         }
@@ -101,23 +90,22 @@ public class CrewManager : MonoBehaviour
 
     private void GeneratePlayerCharacters()
     {
+        //Pozycja od ktorej zaczynamy respic ikony postaci
         Vector3 position = new Vector3(350, 200);
+        //Pobieramy liste naszych postaci z GameHandlera
         foreach(GameObject playerCharacter in PlayerInfo.GetInstance().RecruitedCharacters)
         {
             GameObject character = CharacterTemplate;
+            //Respimy gaeombejct z ikona i danymi naszej postaci
             GameObject spawnedCharacter = Instantiate(character, position, Quaternion.identity);
             position.y -= 100;
 
             spawnedCharacter.name = character.name;
-            
-
-
             CharacterStats characterstats = spawnedCharacter.GetComponent<CharacterStats>();
             CharacterStats playerCharacterStats = playerCharacter.GetComponent<CharacterStats>();
-
-            AssignStats(characterstats, playerCharacterStats);
-
-            Debug.Log(spawnedCharacter.GetComponent<CharacterStats>().classname.ToString());
+            //Kopiujemy dane z obiekut w GameHandlerze do zrespionego obieku w Scenie, po czym ustawiamy odpowiednia
+            //ikone
+            characterstats.CopyStats(playerCharacterStats);
             spawnedCharacter.GetComponent<CharacterIcon>().SetIcon();
 
         }
@@ -127,34 +115,39 @@ public class CrewManager : MonoBehaviour
     {
         PlayerInfo instance = PlayerInfo.GetInstance();
         CharacterStats activeCharacterStats = activeCharacter.GetComponent<CharacterStats>();
+        //Sprawdzamy czy nas stac
         if (instance.playerMoney >= activeCharacterStats.price){
             instance.playerMoney -= activeCharacterStats.price;
+            //Jesli tak przypisujemy go do naszej druzyny
             activeCharacterStats.isplayerteam = true;
+            //I zmieniamy poozycje ikony. Jesli jest to pierwsza psotac w naszej druzynie to respimy ja na wskazanych
+            //koordynatach. Jesli mamy juz kogos to respimy go na x i y-100 ostatniej postaci w naszej liscie
             Vector3 position = new Vector3(350, 200);
             if (instance.RecruitedCharacters.Count != 0)
             {
                 position = new Vector3(instance.RecruitedCharacters.Last().transform.position.x, instance.RecruitedCharacters.Last().transform.position.y - 100);
             }
             GameObject spawnedCharacter = Instantiate(instance.playerCharacterPreFab, position, Quaternion.identity);
-            AssignStats(spawnedCharacter.GetComponent<CharacterStats>(), activeCharacterStats);
-            RecruitableCharacters.Remove(activeCharacter);
+            spawnedCharacter.GetComponent<CharacterStats>().CopyStats(activeCharacterStats);
             activeCharacter.transform.position = position;
-
-
+            //Usuwamy kupiona postac z listy postaci mozliwych do kupienia i przypisujemy do listy zrekrutowanych.
+            RecruitableCharacters.Remove(activeCharacter);
             PlayerInfo.GetInstance().RecruitedCharacters.Add(spawnedCharacter);
         }
         else
         {
+            //TODO: Dodac jakies fancy rzeczy jak nas nie stac na zakup
             Debug.Log("insufficient money");
         }
         
     }
 
+    //Funkcja dodajaca zrekrutowana postac do listy postaci wybierajacyh sie na nastepna misje. 
     public void TeamSwitchButton()
     {
         List<GameObject> CharactersInActiveTeam = PlayerInfo.GetInstance().CharactersInActiveTeam; 
         if (activeCharacter.GetComponent<CharacterStats>().inactiveteam == false)
-        {
+        { //Po sprawdzeniu ze postaci nie ma jeszcze w liscie, dodajemy ja na liste.
             if(CharactersInActiveTeam.Count()>=5)
             {
                 Debug.Log("Team Limit Reached");
@@ -168,11 +161,11 @@ public class CrewManager : MonoBehaviour
                 activeCharacter.GetComponent<CharacterStats>().inactiveteam = true;
                 playerCharacter.GetComponent<CharacterStats>().inactiveteam = true;
                 CharactersInActiveTeam.Add(playerCharacter);
-                activeCharacter.GetComponent<CharacterIcon>().ToggleTeamColor();
+                activeCharacter.GetComponent<CharacterIcon>().ToggleActiveTeamVisuals();
             }
         }
         else
-        {
+        {// Po sprawdzeniu ze postac jest juz na liscie, usuwamy ja z listy.
             // U W A G A
             // Poki co szukamy po imieniu. Bedzie problem jesli 2 postaci beda mialy takie samo imie.
             // Pozniej trzeba dodac jaki unikalny identyfikator.
@@ -181,7 +174,7 @@ public class CrewManager : MonoBehaviour
             activeCharacter.GetComponent<CharacterStats>().inactiveteam = false;
             playerCharacter.GetComponent<CharacterStats>().inactiveteam = false;
             CharactersInActiveTeam.Remove(playerCharacter);
-            activeCharacter.GetComponent<CharacterIcon>().ToggleTeamColor();
+            activeCharacter.GetComponent<CharacterIcon>().ToggleActiveTeamVisuals();
         }
     }
 

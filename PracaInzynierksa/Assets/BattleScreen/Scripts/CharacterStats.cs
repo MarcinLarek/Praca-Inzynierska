@@ -34,6 +34,31 @@ public class CharacterStats : MonoBehaviour
         TANK,
     }
 
+    //Kopiowanie statysytk miedzy postaciami.
+    //Przypisanie bezposrednio jednego komponentu do drugiego da nam referencje poniwea¿ C#
+    //A jak jest referencja to wszystko pojdzie sie pierdolic w momencie jak usuniemy oryginal
+    //Dlatego przypisujemy wartosc po wartosci.
+    //Trzeba to ogolnie zrobic inaczej bo za kazdym razem jak cos dodajemy to trzeba to aktualizowac
+    public void CopyStats(CharacterStats fromCharacter)
+    {
+        this.charactername = fromCharacter.charactername;
+        this.classname = fromCharacter.classname;
+        this.isplayerteam = fromCharacter.isplayerteam;
+        this.isalive = fromCharacter.isalive;
+        this.maxHealth = fromCharacter.maxHealth;
+        this.health = fromCharacter.health;
+        this.maxActionPoints = fromCharacter.maxActionPoints;
+        this.actionPoints = fromCharacter.actionPoints;
+        this.strength = fromCharacter.strength;
+        this.endurance = fromCharacter.endurance;
+        this.agility = fromCharacter.agility;
+        this.luck = fromCharacter.luck;
+        this.inteligence = fromCharacter.inteligence;
+        this.experience = fromCharacter.experience;
+        this.price = fromCharacter.price;
+        this.inactiveteam = fromCharacter.inactiveteam;
+    }
+
     public void RecieveDamage(int damage)
     {
         int finaldamage = damage;

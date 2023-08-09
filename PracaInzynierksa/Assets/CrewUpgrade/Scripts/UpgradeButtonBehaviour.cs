@@ -6,16 +6,17 @@ using UnityEngine.EventSystems;
 public class UpgradeButtonBehaviour : MonoBehaviour, IPointerClickHandler
 {
     public void OnPointerClick(PointerEventData eventData)
-
     {
         StatUpgrade();
-        Debug.Log("Click!");
     }
 
     private void StatUpgrade()
     {
+        //Szukamy po nazwie ktory przycisk zostal klikniety
+        //Nastepnie w zaleznosci od przycisku ulepszamy odpowiadajacy mu atrybut
+        //Na koniec ustawiamy atrybut active przycisku do zatwierdzania zmian na true
+        //Dopiero po wcisnieciu tego przycisku zapiszemy zmiany
         CharacterStats activeCharacterStats = UpgradeManager.GetInstance().activeCharacter.GetComponent<CharacterStats>();
-        Debug.Log(this.name);
         switch (this.name) 
         {
             case "Upgrade-Health":

@@ -200,31 +200,11 @@ public class BattleHandler : MonoBehaviour
         }
 
         //Kopiujemy statystyki naszej postaci przyciagnietej z GameHandlera do tej na planszy
-        AssignStats(spawnedCharacter.GetComponent<CharacterStats>(), singlecharacter.GetComponent<CharacterStats>());
+        spawnedCharacter.GetComponent<CharacterStats>().CopyStats(singlecharacter.GetComponent<CharacterStats>());
         CharacterBattle characterBattle = spawnedCharacter.GetComponent<CharacterBattle>();
         characterBattle.Setup(isPlayerTeam);
         charactersListinbattle.Add(spawnedCharacter);
         return characterBattle;
-    }
-
-    private void AssignStats(CharacterStats toCharacter, CharacterStats fromCharacter)
-    {
-        toCharacter.charactername = fromCharacter.charactername;
-        toCharacter.classname = fromCharacter.classname;
-        toCharacter.isplayerteam = fromCharacter.isplayerteam;
-        toCharacter.isalive = fromCharacter.isalive;
-        toCharacter.maxHealth = fromCharacter.maxHealth;
-        toCharacter.health = fromCharacter.health;
-        toCharacter.maxActionPoints = fromCharacter.maxActionPoints;
-        toCharacter.actionPoints = fromCharacter.actionPoints;
-        toCharacter.strength = fromCharacter.strength;
-        toCharacter.endurance = fromCharacter.endurance;
-        toCharacter.agility = fromCharacter.agility;
-        toCharacter.luck = fromCharacter.luck;
-        toCharacter.inteligence = fromCharacter.inteligence;
-        toCharacter.experience = fromCharacter.experience;
-        toCharacter.price = fromCharacter.price;
-        toCharacter.inactiveteam = fromCharacter.inactiveteam;
     }
 
     //Ustalamy ktora postac ma teraz ture
@@ -365,7 +345,7 @@ public class BattleHandler : MonoBehaviour
             // Poki co szukamy po imieniu. Bedzie problem jesli 2 postaci beda mialy takie samo imie.
             // Pozniej trzeba dodac jaki unikalny identyfikator.
             GameObject stats = charactersListinbattle.Find((x) => x.GetComponent<CharacterStats>().charactername == playerCharacter.GetComponent<CharacterStats>().charactername);
-            AssignStats(playerCharacter.GetComponent<CharacterStats>(), stats.GetComponent<CharacterStats>());
+            playerCharacter.GetComponent<CharacterStats>().CopyStats(stats.GetComponent<CharacterStats>());
             //Nagroda EXP dla kazdego czlonka druzyny 15 * ilosc przeciwnikow.
             playerCharacter.GetComponent<CharacterStats>().experience += experienceReward;
         }
