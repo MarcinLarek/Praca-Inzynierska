@@ -220,15 +220,18 @@ MonoBehaviour:
   classname: 0
   isplayerteam: 0
   isalive: 1
+  inactiveteam: 0
   maxHealth: 20
   health: 20
   maxActionPoints: 5
   actionPoints: 5
   strength: 5
-  endurance: 5
+  endurance: 1
   agility: 5
   luck: 5
   inteligence: 5
+  experience: 15
+  price: 0
   bonusDamage: 0
 --- !u!61 &8864456758990345721
 BoxCollider2D:

@@ -49,6 +49,7 @@ MonoBehaviour:
   classname: 0
   isplayerteam: 0
   isalive: 1
+  inactiveteam: 0
   maxHealth: 15
   health: 15
   maxActionPoints: 5
@@ -58,6 +59,8 @@ MonoBehaviour:
   agility: 0
   luck: 0
   inteligence: 0
+  experience: 10
+  price: 0
   bonusDamage: 0
 --- !u!114 &637742076017388887
 MonoBehaviour:
@@ -71,3 +74,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1db1c38436e8904096b40f2a1d144f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroy: 1

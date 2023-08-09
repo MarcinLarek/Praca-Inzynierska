@@ -32,11 +32,6 @@ public class CharacterIcon : MonoBehaviour
         ToggleTeamColor();
     }
 
-    private void OnMouseDown()
-    {
-        CrewManager.GetInstance().activeCharacter = this.gameObject;
-    }
-
     public void ToggleTeamColor()
     {
         if (this.GetComponent<CharacterStats>().inactiveteam)

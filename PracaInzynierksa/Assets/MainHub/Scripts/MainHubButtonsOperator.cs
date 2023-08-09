@@ -17,4 +17,8 @@ public class MainHubButtonsOperator : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName: "CrewManagement");
     }
+    public void GoToCrewUpgradeButton()
+    {
+        SceneManager.LoadScene(sceneName: "CrewUpgrade");
+    }
 }
