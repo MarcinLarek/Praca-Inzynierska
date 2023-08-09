@@ -156,6 +156,8 @@ public class CharacterBattle : MonoBehaviour
         {
             targetCharacterStats.isalive = false;
             targetCharacterStats.gameObject.GetComponent<CharacterVisuals>().ChangeSpriteColor(Color.red);
+            //Dodajemy expa za zabicie przeciwnika
+            BattleHandler.GetInstance().activeCharacter.GetComponent<CharacterStats>().experience += targetCharacterStats.experience;
         }
     }
 }

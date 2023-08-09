@@ -350,11 +350,14 @@ public class BattleHandler : MonoBehaviour
 
     private void BattleEnd(bool playerWin)
     {
+        int experienceReward = 0;
         //Przenosimy dane z walki (HP i inne statystyki) do statysytk postaci w gameHandlerze
         foreach (GameObject enemy in battleScreenHandler.enemyCharactersList)
         {
+            experienceReward++;
             Destroy(enemy);
         }
+        experienceReward *= 15;
         battleScreenHandler.enemyCharactersList.Clear();
         foreach (GameObject playerCharacter in PlayerInfo.GetInstance().CharactersInActiveTeam)
         {
@@ -363,6 +366,8 @@ public class BattleHandler : MonoBehaviour
             // Pozniej trzeba dodac jaki unikalny identyfikator.
             GameObject stats = charactersListinbattle.Find((x) => x.GetComponent<CharacterStats>().charactername == playerCharacter.GetComponent<CharacterStats>().charactername);
             AssignStats(playerCharacter.GetComponent<CharacterStats>(), stats.GetComponent<CharacterStats>());
+            //Nagroda EXP dla kazdego czlonka druzyny 15 * ilosc przeciwnikow.
+            playerCharacter.GetComponent<CharacterStats>().experience += experienceReward;
         }
         if (playerWin)
         {
