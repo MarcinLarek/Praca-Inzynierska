@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ScriptUpgrader : MonoBehaviour
+public class ShipUpgrader : MonoBehaviour
 {
-    private static ScriptUpgrader instance;
+    private static ShipUpgrader instance;
 
-    public static ScriptUpgrader GetInstance()
+    public static ShipUpgrader GetInstance()
     {
         return instance;
     }
@@ -97,6 +97,7 @@ public class ScriptUpgrader : MonoBehaviour
 
     public void ButtonSelector()
     {
+        PlayerInfo playerInfo = PlayerInfo.GetInstance();
         //Szukamy po nazwie GameObjcetu ktory zawiera nasz przycisk
         switch (EventSystem.current.currentSelectedGameObject.transform.parent.gameObject.name)
         {
@@ -104,6 +105,7 @@ public class ScriptUpgrader : MonoBehaviour
                 if(!ShipUpgradeHandler.GetInstance().crewUpgrade_1 && BuyUpgrade(crewUpgrade_1_Cost))
                 {
                     ShipUpgradeHandler.GetInstance().crewUpgrade_1 = true;
+
                 }
                 break;
             case "CrewUpgrade2":

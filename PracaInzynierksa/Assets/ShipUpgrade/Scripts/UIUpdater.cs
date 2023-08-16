@@ -8,6 +8,7 @@ public class UIUpdater : MonoBehaviour
 {
     private TextMeshProUGUI moneydisplay;
     public List<GameObject> upgradeButtons;
+
     private void Awake()
     {
         moneydisplay = GameObject.Find("Canvas/MoneyPanel/MoneyCount").GetComponent<TextMeshProUGUI>();
@@ -27,37 +28,119 @@ public class UIUpdater : MonoBehaviour
 
     private void ButtonsUpdater()
     {
-        ScriptUpgrader instance = ScriptUpgrader.GetInstance();
-        foreach(GameObject upgradeButton in upgradeButtons)
+        ShipUpgrader shipUpgrader = ShipUpgrader.GetInstance();
+        ShipUpgradeHandler shipUpgradeHandler = ShipUpgradeHandler.GetInstance();
+        foreach (GameObject upgradeButton in upgradeButtons)
         {
             switch (upgradeButton.name)
             {
                 case "CrewUpgrade1":
-                    UpdateSingleButton(instance.crewUpgrade_1_Cost, instance.crewUpgrade_1_Name, instance.crewUpgrade_1_Description);
+                    if(shipUpgradeHandler.crewUpgrade_1)
+                    {
+                        //Zmienic tutaj pozniej na to, zeby przycisk mial jakas inna grafike po zakupie ulepszenia
+                        //Obecnie po prostu sie wylacza
+                        upgradeButton.SetActive(false);
+                    }
+                    else
+                    {
+                        UpdateSingleButton(upgradeButton, shipUpgrader.crewUpgrade_1_Cost, shipUpgrader.crewUpgrade_1_Name, shipUpgrader.crewUpgrade_1_Description);
+                    }
                     break;
                 case "CrewUpgrade2":
-                    UpdateSingleButton(instance.crewUpgrade_2_Cost, instance.crewUpgrade_2_Name, instance.crewUpgrade_2_Description);
+                    if(shipUpgradeHandler.crewUpgrade_2)
+                    {
+                        //Zmienic tutaj pozniej na to, zeby przycisk mial jakas inna grafike po zakupie ulepszenia
+                        //Obecnie po prostu sie wylacza
+                        upgradeButton.SetActive(false);
+                    }
+                    else
+                    {
+                        UpdateSingleButton(upgradeButton, shipUpgrader.crewUpgrade_2_Cost, shipUpgrader.crewUpgrade_2_Name, shipUpgrader.crewUpgrade_2_Description);
+                    }
                     break;
                 case "CrewUpgrade3":
-                    UpdateSingleButton(instance.crewUpgrade_3_Cost, instance.crewUpgrade_3_Name, instance.crewUpgrade_3_Description);
+                    if (shipUpgradeHandler.crewUpgrade_3)
+                    {
+                        //Zmienic tutaj pozniej na to, zeby przycisk mial jakas inna grafike po zakupie ulepszenia
+                        //Obecnie po prostu sie wylacza
+                        upgradeButton.SetActive(false);
+                    }
+                    else
+                    {
+                        UpdateSingleButton(upgradeButton, shipUpgrader.crewUpgrade_3_Cost, shipUpgrader.crewUpgrade_3_Name, shipUpgrader.crewUpgrade_3_Description);
+                    }
                     break;
                 case "RecruitUpgrade1":
-                    UpdateSingleButton(instance.recruitUpgrade_1_Cost, instance.recruitUpgrade_1_Name, instance.recruitUpgrade_1_Description);
+                    if (shipUpgradeHandler.recruitUpgrade_1)
+                    {
+                        //Zmienic tutaj pozniej na to, zeby przycisk mial jakas inna grafike po zakupie ulepszenia
+                        //Obecnie po prostu sie wylacza
+                        upgradeButton.SetActive(false);
+                    }
+                    else
+                    {
+                        UpdateSingleButton(upgradeButton, shipUpgrader.recruitUpgrade_1_Cost, shipUpgrader.recruitUpgrade_1_Name, shipUpgrader.recruitUpgrade_1_Description);
+                    }
                     break;
                 case "RecruitUpgrade2":
-                    UpdateSingleButton(instance.recruitUpgrade_2_Cost, instance.recruitUpgrade_2_Name, instance.recruitUpgrade_2_Description);
+                    if (shipUpgradeHandler.recruitUpgrade_2)
+                    {
+                        //Zmienic tutaj pozniej na to, zeby przycisk mial jakas inna grafike po zakupie ulepszenia
+                        //Obecnie po prostu sie wylacza
+                        upgradeButton.SetActive(false);
+                    }
+                    else
+                    {
+                        UpdateSingleButton(upgradeButton, shipUpgrader.recruitUpgrade_2_Cost, shipUpgrader.recruitUpgrade_2_Name, shipUpgrader.recruitUpgrade_2_Description);
+                    }
                     break;
                 case "RecruitUpgrade3":
-                    UpdateSingleButton(instance.recruitUpgrade_3_Cost, instance.recruitUpgrade_3_Name, instance.recruitUpgrade_3_Description);
+                    if (shipUpgradeHandler.recruitUpgrade_3)
+                    {
+                        //Zmienic tutaj pozniej na to, zeby przycisk mial jakas inna grafike po zakupie ulepszenia
+                        //Obecnie po prostu sie wylacza
+                        upgradeButton.SetActive(false);
+                    }
+                    else
+                    {
+                        UpdateSingleButton(upgradeButton, shipUpgrader.recruitUpgrade_3_Cost, shipUpgrader.recruitUpgrade_3_Name, shipUpgrader.recruitUpgrade_3_Description);
+                    }
                     break;
                 case "TeamUpgrade1":
-                    UpdateSingleButton(instance.teamUpgrade_1_Cost, instance.teamUpgrade_1_Name, instance.teamUpgrade_1_Description);
+                    if (shipUpgradeHandler.teamUpgrade_1)
+                    {
+                        //Zmienic tutaj pozniej na to, zeby przycisk mial jakas inna grafike po zakupie ulepszenia
+                        //Obecnie po prostu sie wylacza
+                        upgradeButton.SetActive(false);
+                    }
+                    else
+                    {
+                        UpdateSingleButton(upgradeButton, shipUpgrader.teamUpgrade_1_Cost, shipUpgrader.teamUpgrade_1_Name, shipUpgrader.teamUpgrade_1_Description);
+                    }
                     break;
                 case "TeamUpgrade2":
-                    UpdateSingleButton(instance.teamUpgrade_2_Cost, instance.teamUpgrade_2_Name, instance.teamUpgrade_2_Description);
+                    if (shipUpgradeHandler.teamUpgrade_2)
+                    {
+                        //Zmienic tutaj pozniej na to, zeby przycisk mial jakas inna grafike po zakupie ulepszenia
+                        //Obecnie po prostu sie wylacza
+                        upgradeButton.SetActive(false);
+                    }
+                    else
+                    {
+                        UpdateSingleButton(upgradeButton, shipUpgrader.teamUpgrade_2_Cost, shipUpgrader.teamUpgrade_2_Name, shipUpgrader.teamUpgrade_2_Description);
+                    }
                     break;
                 case "BetterRecruitsUpgrade":
-                    UpdateSingleButton(instance.betterRecruitsUpgrade_Cost, instance.betterRecruitsUpgrade_Name, instance.betterRecruitsUpgrade_Description);
+                    if (shipUpgradeHandler.betterRecruitsUpgrade)
+                    {
+                        //Zmienic tutaj pozniej na to, zeby przycisk mial jakas inna grafike po zakupie ulepszenia
+                        //Obecnie po prostu sie wylacza
+                        upgradeButton.SetActive(false);
+                    }
+                    else
+                    {
+                        UpdateSingleButton(upgradeButton, shipUpgrader.betterRecruitsUpgrade_Cost, shipUpgrader.betterRecruitsUpgrade_Name, shipUpgrader.betterRecruitsUpgrade_Description);
+                    }
                     break;
                 default:
                     Debug.Log("Wrong Button Name");
@@ -66,8 +149,10 @@ public class UIUpdater : MonoBehaviour
             }
         }
     }
-    private void UpdateSingleButton(int price, string name, string description)
+    private void UpdateSingleButton(GameObject upgradeButton, int price, string name, string description)
     {
-
+        upgradeButton.transform.Find("Price").GetComponent<TextMeshProUGUI>().text = price.ToString();
+        upgradeButton.transform.Find("Description").GetComponent<TextMeshProUGUI>().text = description;
+        upgradeButton.transform.Find("Button").GetComponentInChildren<TextMeshProUGUI>().text = name;
     }
 }
