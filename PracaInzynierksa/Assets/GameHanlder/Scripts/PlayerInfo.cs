@@ -19,7 +19,7 @@ public class PlayerInfo : MonoBehaviour
     public List<GameObject> RecruitedCharacters;
     //Waluta i statysytki zmieniajace sie po ulepszeniu statku
     public int playerMoney;
-    public int recruitslimit = 3;
+    public int recruitslimit = 2;
     public int crewlimit = 5;
     public int teamlimit = 3;
     public bool betterrecruits = false;

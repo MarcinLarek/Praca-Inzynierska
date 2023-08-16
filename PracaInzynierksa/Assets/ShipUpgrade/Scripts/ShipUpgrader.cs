@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class ShipUpgrader : MonoBehaviour
 {
@@ -83,77 +84,121 @@ public class ShipUpgrader : MonoBehaviour
 
         recruitUpgrade_1_Cost = 500;
         recruitUpgrade_1_Name = "Recruit Upgrade 1";
-        recruitUpgrade_1_Description = "Recruiting pool is now 5";
+        recruitUpgrade_1_Description = "Recruiting pool is now 4";
 
         recruitUpgrade_2_Cost = 1500;
         recruitUpgrade_2_Name = "Recruit Upgrade 2";
-        recruitUpgrade_2_Description = "Recruiting pool is now 7";
+        recruitUpgrade_2_Description = "Recruiting pool is now 6";
 
         recruitUpgrade_3_Cost = 2500;
         recruitUpgrade_3_Name = "Recruit Upgrade 3";
-        recruitUpgrade_3_Description = "Recruiting pool is now 10";
+        recruitUpgrade_3_Description = "Recruiting pool is now 8";
 
     }
 
     public void ButtonSelector()
     {
         PlayerInfo playerInfo = PlayerInfo.GetInstance();
+        ShipUpgradeHandler shipUpgradeHandler = ShipUpgradeHandler.GetInstance();
         //Szukamy po nazwie GameObjcetu ktory zawiera nasz przycisk
         switch (EventSystem.current.currentSelectedGameObject.transform.parent.gameObject.name)
         {
             case "CrewUpgrade1":
-                if(!ShipUpgradeHandler.GetInstance().crewUpgrade_1 && BuyUpgrade(crewUpgrade_1_Cost))
+                if(!shipUpgradeHandler.crewUpgrade_1 && BuyUpgrade(crewUpgrade_1_Cost))
                 {
-                    ShipUpgradeHandler.GetInstance().crewUpgrade_1 = true;
-
+                    shipUpgradeHandler.crewUpgrade_1 = true;
+                    playerInfo.crewlimit = 10;
                 }
                 break;
             case "CrewUpgrade2":
-                if (!ShipUpgradeHandler.GetInstance().crewUpgrade_2 && BuyUpgrade(crewUpgrade_2_Cost))
+                if (!shipUpgradeHandler.crewUpgrade_2 && shipUpgradeHandler.crewUpgrade_1)
                 {
-                    ShipUpgradeHandler.GetInstance().crewUpgrade_2 = true;
+                    if(BuyUpgrade(crewUpgrade_2_Cost))
+                    {
+                        shipUpgradeHandler.crewUpgrade_2 = true;
+                        playerInfo.crewlimit = 15;
+                    }
+                }
+                else
+                {
+                    Debug.Log("Previous Upgrade Required");
                 }
                 break;
             case "CrewUpgrade3":
-                if (!ShipUpgradeHandler.GetInstance().crewUpgrade_3 && BuyUpgrade(crewUpgrade_3_Cost))
+                if (!shipUpgradeHandler.crewUpgrade_3 && shipUpgradeHandler.crewUpgrade_2)
                 {
-                    ShipUpgradeHandler.GetInstance().crewUpgrade_3 = true;
+                    if (BuyUpgrade(crewUpgrade_3_Cost))
+                    {
+                        shipUpgradeHandler.crewUpgrade_3 = true;
+                        playerInfo.crewlimit = 20;
+                    }
+                }
+                else
+                {
+                    Debug.Log("Previous Upgrade Required");
                 }
                 break;
             case "RecruitUpgrade1":
-                if (!ShipUpgradeHandler.GetInstance().recruitUpgrade_1 && BuyUpgrade(recruitUpgrade_1_Cost))
+                if (!shipUpgradeHandler.recruitUpgrade_1 && BuyUpgrade(recruitUpgrade_1_Cost))
                 {
-                    ShipUpgradeHandler.GetInstance().recruitUpgrade_1 = true;
+                    shipUpgradeHandler.recruitUpgrade_1 = true;
+                    playerInfo.recruitslimit = 4;
                 }
                 break;
             case "RecruitUpgrade2":
-                if (!ShipUpgradeHandler.GetInstance().recruitUpgrade_2 && BuyUpgrade(recruitUpgrade_2_Cost))
+                if (!shipUpgradeHandler.recruitUpgrade_2 && shipUpgradeHandler.recruitUpgrade_1)
                 {
-                    ShipUpgradeHandler.GetInstance().recruitUpgrade_2 = true;
+                    if (BuyUpgrade(recruitUpgrade_2_Cost))
+                    {
+                        shipUpgradeHandler.recruitUpgrade_2 = true;
+                        playerInfo.recruitslimit = 6;
+                    }
+                }
+                else
+                {
+                    Debug.Log("Previous Upgrade Required");
                 }
                 break;
             case "RecruitUpgrade3":
-                if (!ShipUpgradeHandler.GetInstance().recruitUpgrade_3 && BuyUpgrade(recruitUpgrade_3_Cost))
+                if (!shipUpgradeHandler.recruitUpgrade_3 && shipUpgradeHandler.recruitUpgrade_2)
                 {
-                    ShipUpgradeHandler.GetInstance().recruitUpgrade_3 = true;
+                    if (BuyUpgrade(recruitUpgrade_3_Cost) )
+                    {
+                        shipUpgradeHandler.recruitUpgrade_3 = true;
+                        playerInfo.recruitslimit = 8;
+                    }
+                }
+                else
+                {
+                    Debug.Log("Previous Upgrade Required");
                 }
                 break;
             case "TeamUpgrade1":
-                if (!ShipUpgradeHandler.GetInstance().teamUpgrade_1 && BuyUpgrade(teamUpgrade_1_Cost))
+                if (!shipUpgradeHandler.teamUpgrade_1 && BuyUpgrade(teamUpgrade_1_Cost))
                 {
-                    ShipUpgradeHandler.GetInstance().teamUpgrade_1 = true;
+                    shipUpgradeHandler.teamUpgrade_1 = true;
+                    playerInfo.teamlimit = 4;
                 }
                 break;
             case "TeamUpgrade2":
-                if (!ShipUpgradeHandler.GetInstance().teamUpgrade_2 && BuyUpgrade(teamUpgrade_2_Cost))
+                if (!shipUpgradeHandler.teamUpgrade_2 && shipUpgradeHandler.teamUpgrade_1)
                 {
-                    ShipUpgradeHandler.GetInstance().teamUpgrade_2 = true;
+                    if (BuyUpgrade(teamUpgrade_2_Cost))
+                    {
+                        shipUpgradeHandler.teamUpgrade_2 = true;
+                        playerInfo.teamlimit = 5;
+                    }
+                }
+                else
+                {
+                    Debug.Log("Previous Upgrade Required");
                 }
                 break;
             case "BetterRecruitsUpgrade":
-                if (!ShipUpgradeHandler.GetInstance().betterRecruitsUpgrade && BuyUpgrade(betterRecruitsUpgrade_Cost))
+                if (!shipUpgradeHandler.betterRecruitsUpgrade && BuyUpgrade(betterRecruitsUpgrade_Cost))
                 {
-                    ShipUpgradeHandler.GetInstance().betterRecruitsUpgrade = true;
+                    shipUpgradeHandler.betterRecruitsUpgrade = true;
+                    playerInfo.betterrecruits = true;
                 }
                 break;
             default:
@@ -175,6 +220,11 @@ public class ShipUpgrader : MonoBehaviour
             Debug.Log("Insufficient money");
             return false;
         }
+    }
+
+    public void GoToMainHub()
+    {
+        SceneManager.LoadScene(sceneName: "MainHub");
     }
 
 
