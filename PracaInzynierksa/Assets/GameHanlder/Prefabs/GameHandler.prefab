@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 9142467553942118599}
   - component: {fileID: -1454731583807297312}
   - component: {fileID: 6128138056079656642}
+  - component: {fileID: 1417334856297552911}
   m_Layer: 0
   m_Name: GameHandler
   m_TagString: Untagged
@@ -122,3 +123,24 @@ MonoBehaviour:
   CharactersInActiveTeam: []
   RecruitedCharacters: []
   playerMoney: 1000
+--- !u!114 &1417334856297552911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815067631230938642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dfc3ea436900cc4e8c38eeba5fd444c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crewUpgrade_1: 0
+  crewUpgrade_2: 0
+  crewUpgrade_3: 0
+  teamUpgrade_1: 0
+  teamUpgrade_2: 0
+  recruitUpgrade_1: 0
+  recruitUpgrade_2: 0
+  recruitUpgrade_3: 0
+  betterRecruitsUpgrade: 0
