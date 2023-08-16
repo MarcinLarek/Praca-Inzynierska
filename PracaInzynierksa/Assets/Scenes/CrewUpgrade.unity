@@ -490,7 +490,7 @@ GameObject:
   - component: {fileID: 342388524}
   - component: {fileID: 342388523}
   m_Layer: 5
-  m_Name: AcceptChanges
+  m_Name: AcceptChangesButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -561,9 +561,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CrewManager, Assembly-CSharp
-        m_MethodName: PurchaseCharacterButton
+      - m_Target: {fileID: 1078092765}
+        m_TargetAssemblyTypeName: UpgradeManager, Assembly-CSharp
+        m_MethodName: SaveCharacterStats
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1883,6 +1883,7 @@ MonoBehaviour:
   CharacterTemplate: {fileID: 8267634638017998019, guid: c0ed83b65bea12e40be633165d42621f, type: 3}
   activeCharacter: {fileID: 0}
   characterPortrait: {fileID: 58268653}
+  playerTeamIconList: []
   portraitDPS: {fileID: 21300000, guid: c8cd06f6881d46245a3ad15fdd0272d6, type: 3}
   portraitTank: {fileID: 21300000, guid: bf8ee280b40c72b488c1d9cb6b3df9d9, type: 3}
   portraitSupport: {fileID: 21300000, guid: e7568fb78a0baa7409a8cad614248d2e, type: 3}
