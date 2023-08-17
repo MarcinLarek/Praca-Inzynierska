@@ -79,6 +79,6 @@ public class StatsTableUpdater : MonoBehaviour
 
     private void UpdateTeamCount()
     {
-        transform.Find("ActiveTeam").gameObject.GetComponent<TextMeshProUGUI>().text = $"Characters in Team: {PlayerInfo.GetInstance().CharactersInActiveTeam.Count.ToString()}/5";
+        transform.Find("ActiveTeam").gameObject.GetComponent<TextMeshProUGUI>().text = $"Characters in Team: {PlayerInfo.GetInstance().CharactersInActiveTeam.Count.ToString()}/{PlayerInfo.GetInstance().teamlimit.ToString()}";
     }
 }
