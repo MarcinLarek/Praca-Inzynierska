@@ -208,6 +208,8 @@ MonoBehaviour:
   - {fileID: 2673647865548792246, guid: fc3c87d33c4d2614792f46e457c5e798, type: 3}
   spawnableEncounters:
   - {fileID: 7848555665889758057, guid: 5f95cefa49d48ca4b847f7fcaefd42fe, type: 3}
+  spawnableBossEncounters:
+  - {fileID: 7848555665889758057, guid: 2c21440606473e24d8af46f4e198fea0, type: 3}
   encountersList: []
 --- !u!1 &2098645178
 GameObject:

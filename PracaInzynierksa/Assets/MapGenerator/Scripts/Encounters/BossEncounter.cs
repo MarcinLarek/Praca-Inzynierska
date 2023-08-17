@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class EnemyEncounter : MonoBehaviour
+public class BossEncounter : MonoBehaviour
 {
     public GameObject enmyInfoPrefab;
     private int enemyCounter;
@@ -13,24 +13,37 @@ public class EnemyEncounter : MonoBehaviour
     {
         if (collision.gameObject.name == "Player")
         {
+            battleScreenHandler.bossFight = true;
             MoveToBattleScene();
         }
     }
 
     private void Awake()
     {
-        enemyCounter = Random.Range(1, 6);
+        enemyCounter = Random.Range(1, 3);
         battleScreenHandler = BattleScreenHandler.GetInstance();
     }
 
     private void GenerateEnemies()
     {
         GameObject enemy;
-        for(int i = 0; i < enemyCounter; i++)
+        GameObject bossEnemy;
+        bossEnemy = Instantiate(enmyInfoPrefab, Vector3.zero, Quaternion.identity);
+        CharacterStats bossEnemyStats = bossEnemy.GetComponent<CharacterStats>();
+        bossEnemyStats.maxHealth = 50;
+        bossEnemyStats.health = 50;
+        bossEnemyStats.endurance = 1;
+        bossEnemyStats.experience = 100;
+        bossEnemyStats.classname = CharacterStats.Classes.TANK;
+        battleScreenHandler.enemyCharactersList.Add(bossEnemy);
+
+
+        for (int i = 0; i < enemyCounter; i++)
         {
             enemy = Instantiate(enmyInfoPrefab, Vector3.zero, Quaternion.identity);
             battleScreenHandler.enemyCharactersList.Add(enemy);
         }
+
     }
 
     private void MoveToBattleScene()
