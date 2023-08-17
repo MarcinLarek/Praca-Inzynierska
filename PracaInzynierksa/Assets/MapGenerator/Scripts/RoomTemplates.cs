@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,9 +18,11 @@ public class RoomTemplates : MonoBehaviour
 
     public float waitTime;
     private bool spawnedBoss;
+    private bool spawnedBossEncounter;
     public GameObject[] bossroom; // Tablica z dostêpnymi pomieszczeniamy koñcowymi (pomieszczenia z bossem, ale w sumie nie musi go tam byæ. Zalezy od prefabu)
 
     public List<GameObject> spawnableEncounters; // Lista z mo¿liwymi do zrespienia zdarzeniami na mapie
+    public List<GameObject> spawnableBossEncounters;
     public List<GameObject> encountersList; // Lista z wygenrowanymi juz zdarzeniami
     private MapGeneratorHandler mapgeneratorhandler;
 
@@ -53,6 +56,9 @@ public class RoomTemplates : MonoBehaviour
                         {
                             Instantiate(room, rooms[rooms.Count - 2].transform.position, Quaternion.identity);
                             Destroy(rooms[rooms.Count - 2]);
+                            GameObject oldRoom = rooms[rooms.Count - 2];
+                            rooms.Remove(oldRoom);
+                            Destroy(oldRoom);
                             spawnedBoss = true;
                         }
                     }
@@ -68,7 +74,9 @@ public class RoomTemplates : MonoBehaviour
                         if (room.name == bossroomname)
                         {
                             Instantiate(room, rooms[rooms.Count - 1].transform.position, Quaternion.identity);
-                            Destroy(rooms[rooms.Count - 1]);
+                            GameObject oldRoom = rooms[rooms.Count - 1];
+                            rooms.Remove(oldRoom);
+                            Destroy(oldRoom);
                             spawnedBoss = true;
                             //Respimy pomieszczenie z bossem i usuwamy to oryginalne. Zmieniamy status spawnedBoss na true zeby nam sie 2 nie respily.
                         }
@@ -79,7 +87,16 @@ public class RoomTemplates : MonoBehaviour
                 generateEncounters();
 
             } 
-            else if (waitTime >= 0)
+            else if(waitTime < 0 && waitTime >= -1 && spawnedBossEncounter == false)
+            {
+                //Enconunter z bossem respimy sekunde pozniej niz cala reszte, przez to w jaki sposob pomieszczenia
+                //dodawane sa do listy. W momencie kiedy wywolujemy wyzej gemerateEncounters(); aby wygenerowac
+                //reszte encounterow to w liscie pomieszczen nie ma jeszcze pomieszczenia z bossem. Ono dodaje sie tam
+                //dopiero po tym jak ta funkcja skonczy sie generowac. Dlatego musiala zostac popelniona taka
+                //gimnastyka mentalna
+                GenerateBossEncounter();
+            }
+            else if (waitTime >= -1)
             {
                 waitTime -= Time.deltaTime;
             }
@@ -88,22 +105,53 @@ public class RoomTemplates : MonoBehaviour
 
     private void generateEncounters()
     {
+        
         //Przechodzimy po liscie i respimy losowe encountery (poki co) na srodku pomieszczenia
         //Kazde pomieszczenie ma 50% szany na wygenerowanie
         foreach (GameObject room in rooms)
         {
             if(room.name != "closedRoom(Clone)")
             {
-                int chance = Random.Range(1, 10);
-                if (chance <= 5)
+                if (room.name.Substring(0,4) == "Boss") //Spawnujemy Ecnountery do pomieszczenia z bossem
                 {
-                    GameObject encounterToSpawn = spawnableEncounters[Random.Range(0, spawnableEncounters.Count)];
+                    Debug.Log("MAMY BOSSSSASAAASDF Dfd mokjaf IOFN");
+                    GameObject encounterToSpawn = spawnableBossEncounters[Random.Range(0, spawnableBossEncounters.Count)];
+                    Vector2 roomposition = room.transform.position;
+                    GameObject spawnedMarker = Instantiate(encounterToSpawn, roomposition, encounterToSpawn.transform.rotation);
+                    encountersList.Add(spawnedMarker);
+                }
+                else //Spawnujemy Ecnountery do zwyczajnych pomieszczen
+                {
+                    int chance = Random.Range(1, 10);
+                    if (chance <= 5)
+                    {
+                        GameObject encounterToSpawn = spawnableEncounters[Random.Range(0, spawnableEncounters.Count)];
+                        Vector2 roomposition = room.transform.position;
+                        GameObject spawnedMarker = Instantiate(encounterToSpawn, roomposition, encounterToSpawn.transform.rotation);
+                        encountersList.Add(spawnedMarker);
+                    }
+                }
+            }
+        }
+    }
+
+    private void GenerateBossEncounter()
+    {
+        foreach (GameObject room in rooms)
+        {
+            if (room.name != "closedRoom(Clone)")
+            {
+                if (room.name.Substring(0, 4) == "Boss") //Spawnujemy Ecnountery do pomieszczenia z bossem
+                {
+                    Debug.Log("MAMY BOSSSSASAAASDF Dfd mokjaf IOFN");
+                    GameObject encounterToSpawn = spawnableBossEncounters[Random.Range(0, spawnableBossEncounters.Count)];
                     Vector2 roomposition = room.transform.position;
                     GameObject spawnedMarker = Instantiate(encounterToSpawn, roomposition, encounterToSpawn.transform.rotation);
                     encountersList.Add(spawnedMarker);
                 }
             }
         }
+        spawnedBossEncounter = true;
     }
 
 }

@@ -192,6 +192,7 @@ MonoBehaviour:
   characterSpriteTANK: {fileID: 21300000, guid: bf8ee280b40c72b488c1d9cb6b3df9d9, type: 3}
   characterSpriteSUPPORT: {fileID: 21300000, guid: e7568fb78a0baa7409a8cad614248d2e, type: 3}
   characterSpriteDRONE: {fileID: 21300000, guid: 085a578922fc4db4ca84947426038d61, type: 3}
+  characterSpriteBOSS: {fileID: 21300000, guid: fc37120f5b06b1b45aec513f97c36853, type: 3}
 --- !u!114 &6971680022758511322
 MonoBehaviour:
   m_ObjectHideFlags: 0

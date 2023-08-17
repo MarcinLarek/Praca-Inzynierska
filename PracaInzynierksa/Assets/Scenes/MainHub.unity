@@ -1713,7 +1713,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1005842437}
         m_TargetAssemblyTypeName: MainHubButtonsOperator, Assembly-CSharp
-        m_MethodName: GoToMissionSelectionButton
+        m_MethodName: GoToShipUpgrade
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
