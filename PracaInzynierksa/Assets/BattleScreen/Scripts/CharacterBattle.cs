@@ -158,6 +158,24 @@ public class CharacterBattle : MonoBehaviour
             targetCharacterStats.gameObject.GetComponent<CharacterVisuals>().ChangeSpriteColor(Color.red);
             //Dodajemy expa za zabicie przeciwnika
             BattleHandler.GetInstance().activeCharacter.GetComponent<CharacterStats>().experience += targetCharacterStats.experience;
+
+            if (targetCharacterStats.isplayerteam)
+            {
+                // U W A G A
+                // Poki co szukamy po imieniu. Bedzie problem jesli 2 postaci beda mialy takie samo imie.
+                // Pozniej trzeba dodac jaki unikalny identyfikator.
+                PlayerInfo playerInfo = PlayerInfo.GetInstance();
+                GameObject deadCharacter = playerInfo.CharactersInActiveTeam.Find((x) => x.GetComponent<CharacterStats>().charactername == targetCharacterStats.charactername);
+                playerInfo.CharactersInActiveTeam.Remove(deadCharacter);
+                playerInfo.RecruitedCharacters.Remove(deadCharacter);
+                Destroy(deadCharacter);
+
+                BattleHandler battleHandler = BattleHandler.GetInstance();
+                GameObject deadCharacterBattle = battleHandler.charactersListinbattle.Find((x) => x.GetComponent<CharacterStats>().charactername == targetCharacterStats.charactername);
+                battleHandler.charactersListinbattle.Remove(deadCharacterBattle);
+            }
+
+
         }
     }
 }
