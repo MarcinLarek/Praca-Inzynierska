@@ -5,6 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CharacterBattle : MonoBehaviour
 {
@@ -143,10 +144,22 @@ public class CharacterBattle : MonoBehaviour
 
     public void Attack(CharacterBattle targetCharacterBattle)
     {
-        Debug.Log(characterStats.charactername + " attacks " + targetCharacterBattle.GetComponent<CharacterStats>().charactername);
-        int damage = characterStats.CalculateDamage();
-        targetCharacterBattle.GetComponent<CharacterStats>().RecieveDamage(damage);
-        CheckIfKilled(targetCharacterBattle.GetComponent<CharacterStats>());
+        CharacterStats targetStats = targetCharacterBattle.GetComponent<CharacterStats>();
+
+        Debug.Log(characterStats.charactername + " attacks " + targetStats.charactername);
+        int attakcRoll = characterStats.agility + Random.Range(1, 11);
+        int defenceRoll = targetStats.agility + Random.Range(1, 11);
+        if(attakcRoll > defenceRoll)
+        {
+            Debug.Log($"Attack succed! Rolled {attakcRoll} aginst {defenceRoll}");
+            int damage = characterStats.CalculateDamage();
+            targetStats.RecieveDamage(damage);
+            CheckIfKilled(targetStats);
+        }
+        else
+        {
+            Debug.Log($"Attack fails! Rolled {attakcRoll} aginst {defenceRoll}");
+        }
 
     }
 
