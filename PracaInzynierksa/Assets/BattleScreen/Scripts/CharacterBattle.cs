@@ -5,6 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CharacterBattle : MonoBehaviour
 {
@@ -143,10 +144,34 @@ public class CharacterBattle : MonoBehaviour
 
     public void Attack(CharacterBattle targetCharacterBattle)
     {
-        Debug.Log(characterStats.charactername + " attacks " + targetCharacterBattle.GetComponent<CharacterStats>().charactername);
-        int damage = characterStats.CalculateDamage();
-        targetCharacterBattle.GetComponent<CharacterStats>().RecieveDamage(damage);
-        CheckIfKilled(targetCharacterBattle.GetComponent<CharacterStats>());
+        CharacterStats targetStats = targetCharacterBattle.GetComponent<CharacterStats>();
+
+        Debug.Log(characterStats.charactername + " attacks " + targetStats.charactername);
+        int attackRoll = Random.Range(1, 11);
+        int attackscore = characterStats.agility + attackRoll;
+
+        int defenceRoll = targetStats.agility + Random.Range(1, 11);
+        if(attackscore > defenceRoll)
+        {
+            Debug.Log($"Attack succed! Rolled {attackscore} aginst {defenceRoll}");
+            int damage = characterStats.CalculateDamage();
+            if(attackRoll == 10)
+            {
+                int luckcheck = Random.Range(1, 11) + characterStats.luck - targetStats.luck;
+                Debug.Log($"Rolled 10 for atack. Rolling {luckcheck} for critical");
+                if (luckcheck >= 10)
+                {
+                    Debug.Log("Criical! Double damage!");
+                    damage *= 2;
+                }
+            }
+            targetStats.RecieveDamage(damage);
+            CheckIfKilled(targetStats);
+        }
+        else
+        {
+            Debug.Log($"Attack fails! Rolled {attackscore} aginst {defenceRoll}");
+        }
 
     }
 
@@ -158,6 +183,24 @@ public class CharacterBattle : MonoBehaviour
             targetCharacterStats.gameObject.GetComponent<CharacterVisuals>().ChangeSpriteColor(Color.red);
             //Dodajemy expa za zabicie przeciwnika
             BattleHandler.GetInstance().activeCharacter.GetComponent<CharacterStats>().experience += targetCharacterStats.experience;
+
+            if (targetCharacterStats.isplayerteam)
+            {
+                // U W A G A
+                // Poki co szukamy po imieniu. Bedzie problem jesli 2 postaci beda mialy takie samo imie.
+                // Pozniej trzeba dodac jaki unikalny identyfikator.
+                PlayerInfo playerInfo = PlayerInfo.GetInstance();
+                GameObject deadCharacter = playerInfo.CharactersInActiveTeam.Find((x) => x.GetComponent<CharacterStats>().charactername == targetCharacterStats.charactername);
+                playerInfo.CharactersInActiveTeam.Remove(deadCharacter);
+                playerInfo.RecruitedCharacters.Remove(deadCharacter);
+                Destroy(deadCharacter);
+
+                BattleHandler battleHandler = BattleHandler.GetInstance();
+                GameObject deadCharacterBattle = battleHandler.charactersListinbattle.Find((x) => x.GetComponent<CharacterStats>().charactername == targetCharacterStats.charactername);
+                battleHandler.charactersListinbattle.Remove(deadCharacterBattle);
+            }
+
+
         }
     }
 }
