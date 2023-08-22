@@ -147,18 +147,30 @@ public class CharacterBattle : MonoBehaviour
         CharacterStats targetStats = targetCharacterBattle.GetComponent<CharacterStats>();
 
         Debug.Log(characterStats.charactername + " attacks " + targetStats.charactername);
-        int attakcRoll = characterStats.agility + Random.Range(1, 11);
+        int attackRoll = Random.Range(1, 11);
+        int attackscore = characterStats.agility + attackRoll;
+
         int defenceRoll = targetStats.agility + Random.Range(1, 11);
-        if(attakcRoll > defenceRoll)
+        if(attackscore > defenceRoll)
         {
-            Debug.Log($"Attack succed! Rolled {attakcRoll} aginst {defenceRoll}");
+            Debug.Log($"Attack succed! Rolled {attackscore} aginst {defenceRoll}");
             int damage = characterStats.CalculateDamage();
+            if(attackRoll == 10)
+            {
+                int luckcheck = Random.Range(1, 11) + characterStats.luck - targetStats.luck;
+                Debug.Log($"Rolled 10 for atack. Rolling {luckcheck} for critical");
+                if (luckcheck >= 10)
+                {
+                    Debug.Log("Criical! Double damage!");
+                    damage *= 2;
+                }
+            }
             targetStats.RecieveDamage(damage);
             CheckIfKilled(targetStats);
         }
         else
         {
-            Debug.Log($"Attack fails! Rolled {attakcRoll} aginst {defenceRoll}");
+            Debug.Log($"Attack fails! Rolled {attackscore} aginst {defenceRoll}");
         }
 
     }
