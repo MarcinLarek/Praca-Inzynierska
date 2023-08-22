@@ -21,4 +21,8 @@ public class MainHubButtonsOperator : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName: "CrewUpgrade");
     }
+    public void GoToMainMenuButton()
+    {
+        SceneManager.LoadScene(sceneName: "MainMenu");
+    }
 }
