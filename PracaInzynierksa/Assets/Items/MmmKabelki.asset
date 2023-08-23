@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73186e0be9d0b784dbbb89a7113c5112, type: 3}
   m_Name: MmmKabelki
   m_EditorClassIdentifier: 
+  itemname: Kabelki
+  description: Miedziane Kabelki znalezione na statku. Handlarz na pewno je kupi.
   tile: {fileID: 0}
   image: {fileID: 21300000, guid: 260bc09f6c5e0e0449305de68c9ae6f2, type: 3}
   type: 0
   actionType: 2
+  value: 0
+  price: 50

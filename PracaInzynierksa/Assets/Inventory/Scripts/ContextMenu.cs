@@ -11,6 +11,7 @@ public class ContextMenu : MonoBehaviour
     private Vector3 menuPosition;
     private GameObject clickedItem;
     public Image image;
+    public int typ;
 
     void Update()
     {
@@ -51,6 +52,17 @@ public class ContextMenu : MonoBehaviour
                 if (clickedItem != null)
                 {
                     Debug.Log("U¿yto elementu: " + clickedItem.name);
+                    switch (typ)
+                    {
+                        case 1: //u¿ycie medykamentu
+                            Destroy(clickedItem);
+                            break;
+                        case 2: //wyekwipowanie broni
+                            break;
+                        case 3: //inne
+                            break;
+
+                    }
                     //tutaj czarna magia bo trzeba zaimplementowaæ do sceny walki.
                 }
             }

@@ -16,7 +16,7 @@ MonoBehaviour:
   description: "Standardowy Karabin Laserowy. Tani i skuteczny, jednak mniej celny
     ni\u017C karabin standardowy, kt\xF3rego pocisk\xF3 nie znosi na wietrze."
   tile: {fileID: 0}
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: ca3abd43503d8e5469a2b44dd70dfbd3, type: 3}
   type: 2
   actionType: 1
   value: 7
