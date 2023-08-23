@@ -14,6 +14,7 @@ public class CharacterVisuals : MonoBehaviour
     public Sprite characterSpriteTANK;
     public Sprite characterSpriteSUPPORT;
     public Sprite characterSpriteDRONE;
+    public Sprite characterSpriteBOSS;
 
 
     private void Awake()
@@ -49,7 +50,18 @@ public class CharacterVisuals : MonoBehaviour
         }
         else
         {
-            spriteRenderer.sprite = characterSpriteDRONE;
+            switch (GetComponent<CharacterStats>().classname)
+            {
+                case (CharacterStats.Classes.DMG):
+                    spriteRenderer.sprite = characterSpriteDRONE;
+                    break;
+                case (CharacterStats.Classes.TANK):
+                    spriteRenderer.sprite = characterSpriteBOSS;
+                    break;
+                case (CharacterStats.Classes.SUPPORT):
+                    spriteRenderer.sprite = characterSpriteDRONE;
+                    break;
+            }
         }
 
         

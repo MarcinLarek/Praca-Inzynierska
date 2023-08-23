@@ -8,6 +8,9 @@ public class UIScripts : MonoBehaviour
     private BattleHandler battlehandler;
     public GameObject ActionPointsDisplay;
 
+    private int attackCost = 2;
+    private int givePointCost = 2;
+
     private void Awake()
     {
         battlehandler = BattleHandler.GetInstance();
@@ -22,9 +25,9 @@ public class UIScripts : MonoBehaviour
     {
         if (battlehandler.selectedCharacter != null)
         {
-            if (battlehandler.activeCharacter.GetComponent<CharacterStats>().actionPoints < 3)
+            if (battlehandler.activeCharacter.GetComponent<CharacterStats>().actionPoints < attackCost)
             {
-                Debug.Log("You don't have at least 3 action points");
+                Debug.Log($"You don't have at least {attackCost} action points");
             }
             else
             {
@@ -35,7 +38,7 @@ public class UIScripts : MonoBehaviour
                 else
                 {
                     battlehandler.activeCharacter.GetComponent<CharacterBattle>().Attack(battlehandler.selectedCharacter.GetComponent<CharacterBattle>());
-                    battlehandler.activeCharacter.GetComponent<CharacterStats>().actionPoints -= 3;
+                    battlehandler.activeCharacter.GetComponent<CharacterStats>().actionPoints -= attackCost;
                 }
             }
         }
@@ -53,13 +56,13 @@ public class UIScripts : MonoBehaviour
 
     public void GiveActionPointButton()
     {
-        if (battlehandler.activeCharacter.GetComponent<CharacterStats>().actionPoints < 3)
+        if (battlehandler.activeCharacter.GetComponent<CharacterStats>().actionPoints < givePointCost)
         {
-            Debug.Log("You don't have at least 3 action points");
+            Debug.Log($"You don't have at least {givePointCost} action points");
         }
         else
         {
-            battlehandler.activeCharacter.GetComponent<CharacterStats>().actionPoints -= 3;
+            battlehandler.activeCharacter.GetComponent<CharacterStats>().actionPoints -= givePointCost;
             battlehandler.selectedCharacter.GetComponent<CharacterStats>().actionPoints += 1;
         }
 

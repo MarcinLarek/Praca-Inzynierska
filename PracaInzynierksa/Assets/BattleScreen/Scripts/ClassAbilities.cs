@@ -123,13 +123,14 @@ public class ClassAbilities : MonoBehaviour
     private void SupportAbilityOne()
     {
         BattleHandler battlehandler = BattleHandler.GetInstance();
+        int abilityCost = 3;
 
         if (battlehandler.selectedCharacter != null)//Sprawdzamy czy ktos wybrany
         {
             CharacterStats selectescharacter = battlehandler.selectedCharacter.GetComponent<CharacterStats>();
             if (selectescharacter.isplayerteam == true)//Sprawdzamy czy przeciwnik czy swoj
             {
-                if (characterStats.actionPoints >= 3)//Sprawdzamy ilosc Action Pointow
+                if (characterStats.actionPoints >= abilityCost)//Sprawdzamy ilosc Action Pointow
                 {
                     if (selectescharacter.health != selectescharacter.maxHealth)//Sprawdzamy czy nie ma juz max HP
                     {
@@ -141,7 +142,7 @@ public class ClassAbilities : MonoBehaviour
                         {
                             selectescharacter.health = selectescharacter.maxHealth;
                         }
-                        characterStats.actionPoints -= 3;
+                        characterStats.actionPoints -= abilityCost;
                     }
                     else
                     {
@@ -150,7 +151,7 @@ public class ClassAbilities : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("You don't have enought Action Points");
+                    Debug.Log($"You don't at least {abilityCost} Action Points");
                 }
             }
             else
@@ -168,7 +169,8 @@ public class ClassAbilities : MonoBehaviour
     private void SupportAbilityTwo()
     {
         BattleHandler battlehandler = BattleHandler.GetInstance();
-        if (characterStats.actionPoints >= 4)//Sprawdzamy ilosc Action Pointow
+        int abilitycost = 4;
+        if (characterStats.actionPoints >= abilitycost)//Sprawdzamy ilosc Action Pointow
         {
             //Jedziemy po wszystkich postaciach w walce
             foreach (GameObject singlecharacter in battlehandler.charactersListinbattle)
@@ -192,30 +194,30 @@ public class ClassAbilities : MonoBehaviour
                     }
                 }
             }
-            characterStats.actionPoints -= 4;
+            characterStats.actionPoints -= abilitycost;
         }
         else
         {
-            Debug.Log("You don't have enought Action Points");
+            Debug.Log($"You don't have at least {abilitycost} Action Points");
         }
     }
     //Overheal ally by 8. He needs to be at max hp alredy. AP cost: 5
     private void SupportAbilityThree()
     {
         BattleHandler battlehandler = BattleHandler.GetInstance();
-
+        int abilitycost = 5;
         if (battlehandler.selectedCharacter != null)//Sprawdzamy czy ktos wybrany
         {
             CharacterStats selectescharacter = battlehandler.selectedCharacter.GetComponent<CharacterStats>();
             if (selectescharacter.isplayerteam == true)//Sprawdzamy czy przeciwnik czy swoj
             {
-                if (characterStats.actionPoints >= 5)//Sprawdzamy ilosc Action Pointow
+                if (characterStats.actionPoints >= abilitycost)//Sprawdzamy ilosc Action Pointow
                 {
                     if (selectescharacter.health == selectescharacter.maxHealth)//Sprawdzamy czy ma max HP
                     {
                         Debug.Log($"{characterStats.name} boost {selectescharacter.name} for 8 hp points");
                         selectescharacter.health += 8;
-                        characterStats.actionPoints -= 5;
+                        characterStats.actionPoints -= abilitycost;
                     }
                     else
                     {
@@ -224,7 +226,7 @@ public class ClassAbilities : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("You don't have enought Action Points");
+                    Debug.Log($"You don't have {abilitycost} Action Points");
                 }
             }
             else
@@ -242,13 +244,14 @@ public class ClassAbilities : MonoBehaviour
     private void DPSAbilityOne()
     {
         BattleHandler battlehandler = BattleHandler.GetInstance();
+        int abilityCost = 5;
 
         if (battlehandler.selectedCharacter != null)//Sprawdzamy czy ktos wybrany
         {
             CharacterStats selectescharacter = battlehandler.selectedCharacter.GetComponent<CharacterStats>();
             if (selectescharacter.isplayerteam == false)//Sprawdzamy czy przeciwnik czy swoj
             {
-                if (characterStats.actionPoints >= 4)//Sprawdzamy ilosc Action Pointow
+                if (characterStats.actionPoints >= abilityCost)//Sprawdzamy ilosc Action Pointow
                 {
 
                     int chanceRoll = Random.Range(1, 10);
@@ -263,11 +266,11 @@ public class ClassAbilities : MonoBehaviour
                         Debug.Log("Marksman shoot misses!");
                     }
 
-                    characterStats.actionPoints -= 4;
+                    characterStats.actionPoints -= abilityCost;
                 }
                 else
                 {
-                    Debug.Log("You don't have enought Action Points");
+                    Debug.Log($"You don't have {abilityCost} Action Points");
                 }
             }
             else
@@ -285,7 +288,8 @@ public class ClassAbilities : MonoBehaviour
     {
         Debug.Log($"{characterStats.name} uses Blind Fire");
         BattleHandler battlehandler = BattleHandler.GetInstance();
-        if (characterStats.actionPoints >= 6)//Sprawdzamy ilosc Action Pointow
+        int abilityCost = 6;
+        if (characterStats.actionPoints >= abilityCost)//Sprawdzamy ilosc Action Pointow
         {
             //Jedziemy po wszystkich postaciach w walce
             foreach (GameObject singlecharacter in battlehandler.charactersListinbattle)
@@ -312,16 +316,17 @@ public class ClassAbilities : MonoBehaviour
 
                 }
             }
-            characterStats.actionPoints -= 6;
+            characterStats.actionPoints -= abilityCost;
         }
         else
         {
-            Debug.Log("You don't have enought Action Points");
+            Debug.Log($"You don't have {abilityCost} Action Points");
         }
     }
     //Add +3 damage to next standard attack of selected character. AP cost: 2
     private void DPSAbilityThree()
     {
+        int abilityCost = 2;
         BattleHandler battlehandler = BattleHandler.GetInstance();
         Debug.Log($"{characterStats.name} uses Command");
         if (battlehandler.selectedCharacter != null)//Sprawdzamy czy ktos wybrany
@@ -329,17 +334,17 @@ public class ClassAbilities : MonoBehaviour
             CharacterStats selectescharacter = battlehandler.selectedCharacter.GetComponent<CharacterStats>();
             if (selectescharacter.isplayerteam == true)//Sprawdzamy czy przeciwnik czy swoj
             {
-                if (characterStats.actionPoints >= 2)//Sprawdzamy ilosc Action Pointow
+                if (characterStats.actionPoints >= abilityCost)//Sprawdzamy ilosc Action Pointow
                 {
                     int roll = Random.Range(1, 10);
                     int totalheal = roll + 3;
                     Debug.Log($"{selectescharacter.name} recive +3 damage for next standard attack");
                     selectescharacter.bonusDamage += 3;
-                    characterStats.actionPoints -= 2;
+                    characterStats.actionPoints -= abilityCost;
                 }
                 else
                 {
-                    Debug.Log("You don't have enought Action Points");
+                    Debug.Log($"You don't have {abilityCost} Action Points");
                 }
             }
             else
@@ -357,24 +362,24 @@ public class ClassAbilities : MonoBehaviour
     private void TankAbilityOne()
     {
         BattleHandler battlehandler = BattleHandler.GetInstance();
-
+        int abilityCost = 2;
         if (battlehandler.selectedCharacter != null)//Sprawdzamy czy ktos wybrany
         {
             CharacterStats selectescharacter = battlehandler.selectedCharacter.GetComponent<CharacterStats>();
             if (selectescharacter.isplayerteam == true)//Sprawdzamy czy przeciwnik czy swoj
             {
-                if (characterStats.actionPoints >= 2)//Sprawdzamy ilosc Action Pointow
+                if (characterStats.actionPoints >= abilityCost)//Sprawdzamy ilosc Action Pointow
                 {
                     if (characterStats.health > 5)//Sprawdzamy czy mamy conajmniej 5 HP
                     {
-                        int roll = Random.Range(0, 10);
+                        int roll = Random.Range(0, 11);
                         Debug.Log($"{characterStats.name} healing {selectescharacter.name} for 0-10 points  - {roll}");
                         selectescharacter.health += roll;
                         if (selectescharacter.health > selectescharacter.maxHealth)//Jesli uleczyliscmy o za duzo, zmniejszamy do limitu.
                         {
                             selectescharacter.health = selectescharacter.maxHealth;
                         }
-                        characterStats.actionPoints -= 2;
+                        characterStats.actionPoints -= abilityCost;
                         characterStats.health -= 5;
                     }
                     else
@@ -384,7 +389,7 @@ public class ClassAbilities : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("You don't have enought Action Points");
+                    Debug.Log($"You don't have {abilityCost} Action Points");
                 }
             }
             else
@@ -401,17 +406,17 @@ public class ClassAbilities : MonoBehaviour
     private void TankAbilityTwo()
     {
         BattleHandler battlehandler = BattleHandler.GetInstance();
-
-        if (characterStats.actionPoints >= 4)//Sprawdzamy ilosc Action Pointow
+        int abilityCost = 4;
+        if (characterStats.actionPoints >= abilityCost)//Sprawdzamy ilosc Action Pointow
         {
             int roll = Random.Range(1, 10);
             Debug.Log($"{characterStats.name} boosting self fo 1d10 HP poiunts. Roll - {roll}");
-            characterStats.actionPoints -= 4;
+            characterStats.actionPoints -= abilityCost;
             characterStats.health += roll;
         }
         else
         {
-            Debug.Log("You don't have enought Action Points");
+            Debug.Log($"You don't have {abilityCost} Action Points");
         }
     }
     //Give all other allies 0-3 AP. AP cost: 6
@@ -419,7 +424,8 @@ public class ClassAbilities : MonoBehaviour
     {
         Debug.Log($"{characterStats} uses Rally up");
         BattleHandler battlehandler = BattleHandler.GetInstance();
-        if (characterStats.actionPoints >= 6)//Sprawdzamy ilosc Action Pointow
+        int abilityCost = 6;
+        if (characterStats.actionPoints >= abilityCost)//Sprawdzamy ilosc Action Pointow
         {
             //Jedziemy po wszystkich postaciach w walce
             foreach (GameObject singlecharacter in battlehandler.charactersListinbattle)
@@ -437,7 +443,7 @@ public class ClassAbilities : MonoBehaviour
                     singlecharacterstats.actionPoints += roll;
                 }
             }
-            characterStats.actionPoints -= 6;
+            characterStats.actionPoints -= abilityCost;
         }
         else
         {

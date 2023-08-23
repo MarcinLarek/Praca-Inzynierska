@@ -331,6 +331,7 @@ public class BattleHandler : MonoBehaviour
     private void BattleEnd(bool playerWin)
     {
         int experienceReward = 0;
+        int bossexperienceReward = 0;
         //Przenosimy dane z walki (HP i inne statystyki) do statysytk postaci w gameHandlerze
         foreach (GameObject enemy in battleScreenHandler.enemyCharactersList)
         {
@@ -338,6 +339,7 @@ public class BattleHandler : MonoBehaviour
             Destroy(enemy);
         }
         experienceReward *= 15;
+        bossexperienceReward = experienceReward * 2;
         battleScreenHandler.enemyCharactersList.Clear();
         foreach (GameObject playerCharacter in PlayerInfo.GetInstance().CharactersInActiveTeam)
         {
@@ -347,11 +349,26 @@ public class BattleHandler : MonoBehaviour
             GameObject stats = charactersListinbattle.Find((x) => x.GetComponent<CharacterStats>().charactername == playerCharacter.GetComponent<CharacterStats>().charactername);
             playerCharacter.GetComponent<CharacterStats>().CopyStats(stats.GetComponent<CharacterStats>());
             //Nagroda EXP dla kazdego czlonka druzyny 15 * ilosc przeciwnikow.
-            playerCharacter.GetComponent<CharacterStats>().experience += experienceReward;
+            //Jesli boss to jeszcze mnozymy x2
+            if (battleScreenHandler.bossFight)
+            {
+                playerCharacter.GetComponent<CharacterStats>().experience += bossexperienceReward;
+            }
+            else
+            {
+                playerCharacter.GetComponent<CharacterStats>().experience += experienceReward;
+            }
         }
         if (playerWin)
         {
             SceneManager.LoadScene(sceneName: "MapGenerator");
+            if (battleScreenHandler.bossFight)
+            {
+                battleScreenHandler.bossFight = false;
+                MapGeneratorHandler.GetInstance().RemoveGeneratedScene();
+                Destroy(MapGeneratorHandler.GetInstance().player);
+                SceneManager.LoadScene(sceneName: "MainHub");
+            }
         }
         else
         {

@@ -5,7 +5,7 @@ using UnityEngine;
 public class BattleScreenHandler : MonoBehaviour
 {
     public List<GameObject> enemyCharactersList;
-
+    public bool bossFight;
     private static BattleScreenHandler instance;
     public static BattleScreenHandler GetInstance()
     {

@@ -17,8 +17,12 @@ public class PlayerInfo : MonoBehaviour
     public List<GameObject> CharactersInActiveTeam;
     //Lista postaci ktore bierzemy na misje
     public List<GameObject> RecruitedCharacters;
-    //Waluta
+    //Waluta i statysytki zmieniajace sie po ulepszeniu statku
     public int playerMoney;
+    public int recruitslimit = 2;
+    public int crewlimit = 5;
+    public int teamlimit = 3;
+    public bool betterrecruits = false;
 
     private void Awake()
     {
