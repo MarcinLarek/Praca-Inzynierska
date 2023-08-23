@@ -31,4 +31,8 @@ public class MainHubButtonsOperator : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName: "ShipUpgrade");
     }
+    public void GoToInventory()
+    {
+        SceneManager.LoadScene(sceneName: "Inventory");
+    }
 }
