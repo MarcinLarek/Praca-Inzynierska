@@ -15,9 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MissionSelection.unity
     guid: 0d10faa28c1d8524abe1019680e1572c
   - enabled: 1
-    path: Assets/Scenes/Inventory.unity
-    guid: ceeac36ddc9d78e428a1eaeb84372aec
-  - enabled: 1
     path: Assets/Scenes/Trade.unity
     guid: 86d12c898fc57e54aa5ca3d99fdfee7a
   - enabled: 1

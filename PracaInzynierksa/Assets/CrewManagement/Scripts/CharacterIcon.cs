@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class CharacterIcon : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
     public Sprite IconDPS;
     public Sprite IconTank;
     public Sprite IconSupport;
+    public Image image;
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        image = GetComponent<Image>();
     }
 
     //Wczytujemy grafike ikony przypisanej do klasy
@@ -21,13 +21,13 @@ public class CharacterIcon : MonoBehaviour
         switch (this.GetComponent<CharacterStats>().classname)
         {
             case (CharacterStats.Classes.DMG):
-                spriteRenderer.sprite = IconDPS;
+                image.sprite = IconDPS;
                 break;
             case (CharacterStats.Classes.TANK):
-                spriteRenderer.sprite = IconTank;
+                image.sprite = IconTank;
                 break;
             case (CharacterStats.Classes.SUPPORT):
-                spriteRenderer.sprite = IconSupport;
+                image.sprite = IconSupport;
                 break;
         }
         ToggleActiveTeamVisuals();
@@ -39,11 +39,11 @@ public class CharacterIcon : MonoBehaviour
     {
         if (this.GetComponent<CharacterStats>().inactiveteam)
         {
-            spriteRenderer.color = Color.green;
+            image.color = Color.green;
         }
         else
         {
-            spriteRenderer.color = Color.white;
+            image.color = Color.white;
         }
     }
 }
