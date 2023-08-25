@@ -18,6 +18,7 @@ public class CrewManager : MonoBehaviour
     private PlayerInfo playerInfo;
     public GameObject recruitsScrollableList;
     public GameObject crewScrollableList;
+    private CrewManagementHandler crewManagementHandler;
 
     public static CrewManager GetInstance()
     {
@@ -28,7 +29,17 @@ public class CrewManager : MonoBehaviour
         instance = this; // Singleton
         playerInfo = PlayerInfo.GetInstance();
         recruitsAmmount = playerInfo.recruitslimit;
-        GenerateCharatersToRecruit(); // Tworzymy losowe postaci do rekrutacji
+        crewManagementHandler = CrewManagementHandler.GetInstance();
+        if (crewManagementHandler.recruitsAreGenerated == true)
+        {
+            LoadRecruitsCharacters();
+        }
+        else
+        {
+            crewManagementHandler.recruitsAreGenerated = true;
+            GenerateCharatersToRecruit(); // Tworzymy losowe postaci do rekrutacji
+        }
+
         GeneratePlayerCharacters(); // Wczytujemy liste zrekrtutowanych postaci gracza
     }
     private static string[] firstNames = {
@@ -119,11 +130,35 @@ public class CrewManager : MonoBehaviour
             //Pozniej wykorzystamy ta liste aby dostepne postacie sie nie resetowaly co wejscie do sceny
             RecruitableCharacters.Add(spawnedCharacter);
 
+
+            GameObject gameHandlerCharacter = Instantiate(crewManagementHandler.playerCharacterPreFab, new Vector3(0, 0), Quaternion.identity);
+            gameHandlerCharacter.name = crewManagementHandler.playerCharacterPreFab.name;
+            gameHandlerCharacter.GetComponent<CharacterStats>().CopyStats(spawnedCharacter.GetComponent<CharacterStats>());
+            crewManagementHandler.generatedRecruits.Add(gameHandlerCharacter);
+
         }
 
     }
 
+    private void LoadRecruitsCharacters()
+    {
+        foreach (GameObject recruitCharacter in crewManagementHandler.generatedRecruits)
+        {
+            GameObject character = CharacterTemplate;
+            //Respimy gaeombejct z ikona i danymi naszej postaci
+            GameObject spawnedCharacter = Instantiate(character, new Vector3(0, 0), Quaternion.identity);
+            spawnedCharacter.transform.parent = recruitsScrollableList.transform;
 
+            spawnedCharacter.name = character.name;
+            CharacterStats characterstats = spawnedCharacter.GetComponent<CharacterStats>();
+            CharacterStats recruitCharacterStats = recruitCharacter.GetComponent<CharacterStats>();
+            //Kopiujemy dane z obiekut w GameHandlerze do zrespionego obieku w Scenie, po czym ustawiamy odpowiednia
+            //ikone
+            characterstats.CopyStats(recruitCharacterStats);
+            spawnedCharacter.GetComponent<CharacterIcon>().SetIcon();
+
+        }
+    }
     private void GeneratePlayerCharacters()
     {
         //Pobieramy liste naszych postaci z GameHandlera
@@ -162,11 +197,15 @@ public class CrewManager : MonoBehaviour
                 //Dodajemy do listy przewijanej zalogi
                 activeCharacterStats.transform.parent = crewScrollableList.transform;
 
-                GameObject spawnedCharacter = Instantiate(instance.playerCharacterPreFab, new Vector3(0, 0), Quaternion.identity);
-                spawnedCharacter.GetComponent<CharacterStats>().CopyStats(activeCharacterStats);
+                // U W A G A
+                // Poki co szukamy po imieniu. Bedzie problem jesli 2 postaci beda mialy takie samo imie.
+                // Pozniej trzeba dodac jaki unikalny identyfikator.
+                GameObject purchasedCharacterGameHandler = CrewManagementHandler.GetInstance().generatedRecruits.Find((x) => x.GetComponent<CharacterStats>().charactername == activeCharacter.GetComponent<CharacterStats>().charactername);
+                purchasedCharacterGameHandler.GetComponent<CharacterStats>().CopyStats(activeCharacterStats);
                 //Usuwamy kupiona postac z listy postaci mozliwych do kupienia i przypisujemy do listy zrekrutowanych.
                 RecruitableCharacters.Remove(activeCharacter);
-                PlayerInfo.GetInstance().RecruitedCharacters.Add(spawnedCharacter);
+                CrewManagementHandler.GetInstance().generatedRecruits.Remove(purchasedCharacterGameHandler);
+                PlayerInfo.GetInstance().RecruitedCharacters.Add(purchasedCharacterGameHandler);
             }
             else
             {
