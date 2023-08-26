@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UpgradeManager : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class UpgradeManager : MonoBehaviour
     public Sprite portraitTank;
     public Sprite portraitSupport;
     private static UpgradeManager instance;
+    public GameObject crewScrollableList;
+
     public static UpgradeManager GetInstance()
     {
         return instance;
@@ -27,12 +30,11 @@ public class UpgradeManager : MonoBehaviour
 
     private void GeneratePlayerCharacters()
     {
-        Vector3 position = new Vector3(-140, 70);
         foreach (GameObject playerCharacter in PlayerInfo.GetInstance().RecruitedCharacters)
         {
             GameObject character = CharacterTemplate;
-            GameObject spawnedCharacter = Instantiate(character, position, Quaternion.identity);
-            position.y -= 30;
+            GameObject spawnedCharacter = Instantiate(character, new Vector3(0, 0), Quaternion.identity);
+            spawnedCharacter.transform.SetParent(crewScrollableList.transform);
 
             spawnedCharacter.name = character.name;
 
