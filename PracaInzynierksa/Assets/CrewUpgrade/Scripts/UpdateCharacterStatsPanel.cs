@@ -49,6 +49,10 @@ public class UpdateCharacterStatsPanel : MonoBehaviour
                     break;
             }
         }
+        else
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 
     private void LvlUpButtonSwitch()

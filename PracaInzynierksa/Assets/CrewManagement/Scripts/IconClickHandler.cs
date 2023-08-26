@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IconClickHandler : MonoBehaviour
 {
-    GameObject statsTable;
+    private GameObject statsTable;
     private void Awake()
     {
         statsTable = GameObject.Find("Canvas/StatsTable");
