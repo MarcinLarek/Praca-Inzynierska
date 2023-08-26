@@ -7,9 +7,12 @@ using UnityEngine;
 public class StatsTableUpdater : MonoBehaviour
 {
     private CrewManager instance;
+    private TextMeshProUGUI moneydisplay;
     private void Awake()
     {
         instance = CrewManager.GetInstance();
+        moneydisplay = GameObject.Find("Canvas/MoneyPanel/MoneyCount").GetComponent<TextMeshProUGUI>();
+
         UpdateTeamCount();
     }
 
@@ -17,6 +20,11 @@ public class StatsTableUpdater : MonoBehaviour
     void Update()
     {
         UpdateTable();
+        MoneyCounterUpdater();
+    }
+    private void MoneyCounterUpdater()
+    {
+        moneydisplay.text = PlayerInfo.GetInstance().playerMoney.ToString();
     }
 
     private void UpdateTable()
@@ -74,6 +82,10 @@ public class StatsTableUpdater : MonoBehaviour
                     transform.Find("TeamSwitchButton").gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Add to team";
                 }
             }
+        }
+        else
+        {
+            this.gameObject.SetActive(false);
         }
     }
 

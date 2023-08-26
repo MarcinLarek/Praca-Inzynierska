@@ -15,7 +15,10 @@ public class CrewManager : MonoBehaviour
     private int recruitsAmmount;
     private static CrewManager instance;
     public GameObject activeCharacter;
-    private PlayerInfo playerInfo; 
+    private PlayerInfo playerInfo;
+    public GameObject recruitsScrollableList;
+    public GameObject crewScrollableList;
+    private CrewManagementHandler crewManagementHandler;
 
     public static CrewManager GetInstance()
     {
@@ -26,7 +29,17 @@ public class CrewManager : MonoBehaviour
         instance = this; // Singleton
         playerInfo = PlayerInfo.GetInstance();
         recruitsAmmount = playerInfo.recruitslimit;
-        GenerateCharatersToRecruit(); // Tworzymy losowe postaci do rekrutacji
+        crewManagementHandler = CrewManagementHandler.GetInstance();
+        if (crewManagementHandler.recruitsAreGenerated == true)
+        {
+            LoadRecruitsCharacters();
+        }
+        else
+        {
+            crewManagementHandler.recruitsAreGenerated = true;
+            GenerateCharatersToRecruit(); // Tworzymy losowe postaci do rekrutacji
+        }
+
         GeneratePlayerCharacters(); // Wczytujemy liste zrekrtutowanych postaci gracza
     }
     private static string[] firstNames = {
@@ -86,8 +99,6 @@ public class CrewManager : MonoBehaviour
     }
     private void GenerateCharatersToRecruit()
     {
-        //Pozycja od ktorej zaczynamy respic ikony postaci
-        Vector3 position = new Vector3(-350, 200);
         for (int i = 0; i < recruitsAmmount; i++)
         {
             //Dajemy losowe statystyki rekrutom
@@ -108,9 +119,10 @@ public class CrewManager : MonoBehaviour
                 characterstats.luck + characterstats.inteligence + characterstats.actionPoints) * 10) +
                 (characterstats.maxHealth * 10);
 
-            GameObject spawnedCharacter = Instantiate(character, position,Quaternion.identity);
-            //Z kazda respiona ikona postaci zmieniamy pozycje do nastepnego respa na osi Y o 100
-            position.y -= 100;
+            GameObject spawnedCharacter = Instantiate(character, new Vector3(0, 0), Quaternion.identity);
+            //Dodajemy do listy przewijanej rekrutow
+            spawnedCharacter.transform.SetParent(recruitsScrollableList.transform);
+
             spawnedCharacter.name = character.name;
             //Ustalamy grafike wyswietlanej ikony
             spawnedCharacter.GetComponent<CharacterIcon>().SetIcon();
@@ -118,22 +130,44 @@ public class CrewManager : MonoBehaviour
             //Pozniej wykorzystamy ta liste aby dostepne postacie sie nie resetowaly co wejscie do sceny
             RecruitableCharacters.Add(spawnedCharacter);
 
+
+            GameObject gameHandlerCharacter = Instantiate(crewManagementHandler.playerCharacterPreFab, new Vector3(0, 0), Quaternion.identity);
+            gameHandlerCharacter.name = crewManagementHandler.playerCharacterPreFab.name;
+            gameHandlerCharacter.GetComponent<CharacterStats>().CopyStats(spawnedCharacter.GetComponent<CharacterStats>());
+            crewManagementHandler.generatedRecruits.Add(gameHandlerCharacter);
+
         }
 
     }
 
+    private void LoadRecruitsCharacters()
+    {
+        foreach (GameObject recruitCharacter in crewManagementHandler.generatedRecruits)
+        {
+            GameObject character = CharacterTemplate;
+            //Respimy gaeombejct z ikona i danymi naszej postaci
+            GameObject spawnedCharacter = Instantiate(character, new Vector3(0, 0), Quaternion.identity);
+            spawnedCharacter.transform.SetParent(recruitsScrollableList.transform);
 
+            spawnedCharacter.name = character.name;
+            CharacterStats characterstats = spawnedCharacter.GetComponent<CharacterStats>();
+            CharacterStats recruitCharacterStats = recruitCharacter.GetComponent<CharacterStats>();
+            //Kopiujemy dane z obiekut w GameHandlerze do zrespionego obieku w Scenie, po czym ustawiamy odpowiednia
+            //ikone
+            characterstats.CopyStats(recruitCharacterStats);
+            spawnedCharacter.GetComponent<CharacterIcon>().SetIcon();
+
+        }
+    }
     private void GeneratePlayerCharacters()
     {
-        //Pozycja od ktorej zaczynamy respic ikony postaci
-        Vector3 position = new Vector3(350, 200);
         //Pobieramy liste naszych postaci z GameHandlera
         foreach(GameObject playerCharacter in PlayerInfo.GetInstance().RecruitedCharacters)
         {
             GameObject character = CharacterTemplate;
             //Respimy gaeombejct z ikona i danymi naszej postaci
-            GameObject spawnedCharacter = Instantiate(character, position, Quaternion.identity);
-            position.y -= 100;
+            GameObject spawnedCharacter = Instantiate(character, new Vector3(0, 0), Quaternion.identity);
+            spawnedCharacter.transform.SetParent(crewScrollableList.transform);
 
             spawnedCharacter.name = character.name;
             CharacterStats characterstats = spawnedCharacter.GetComponent<CharacterStats>();
@@ -159,19 +193,19 @@ public class CrewManager : MonoBehaviour
                 instance.playerMoney -= activeCharacterStats.price;
                 //Jesli tak przypisujemy go do naszej druzyny
                 activeCharacterStats.isplayerteam = true;
-                //I zmieniamy poozycje ikony. Jesli jest to pierwsza psotac w naszej druzynie to respimy ja na wskazanych
-                //koordynatach. Jesli mamy juz kogos to respimy go na x i y-100 ostatniej postaci w naszej liscie
-                Vector3 position = new Vector3(350, 200);
-                if (instance.RecruitedCharacters.Count != 0)
-                {
-                    position = new Vector3(instance.RecruitedCharacters.Last().transform.position.x, instance.RecruitedCharacters.Last().transform.position.y - 100);
-                }
-                GameObject spawnedCharacter = Instantiate(instance.playerCharacterPreFab, position, Quaternion.identity);
-                spawnedCharacter.GetComponent<CharacterStats>().CopyStats(activeCharacterStats);
-                activeCharacter.transform.position = position;
+
+                //Dodajemy do listy przewijanej zalogi
+                activeCharacterStats.transform.SetParent(crewScrollableList.transform);
+
+                // U W A G A
+                // Poki co szukamy po imieniu. Bedzie problem jesli 2 postaci beda mialy takie samo imie.
+                // Pozniej trzeba dodac jaki unikalny identyfikator.
+                GameObject purchasedCharacterGameHandler = CrewManagementHandler.GetInstance().generatedRecruits.Find((x) => x.GetComponent<CharacterStats>().charactername == activeCharacter.GetComponent<CharacterStats>().charactername);
+                purchasedCharacterGameHandler.GetComponent<CharacterStats>().CopyStats(activeCharacterStats);
                 //Usuwamy kupiona postac z listy postaci mozliwych do kupienia i przypisujemy do listy zrekrutowanych.
                 RecruitableCharacters.Remove(activeCharacter);
-                PlayerInfo.GetInstance().RecruitedCharacters.Add(spawnedCharacter);
+                CrewManagementHandler.GetInstance().generatedRecruits.Remove(purchasedCharacterGameHandler);
+                PlayerInfo.GetInstance().RecruitedCharacters.Add(purchasedCharacterGameHandler);
             }
             else
             {

@@ -10,6 +10,7 @@ public class MissionMarkerBehaviour : MonoBehaviour
     public int spawnedNumber;
     void OnMouseDown()
     {
+        CrewManagementHandler.GetInstance().ResetRecruitsList();
         SceneManager.LoadScene(sceneName: "MapGenerator");
     }
 
