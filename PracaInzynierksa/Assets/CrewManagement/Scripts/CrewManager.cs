@@ -121,7 +121,7 @@ public class CrewManager : MonoBehaviour
 
             GameObject spawnedCharacter = Instantiate(character, new Vector3(0, 0), Quaternion.identity);
             //Dodajemy do listy przewijanej rekrutow
-            spawnedCharacter.transform.parent = recruitsScrollableList.transform;
+            spawnedCharacter.transform.SetParent(recruitsScrollableList.transform);
 
             spawnedCharacter.name = character.name;
             //Ustalamy grafike wyswietlanej ikony
@@ -147,7 +147,7 @@ public class CrewManager : MonoBehaviour
             GameObject character = CharacterTemplate;
             //Respimy gaeombejct z ikona i danymi naszej postaci
             GameObject spawnedCharacter = Instantiate(character, new Vector3(0, 0), Quaternion.identity);
-            spawnedCharacter.transform.parent = recruitsScrollableList.transform;
+            spawnedCharacter.transform.SetParent(recruitsScrollableList.transform);
 
             spawnedCharacter.name = character.name;
             CharacterStats characterstats = spawnedCharacter.GetComponent<CharacterStats>();
@@ -167,7 +167,7 @@ public class CrewManager : MonoBehaviour
             GameObject character = CharacterTemplate;
             //Respimy gaeombejct z ikona i danymi naszej postaci
             GameObject spawnedCharacter = Instantiate(character, new Vector3(0, 0), Quaternion.identity);
-            spawnedCharacter.transform.parent = crewScrollableList.transform;
+            spawnedCharacter.transform.SetParent(crewScrollableList.transform);
 
             spawnedCharacter.name = character.name;
             CharacterStats characterstats = spawnedCharacter.GetComponent<CharacterStats>();
@@ -195,7 +195,7 @@ public class CrewManager : MonoBehaviour
                 activeCharacterStats.isplayerteam = true;
 
                 //Dodajemy do listy przewijanej zalogi
-                activeCharacterStats.transform.parent = crewScrollableList.transform;
+                activeCharacterStats.transform.SetParent(crewScrollableList.transform);
 
                 // U W A G A
                 // Poki co szukamy po imieniu. Bedzie problem jesli 2 postaci beda mialy takie samo imie.

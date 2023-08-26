@@ -83,6 +83,10 @@ public class StatsTableUpdater : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 
     private void UpdateTeamCount()

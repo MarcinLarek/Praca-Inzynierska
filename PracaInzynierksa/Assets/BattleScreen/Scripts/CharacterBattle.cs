@@ -63,7 +63,7 @@ public class CharacterBattle : MonoBehaviour
             }
             else
             {
-                if (this.gameObject.transform.Find("ActiveCircle").gameObject.active)
+                if (this.gameObject.transform.Find("ActiveCircle").gameObject.activeSelf)
                 {// Sprawdzamy czy wybrana postac to obecnie aktywna postac. Jesli tak to nic nie robimy bo nie wybierzemy obecnie aktywnej.
                     Debug.Log("Aktywna postac");
                 }
@@ -85,7 +85,7 @@ public class CharacterBattle : MonoBehaviour
         }
         else
         {
-            if (this.gameObject.transform.Find("ActiveCircle").gameObject.active)
+            if (this.gameObject.transform.Find("ActiveCircle").gameObject.activeSelf)
             {//Podobnie jak wyzej. Sprawdzamy czy wybrana postac to postac aktywna w turze. Jesli tak to nic sie nie dzieje, jesli nie to ustawiamy
                 //slected postac na ta w ktora klikamy
                 Debug.Log("Aktywna postac");
