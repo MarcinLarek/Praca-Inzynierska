@@ -1215,6 +1215,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6339c778db91f7d46a88c94e3e7508af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &570796513 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1758057756056352688, guid: 865aed6c46be6cc4b8c885f81b945a05, type: 3}
+  m_PrefabInstance: {fileID: 81117609}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &581449285
 GameObject:
   m_ObjectHideFlags: 0
@@ -2247,7 +2252,7 @@ MonoBehaviour:
   portraitDPS: {fileID: 21300000, guid: c8cd06f6881d46245a3ad15fdd0272d6, type: 3}
   portraitTank: {fileID: 21300000, guid: bf8ee280b40c72b488c1d9cb6b3df9d9, type: 3}
   portraitSupport: {fileID: 21300000, guid: e7568fb78a0baa7409a8cad614248d2e, type: 3}
-  crewScrollableList: {fileID: 0}
+  crewScrollableList: {fileID: 570796513}
 --- !u!1 &1079882055
 GameObject:
   m_ObjectHideFlags: 0
