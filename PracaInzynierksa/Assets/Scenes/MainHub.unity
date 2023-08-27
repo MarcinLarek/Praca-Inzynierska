@@ -618,6 +618,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1005842436}
     m_Modifications:
+    - target: {fileID: 4368154145995480408, guid: 71f42c1c9a9a2aa4e958a70231a3e714, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1005842437}
+    - target: {fileID: 4368154145995480408, guid: 71f42c1c9a9a2aa4e958a70231a3e714, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GoToMainMenuButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368154145995480408, guid: 71f42c1c9a9a2aa4e958a70231a3e714, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MainHubButtonsOperator, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 4368154145995480410, guid: 71f42c1c9a9a2aa4e958a70231a3e714, type: 3}
       propertyPath: m_Name
       value: BackToHubButton
@@ -719,12 +731,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4368154146206980126, guid: 71f42c1c9a9a2aa4e958a70231a3e714, type: 3}
+      propertyPath: m_text
+      value: 'back to Main Menu
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368154146206980126, guid: 71f42c1c9a9a2aa4e958a70231a3e714, type: 3}
       propertyPath: m_fontSize
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4368154146206980126, guid: 71f42c1c9a9a2aa4e958a70231a3e714, type: 3}
       propertyPath: m_fontSizeBase
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71f42c1c9a9a2aa4e958a70231a3e714, type: 3}
