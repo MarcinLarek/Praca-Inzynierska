@@ -95,11 +95,24 @@ public class RoomTemplates : MonoBehaviour
                 //dopiero po tym jak ta funkcja skonczy sie generowac. Dlatego musiala zostac popelniona taka
                 //gimnastyka mentalna
                 GenerateBossEncounter();
+                //^
+                //|
+                //|--- To jest otstatnia rzecz jaka sie wykona wiec po jej wykonaniu chowamy LoadingScreena
+                // i wlaczamy kontrole gracza
+                LoadingScreen.GetInstance().StartFadeOutAndDisable();
+                PlayerMovement.GetInstance().enableMovement = true;
+
+
             }
             else if (waitTime >= -1)
             {
                 waitTime -= Time.deltaTime;
             }
+        }
+        else
+        {
+            LoadingScreen.GetInstance().StartFadeOutAndDisable();
+            PlayerMovement.GetInstance().enableMovement = true;
         }
     }
 
