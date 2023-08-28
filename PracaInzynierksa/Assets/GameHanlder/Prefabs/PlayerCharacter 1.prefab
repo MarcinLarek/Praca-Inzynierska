@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 588650274481265294}
   - component: {fileID: 7658495334586652917}
   - component: {fileID: 637742076017388887}
+  - component: {fileID: 4428247877586654808}
   m_Layer: 0
   m_Name: PlayerCharacter 1
   m_TagString: Untagged
@@ -49,6 +50,7 @@ MonoBehaviour:
   classname: 0
   isplayerteam: 1
   isalive: 1
+  inactiveteam: 0
   maxHealth: 40
   health: 40
   maxActionPoints: 5
@@ -58,6 +60,8 @@ MonoBehaviour:
   agility: 0
   luck: 0
   inteligence: 0
+  experience: 0
+  price: 0
   bonusDamage: 0
 --- !u!114 &637742076017388887
 MonoBehaviour:
@@ -71,3 +75,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1db1c38436e8904096b40f2a1d144f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroy: 1
+--- !u!114 &4428247877586654808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4682686029560386879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68f1881896fe81f4f9c56bf53fd373b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: 1
+  item: 0
