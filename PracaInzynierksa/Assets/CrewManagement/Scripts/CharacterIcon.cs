@@ -12,7 +12,7 @@ public class CharacterIcon : MonoBehaviour
 
     private void Awake()
     {
-        image = GetComponent<Image>();
+        image = transform.Find("Icon").GetComponent<Image>();
     }
 
     //Wczytujemy grafike ikony przypisanej do klasy
