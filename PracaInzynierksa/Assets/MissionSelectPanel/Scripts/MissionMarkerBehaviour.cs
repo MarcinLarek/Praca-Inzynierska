@@ -10,8 +10,20 @@ public class MissionMarkerBehaviour : MonoBehaviour
     public int spawnedNumber;
     void OnMouseDown()
     {
-        CrewManagementHandler.GetInstance().ResetRecruitsList();
-        SceneManager.LoadScene(sceneName: "MapGenerator");
+        EnterMisssionBehaviour();
+    }
+
+    private void EnterMisssionBehaviour()
+    {
+        if(PlayerInfo.GetInstance().CharactersInActiveTeam.Count > 0)
+        {
+            CrewManagementHandler.GetInstance().ResetRecruitsList();
+            SceneManager.LoadScene(sceneName: "MapGenerator");
+        }
+        else
+        {
+            Debug.Log("U need at least one person in your team");
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
