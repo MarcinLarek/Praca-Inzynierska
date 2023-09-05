@@ -15,9 +15,12 @@ public class MissionMarkerBehaviour : MonoBehaviour
 
     private void EnterMisssionBehaviour()
     {
-        if(PlayerInfo.GetInstance().CharactersInActiveTeam.Count > 0)
+        MissionHandler missionHandler = MissionHandler.GetInstance();
+
+        if (PlayerInfo.GetInstance().CharactersInActiveTeam.Count > 0)
         {
             CrewManagementHandler.GetInstance().ResetRecruitsList();
+            missionHandler.PrepareForMission(this);
             SceneManager.LoadScene(sceneName: "MapGenerator");
         }
         else

@@ -104,6 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e0a70572310d7438fce14940d27988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MissionInfoPrefab: {fileID: 4563384383892749970, guid: e405e82bdb8635f4790dda50054c55da, type: 3}
 --- !u!114 &2676470930761675179
 MonoBehaviour:
   m_ObjectHideFlags: 0
