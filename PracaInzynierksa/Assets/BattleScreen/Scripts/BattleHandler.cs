@@ -367,6 +367,7 @@ public class BattleHandler : MonoBehaviour
                 battleScreenHandler.bossFight = false;
                 MapGeneratorHandler.GetInstance().RemoveGeneratedScene();
                 Destroy(MapGeneratorHandler.GetInstance().player);
+                MissionSelectionHandler.GetInstance().CompleteMission(true);
                 SceneManager.LoadScene(sceneName: "MainHub");
             }
         }
@@ -374,6 +375,7 @@ public class BattleHandler : MonoBehaviour
         {
             MapGeneratorHandler.GetInstance().RemoveGeneratedScene();
             Destroy(MapGeneratorHandler.GetInstance().player);
+            MissionSelectionHandler.GetInstance().CompleteMission(false);
             SceneManager.LoadScene(sceneName: "MainHub");
         }
     }
