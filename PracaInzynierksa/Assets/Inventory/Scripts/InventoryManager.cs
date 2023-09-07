@@ -10,8 +10,20 @@ public class InventoryManager : MonoBehaviour
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
 
+    private void Awake()
+    {
+        LoadFromGameHandler();
+    }
 
-    public void AddItem(Item item)
+    private void LoadFromGameHandler()
+    {
+        foreach( GameObject item in InventoryHandler.GetInstance().inventoryItems)
+        {
+            AddItem(item);
+        }
+    }
+
+    public void AddItem(GameObject item)
     {
         for (int i = 0; i < inventorySlots.Length; i++)
         {
@@ -25,11 +37,13 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
-    void SpawnNewItem(Item item, InventorySlot slot)
+    void SpawnNewItem(GameObject item, InventorySlot slot)
     {
-        GameObject newItemGo = Instantiate(inventoryItemPrefab, slot.transform);
+        GameObject itemtospawn = inventoryItemPrefab;
+        itemtospawn.GetComponent<ItemInfo>().AssignStats(item.GetComponent<ItemInfo>());
+
+        GameObject newItemGo = Instantiate(itemtospawn, slot.transform);
         InventoryItem inventoryItem = newItemGo.GetComponent<InventoryItem>();
-        inventoryItem.InitialiseItem(item);
     }
 }
 

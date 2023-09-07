@@ -5,11 +5,11 @@ using UnityEngine;
 public class TestSpawn : MonoBehaviour
 {
     public InventoryManager inventoryManager;
-    public Item[] itemsToPickup;
+    public GameObject itemPrefab;
 
-    public void PickupItem(int id)
+    public void PickupItem()
     {
-        inventoryManager.AddItem(itemsToPickup[id]);
+        inventoryManager.AddItem(itemPrefab);
         Debug.Log("spawning");
     }
 }

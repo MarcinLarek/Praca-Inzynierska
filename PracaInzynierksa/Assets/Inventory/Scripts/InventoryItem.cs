@@ -6,21 +6,9 @@ using UnityEngine.EventSystems;
 
 public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    [HideInInspector] public Item item;
     [Header("UI")]
     public Image image;
     [HideInInspector] public Transform parentAfterDrag;
-
-    private void Start()
-    {
-        InitialiseItem(item);
-    }
-
-    public void InitialiseItem(Item newItem)
-    {
-        item = newItem;
-        image.sprite = newItem.image;
-    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
