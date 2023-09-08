@@ -8,9 +8,8 @@ public class ItemInfo : MonoBehaviour
 {
     public string itemName;
     public string description;
-    public Image image;
+    public Sprite image;
     public ItemType type;
-    public int value;
     public int price;
 
     public void AssignStats(ItemInfo FromItem)
@@ -19,7 +18,6 @@ public class ItemInfo : MonoBehaviour
         this.description = FromItem.description;
         this.image = FromItem.image;
         this.type = FromItem.type;
-        this.value = FromItem.value;
         this.price = FromItem.price;
     }
     public enum ItemType
