@@ -43,7 +43,6 @@ public class InventoryManager : MonoBehaviour
         itemtospawn.GetComponent<ItemInfo>().AssignStats(item.GetComponent<ItemInfo>());
 
         GameObject newItemGo = Instantiate(itemtospawn, slot.transform);
-        InventoryItem inventoryItem = newItemGo.GetComponent<InventoryItem>();
     }
 }
 

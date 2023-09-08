@@ -10,6 +10,12 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public Image image;
     [HideInInspector] public Transform parentAfterDrag;
 
+    private void Awake()
+    {
+        Image iconimage = this.GetComponent<Image>();
+        iconimage.sprite = this.GetComponent<ItemInfo>().image;
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         image.raycastTarget = false;
