@@ -12,7 +12,7 @@ public class InventoryManager : MonoBehaviour
 
     private void Awake()
     {
-        //LoadFromGameHandler();
+        LoadFromGameHandler();
     }
 
     private void LoadFromGameHandler()
