@@ -8,11 +8,27 @@ using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour
 {
     public InventorySlot[] inventorySlots;
+    public List<GameObject> itemsList;
     public GameObject inventoryItemPrefab;
+    public bool isPlayerInventory;
+    public bool isMerchantInventory;
+    public bool isBarterInventory;
 
     private void Awake()
     {
-        LoadFromGameHandler();
+        if (isPlayerInventory)
+        {
+            LoadFromGameHandler();
+        }
+        else if (isMerchantInventory)
+        {
+
+        }
+        else if (isBarterInventory)
+        {
+
+        }
+        
     }
 
     private void LoadFromGameHandler()
@@ -43,6 +59,8 @@ public class InventoryManager : MonoBehaviour
         itemtospawn.GetComponent<ItemInfo>().AssignStats(item.GetComponent<ItemInfo>());
 
         GameObject newItemGo = Instantiate(itemtospawn, slot.transform);
+        itemsList.Add(newItemGo);
+
     }
 }
 

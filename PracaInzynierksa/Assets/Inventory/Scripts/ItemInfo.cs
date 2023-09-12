@@ -11,6 +11,7 @@ public class ItemInfo : MonoBehaviour
     public Sprite image;
     public ItemType type;
     public int price;
+    public bool owned;
 
     public void AssignStats(ItemInfo FromItem)
     {
@@ -19,6 +20,7 @@ public class ItemInfo : MonoBehaviour
         this.image = FromItem.image;
         this.type = FromItem.type;
         this.price = FromItem.price;
+        this.owned = FromItem.owned;
     }
     public enum ItemType
     {

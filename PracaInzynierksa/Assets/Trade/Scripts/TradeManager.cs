@@ -4,15 +4,40 @@ using UnityEngine;
 
 public class TradeManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+
+
+    public GameObject playerInventory;
+    public GameObject merchantInventory;
+    public GameObject barterInventory;
+    private static TradeManager instance;
+    public static TradeManager GetInstance()
     {
-        
+        return instance;
+    }
+    private void Awake()
+    {
+        instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    public int CalculateInventoryValue(GameObject inventory)
     {
-        
+        InventoryManager inventoryManager = inventory.GetComponent<InventoryManager>();
+
+        int inventoryValue = 0;
+        foreach(GameObject item in inventoryManager.itemsList)
+        {
+            ItemInfo itemInfo = item.GetComponent<ItemInfo>();
+            if (itemInfo.owned)
+            {
+                inventoryValue += itemInfo.price;
+            }
+            else
+            {
+                inventoryValue -= itemInfo.price;
+            }
+        }
+        return inventoryValue;
     }
+
 }
