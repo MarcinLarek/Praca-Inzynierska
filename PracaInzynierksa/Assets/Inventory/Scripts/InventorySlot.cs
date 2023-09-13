@@ -12,32 +12,29 @@ public class InventorySlot : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
+
         InventoryManager inventoryManager = GetComponentInParent<InventoryManager>();
-        if (inventoryManager.isPlayerInventory || inventoryManager.isBarterInventory)
+        InventoryItem inventoryItem = eventData.pointerDrag.GetComponent<InventoryItem>();
+        if (inventoryItem != null)
         {
-            if (transform.childCount == 0)
+            if (
+            (inventoryManager.isPlayerInventory && inventoryItem.gameObject.GetComponent<ItemInfo>().owned)
+            ||
+            (inventoryManager.isBarterInventory)
+            ||
+            (inventoryManager.isMerchantInventory && inventoryItem.gameObject.GetComponent<ItemInfo>().owned == false)
+           )
             {
-                InventoryItem inventoryItem = eventData.pointerDrag.GetComponent<InventoryItem>();
-
-                //AddToList(inventoryItem);
-
-                if (inventoryItem != null)
+                if (transform.childCount == 0)
                 {
                     inventoryItem.parentAfterDrag = transform;
+
                 }
             }
-        }
-        else
-        {
-            Debug.Log("Wrong Inventory");
-        }
-        
+            else
+            {
+                Debug.Log("Wrong Inventory");
+            }
+        }      
     }
-
-    private void AddToList(InventoryItem inventoryItem)
-    {
-        InventoryManager SlotinventoryManager = GetComponentInParent<InventoryManager>();
-        SlotinventoryManager.itemsList.Add(inventoryItem.gameObject);
-    }
-
 }
