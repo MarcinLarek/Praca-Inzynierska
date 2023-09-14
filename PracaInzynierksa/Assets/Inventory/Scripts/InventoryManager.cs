@@ -33,9 +33,13 @@ public class InventoryManager : MonoBehaviour
 
     private void LoadFromGameHandler()
     {
-        foreach( GameObject item in InventoryHandler.GetInstance().inventoryItems)
+        InventoryHandler inventoryInstance = InventoryHandler.GetInstance();
+        if(inventoryInstance != null)
         {
-            AddItem(item);
+            foreach (GameObject item in inventoryInstance.inventoryItems)
+            {
+                AddItem(item);
+            }
         }
     }
 
