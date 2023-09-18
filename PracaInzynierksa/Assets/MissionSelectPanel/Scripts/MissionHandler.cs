@@ -11,18 +11,75 @@ public class MissionHandler : MonoBehaviour
         return instance;
     }
 
-    public List<GameObject> missionsList;
     public GameObject spawningSpace;
+    public GameObject MissionMarker;
     public int numberToSpawn;
     private int numberOfSpawned;
+    public List<GameObject> generatedMarkers;
+    MissionSelectionHandler missionSelectionHandler;
+    
 
     private void Awake()
     {
         instance = this; // Singleton
-        spawnMissions();
+        missionSelectionHandler = MissionSelectionHandler.GetInstance();
+        PrepareMissions();
+    }
+    public void PrepareForMission(MissionMarkerBehaviour chosenMission)
+    {
+        RemoveMarkers();
+        SaveChosenMission(chosenMission);
     }
 
-    private void spawnMissions()
+    public void RemoveMarkers()
+    {
+        foreach(GameObject marker in generatedMarkers)
+        {
+            Destroy(marker);
+        }
+        generatedMarkers.Clear();
+    }
+
+
+    private void SaveChosenMission(MissionMarkerBehaviour chosenMission)
+    {
+        foreach(GameObject mission in missionSelectionHandler.generatedMissions)
+        {
+            if (mission.GetComponent<MissionInfo>().missionID == chosenMission.spawnedNumber)
+            {
+                MissionSelectionHandler.GetInstance().ActiveMission = mission;
+            }
+            else
+            {
+                Destroy(mission);
+            }
+        }
+    }
+
+    private void PrepareMissions()
+    {
+        if (MissionSelectionHandler.GetInstance().missionsGenerated == false)
+        {
+            SpawnMissions();
+            MissionSelectionHandler.GetInstance().missionsGenerated = true;
+        }
+        else
+        {
+            LoadMissions();
+        }
+    }
+
+    private void LoadMissions()
+    {
+        foreach (GameObject missions in missionSelectionHandler.generatedMissions)
+        {
+            GameObject spawnedMarker = Instantiate(MissionMarker, missions.transform.position, missions.transform.rotation);
+            spawnedMarker.GetComponent<MissionMarkerBehaviour>().spawnedNumber = missions.GetComponent<MissionInfo>().missionID;
+            generatedMarkers.Add(spawnedMarker);
+        }
+    }
+
+    private void SpawnMissions()
     {
         //Poniewaz uzyto troche mentalnej gimnastyki, mozliwe jest zespawnowanie sie minimalnego wyniku - 1 misji.
         //Na przyklad jesli mamy minimum 2 misje i druga misja umiesci sie w tym samym miejscu co pierwsza
@@ -38,7 +95,12 @@ public class MissionHandler : MonoBehaviour
     private void spawnSingleMission()
     {
         //Bierzemy liste mozliwych misji/typow misji do wylosowania
-        GameObject missionToSpawn = missionsList[Random.Range(0, missionsList.Count)];
+        GameObject missionToSpawn = MissionSelectionHandler.GetInstance().MissionInfoPrefab;
+        missionToSpawn.GetComponent<MissionInfo>().missionID = numberOfSpawned;
+
+        GameObject markerToSpawn = MissionMarker;
+
+
         //Obszar na jakim moze byc wygenerowany marker
         MeshCollider renderSpace = spawningSpace.GetComponent<MeshCollider>();
         float spawnPositionX, spawnPositionY;
@@ -48,11 +110,16 @@ public class MissionHandler : MonoBehaviour
         spawnPositionY = Random.Range(renderSpace.bounds.min.y, renderSpace.bounds.max.y);
         spawnposition = new Vector2(spawnPositionX, spawnPositionY);
 
-        GameObject spawnedMarker = Instantiate(missionToSpawn, spawnposition, missionToSpawn.transform.rotation);
+        GameObject spawnedMarker = Instantiate(markerToSpawn, spawnposition, markerToSpawn.transform.rotation);
+        generatedMarkers.Add(spawnedMarker);
+        GameObject spawnedMission = Instantiate(missionToSpawn, spawnposition, missionToSpawn.transform.rotation);
+        missionSelectionHandler.generatedMissions.Add(spawnedMission);
+
         numberOfSpawned += 1;
         //Przypisujemy kolejny numer po to aby przy wyrkyciu kolizji uzyc go do usuniecia tylko jednego markera
         //Obencie usuwamy ten z wiekszym numerem
         spawnedMarker.GetComponent<MissionMarkerBehaviour>().spawnedNumber = numberOfSpawned;
+        spawnedMission.GetComponent<MissionInfo>().missionID = spawnedMarker.GetComponent<MissionMarkerBehaviour>().spawnedNumber;
     }
 
 }

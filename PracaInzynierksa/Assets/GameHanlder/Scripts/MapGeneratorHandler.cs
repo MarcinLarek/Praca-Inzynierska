@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 using Random = UnityEngine.Random;
+using static MissionSelectionHandler;
 
 public class MapGeneratorHandler : MonoBehaviour
 {
@@ -16,7 +17,26 @@ public class MapGeneratorHandler : MonoBehaviour
 
     public bool mapGenerated;
     //Uzywane przy generowaniu nowej mapy
-    public List<GameObject> spawnRooms;
+    //public List<GameObject> spawnRooms;
+
+    //
+    public GameObject[] bottomRoomsScavengerBase;
+    public GameObject[] topRoomsScavengerBase;
+    public GameObject[] leftRoomsScavengerBase;
+    public GameObject[] rightRoomsScavengerBase;
+    public GameObject spawnRoomScavengerBase;
+    //
+    public GameObject[] bottomRoomsTunels;
+    public GameObject[] topRoomsTunels;
+    public GameObject[] leftRoomsTunels;
+    public GameObject[] rightRoomsTunels;
+    public GameObject spawnRoomTunels;
+    //
+    public GameObject[] bottomRoomsShipWreck;
+    public GameObject[] topRoomsShipWreck;
+    public GameObject[] leftRoomsShipWreck;
+    public GameObject[] rightRoomsShipWreck;
+    public GameObject spawnRoomShipWreck;
 
     //Uzywane przy wczytywaniu istniejacej mapy
     private RoomTemplates templates;
@@ -50,12 +70,42 @@ public class MapGeneratorHandler : MonoBehaviour
         }
 
     }
+
+    private GameObject LoadMissionSettings()
+    {
+        RoomTemplates templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
+        switch (MissionSelectionHandler.GetInstance().ActiveMission.GetComponent<MissionInfo>().dungeonType)
+        {
+            case DungeonType.MineTunels:
+                templates.bottomRooms = bottomRoomsTunels;
+                templates.topRooms = topRoomsTunels;
+                templates.leftRooms = leftRoomsTunels;
+                templates.rightRooms = rightRoomsTunels;
+                return spawnRoomTunels;
+            case DungeonType.ScavengerBase:
+                templates.bottomRooms = bottomRoomsScavengerBase;
+                templates.topRooms = topRoomsScavengerBase;
+                templates.leftRooms = leftRoomsScavengerBase;
+                templates.rightRooms = rightRoomsScavengerBase;
+                return spawnRoomScavengerBase;
+            case DungeonType.ShipWreck:
+                templates.bottomRooms = bottomRoomsShipWreck;
+                templates.topRooms = topRoomsShipWreck;
+                templates.leftRooms = leftRoomsShipWreck;
+                templates.rightRooms = rightRoomsShipWreck;
+                return spawnRoomShipWreck;
+            default:
+                return spawnRoomShipWreck;
+        }
+    }
+
     private void GenerateNewScene()
     {
         //Respimy losowy pokoj poczatkowy na koordynatach 0,0. On automatycznie wygeneruje reszte pomieszczen.
         //Nastepnie respimy gracza conajmniej 3pkt x/y od miejsca respa pokoju poczatkowego.
         //Jesli zrespimy w tym samym miejscu, gracz zostanie od razu usuniety.
-        GameObject spawnRoom = spawnRooms[Random.Range(0,spawnRooms.Count)];
+
+        GameObject spawnRoom = LoadMissionSettings();
         Vector2 roomposition = new Vector2(0, 0);
         Instantiate(spawnRoom, roomposition, spawnRoom.transform.rotation);
         Vector2 playerposition = new Vector2(-3, 0);

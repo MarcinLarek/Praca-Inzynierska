@@ -167,10 +167,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12742e1d974c55c4588640b7e90cf18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missionsList:
-  - {fileID: 5977488183522787368, guid: 8f3137e305cae5d46b3375f3faf138e1, type: 3}
   spawningSpace: {fileID: 619088731}
+  MissionMarker: {fileID: 5977488183522787368, guid: 8f3137e305cae5d46b3375f3faf138e1, type: 3}
   numberToSpawn: 0
+  generatedMarkers: []
+  ActiveMission: {fileID: 0}
+--- !u!1001 &537549321
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7347200182055846081, guid: ff40c0ceaa9e68e4d872eca26254382d, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7347200182055846081, guid: ff40c0ceaa9e68e4d872eca26254382d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -36.967163
+      objectReference: {fileID: 0}
+    - target: {fileID: 7347200182055846081, guid: ff40c0ceaa9e68e4d872eca26254382d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.279236
+      objectReference: {fileID: 0}
+    - target: {fileID: 7347200182055846081, guid: ff40c0ceaa9e68e4d872eca26254382d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -14.185881
+      objectReference: {fileID: 0}
+    - target: {fileID: 7347200182055846081, guid: ff40c0ceaa9e68e4d872eca26254382d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7347200182055846081, guid: ff40c0ceaa9e68e4d872eca26254382d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7347200182055846081, guid: ff40c0ceaa9e68e4d872eca26254382d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7347200182055846081, guid: ff40c0ceaa9e68e4d872eca26254382d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7347200182055846081, guid: ff40c0ceaa9e68e4d872eca26254382d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7347200182055846081, guid: ff40c0ceaa9e68e4d872eca26254382d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7347200182055846081, guid: ff40c0ceaa9e68e4d872eca26254382d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7347200182055846083, guid: ff40c0ceaa9e68e4d872eca26254382d, type: 3}
+      propertyPath: m_Name
+      value: Kamikaze
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ff40c0ceaa9e68e4d872eca26254382d, type: 3}
 --- !u!1 &619088731
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,8 +268,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 619088731}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.1412, y: 0.0018, z: 0.21794666}
-  m_LocalScale: {x: 179.90457, y: 179.94666, z: 1}
+  m_LocalPosition: {x: -1.3513, y: 1.212, z: 0.21794666}
+  m_LocalScale: {x: 951.9901, y: 889.10754, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -314,6 +372,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 960597331}
     m_Modifications:
+    - target: {fileID: 4368154145995480408, guid: 71f42c1c9a9a2aa4e958a70231a3e714, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368154145995480408, guid: 71f42c1c9a9a2aa4e958a70231a3e714, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368154145995480408, guid: 71f42c1c9a9a2aa4e958a70231a3e714, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 48930477}
+    - target: {fileID: 4368154145995480408, guid: 71f42c1c9a9a2aa4e958a70231a3e714, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368154145995480408, guid: 71f42c1c9a9a2aa4e958a70231a3e714, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: RemoveMarkers
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368154145995480408, guid: 71f42c1c9a9a2aa4e958a70231a3e714, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: MissionHandler, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368154145995480408, guid: 71f42c1c9a9a2aa4e958a70231a3e714, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4368154145995480410, guid: 71f42c1c9a9a2aa4e958a70231a3e714, type: 3}
       propertyPath: m_Name
       value: BackToHubButton
@@ -396,11 +482,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4368154145995480411, guid: 71f42c1c9a9a2aa4e958a70231a3e714, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 78.96399
+      value: 78.96411
       objectReference: {fileID: 0}
     - target: {fileID: 4368154145995480411, guid: 71f42c1c9a9a2aa4e958a70231a3e714, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -62.414
+      value: -62.414062
       objectReference: {fileID: 0}
     - target: {fileID: 4368154145995480411, guid: 71f42c1c9a9a2aa4e958a70231a3e714, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -474,7 +560,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 100
+  orthographic size: 500
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
