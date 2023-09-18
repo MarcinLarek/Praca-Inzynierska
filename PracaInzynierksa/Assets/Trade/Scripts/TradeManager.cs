@@ -13,6 +13,8 @@ public class TradeManager : MonoBehaviour
     public GameObject GHItemPrefab;
 
     private static TradeManager instance;
+    public List<GameObject> merchantGeneratedItems;
+    private InventoryHandler handlerInstance;
 
     public static TradeManager GetInstance()
     {
@@ -21,7 +23,12 @@ public class TradeManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        SpawneMerchantItems();
+        handlerInstance = InventoryHandler.GetInstance();
+        if (handlerInstance.traderInventoryGenerated == false)
+        {
+            SpawnMerchantItems();
+            handlerInstance.traderInventoryGenerated = true;
+        }
     }
 
     public int CalculateInventoryValue(GameObject inventory)
@@ -44,13 +51,21 @@ public class TradeManager : MonoBehaviour
         return inventoryValue;
     }
 
-    private void SpawneMerchantItems()
+    public void SpawnMerchantItems()
     {
         int itemsToSpawn = Random.Range(5, 20);
         for(int x = 0; x < itemsToSpawn; x++)
         {
             GameObject itemToSpawn = merchantItems[Random.Range(0, merchantItems.Count)];
             merchantInventory.GetComponent<InventoryManager>().AddItem(itemToSpawn);
+        }
+        GameObject GHItemSpawn = GHItemPrefab;
+        ItemInfo GHItemSpawnInfo = GHItemSpawn.GetComponent<ItemInfo>();
+        foreach (GameObject iventoryItem in merchantGeneratedItems)
+        {
+            GHItemSpawnInfo.AssignStats(iventoryItem.GetComponent<ItemInfo>());
+            GameObject SpawnedGhItem = Instantiate(GHItemSpawn, new Vector3(0,0), Quaternion.identity);
+            InventoryHandler.GetInstance().traderItems.Add(SpawnedGhItem);
         }
     }
 

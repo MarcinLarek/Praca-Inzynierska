@@ -13,6 +13,21 @@ public class InventoryHandler : MonoBehaviour
     {
         instance = this; // Singleton
     }
+
     public List<GameObject> inventoryItems;
+    public bool traderInventoryGenerated;
+    public List<GameObject> traderItems;
+
+    public void ClearMerchantInventory()
+    {
+        foreach(GameObject item in traderItems)
+        {
+            Destroy(item);
+        }
+        traderItems.Clear();
+        traderInventoryGenerated = false;
+    }
+
+    
 
 }

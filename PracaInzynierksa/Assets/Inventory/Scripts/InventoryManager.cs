@@ -22,7 +22,7 @@ public class InventoryManager : MonoBehaviour
         }
         else if (isMerchantInventory)
         {
-
+            LoadTraderItemsFromGameHandler();
         }
         else if (isBarterInventory)
         {
@@ -37,6 +37,18 @@ public class InventoryManager : MonoBehaviour
         if(inventoryInstance != null)
         {
             foreach (GameObject item in inventoryInstance.inventoryItems)
+            {
+                AddItem(item);
+            }
+        }
+    }
+
+    private void LoadTraderItemsFromGameHandler()
+    {
+        InventoryHandler inventoryInstance = InventoryHandler.GetInstance();
+        if (inventoryInstance != null)
+        {
+            foreach (GameObject item in inventoryInstance.traderItems)
             {
                 AddItem(item);
             }
@@ -64,6 +76,11 @@ public class InventoryManager : MonoBehaviour
 
         GameObject newItemGo = Instantiate(itemtospawn, slot.transform);
         itemsList.Add(newItemGo);
+
+        if (isMerchantInventory)
+        {
+            TradeManager.GetInstance().merchantGeneratedItems.Add(newItemGo);
+        }
 
     }
 }
