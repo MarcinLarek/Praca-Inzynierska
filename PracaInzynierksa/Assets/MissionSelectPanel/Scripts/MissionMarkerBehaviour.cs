@@ -20,6 +20,7 @@ public class MissionMarkerBehaviour : MonoBehaviour
         if (PlayerInfo.GetInstance().CharactersInActiveTeam.Count > 0)
         {
             CrewManagementHandler.GetInstance().ResetRecruitsList();
+            InventoryHandler.GetInstance().ClearMerchantInventory();
             missionHandler.PrepareForMission(this);
             SceneManager.LoadScene(sceneName: "MapGenerator");
         }
