@@ -122,8 +122,18 @@ public class TradeManager : MonoBehaviour
                     ItemToSpawn.GetComponent<ItemInfo>().AssignStats(item.GetComponent<ItemInfo>());
                     GameObject SpawnedGHItem = Instantiate(ItemToSpawn, new Vector3(0, 0), Quaternion.identity);
                     InventoryHandler.GetInstance().inventoryItems.Add(SpawnedGHItem);
+                    foreach(GameObject Traderitem in InventoryHandler.GetInstance().traderItems)
+                    {
+                        if (Traderitem.GetComponent<ItemInfo>().itemId == itemInfo.itemId)
+                        {
+                            InventoryHandler.GetInstance().traderItems.Remove(Traderitem);
+                            Destroy(Traderitem);
+                            break;
+                        }
+                    }
                     playerInv.AddItem(ItemToSpawn);
                     Destroy(item);
+
                 }
             }
             barterInv.itemsList.Clear();
