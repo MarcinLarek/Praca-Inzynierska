@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: -3976992276216104789}
   - component: {fileID: 8864456758990345721}
   - component: {fileID: 8004794195615632802}
+  - component: {fileID: 957586714}
   m_Layer: 10
   m_Name: TestEnemyCharacter
   m_TagString: CharacterInBattle
@@ -193,6 +194,14 @@ MonoBehaviour:
   characterSpriteSUPPORT: {fileID: 21300000, guid: e7568fb78a0baa7409a8cad614248d2e, type: 3}
   characterSpriteDRONE: {fileID: 21300000, guid: 085a578922fc4db4ca84947426038d61, type: 3}
   characterSpriteBOSS: {fileID: 21300000, guid: fc37120f5b06b1b45aec513f97c36853, type: 3}
+  animatorController: {fileID: 0}
+  DMGAnimController: {fileID: 9100000, guid: dfc696c596bdc484fa905d967e03f40f, type: 2}
+  TANKAnimController: {fileID: 9100000, guid: ac12e0300d5b41549af034f9b7bb3455, type: 2}
+  SUPAnimController: {fileID: 9100000, guid: ac12e0300d5b41549af034f9b7bb3455, type: 2}
+  AttackDmg: {fileID: 0}
+  AttackSup: {fileID: 0}
+  AttackTank: {fileID: 0}
+  Test: {fileID: 0}
 --- !u!114 &6971680022758511322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,6 +241,7 @@ MonoBehaviour:
   luck: 5
   inteligence: 5
   experience: 15
+  animatorr: {fileID: 0}
   price: 0
   bonusDamage: 0
 --- !u!61 &8864456758990345721
@@ -275,6 +285,27 @@ MonoBehaviour:
   abilityOneButton: {fileID: 0}
   abilityTwoButton: {fileID: 0}
   abilityThreeButton: {fileID: 0}
+--- !u!95 &957586714
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4714675202154540973}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ac12e0300d5b41549af034f9b7bb3455, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5146918992306435370
 GameObject:
   m_ObjectHideFlags: 0

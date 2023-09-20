@@ -7,6 +7,7 @@ using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+
 public class CharacterBattle : MonoBehaviour
 {
     // W tym pliku obslugujemy postac w czasie walki
@@ -17,6 +18,7 @@ public class CharacterBattle : MonoBehaviour
     private GameObject slectionCircleGameObject;
     private GameObject activeCircleGameObject;
     private GameObject healthbar;
+    private Animator animatorr;
 
     BattleHandler battleHandler = BattleHandler.GetInstance();
 
@@ -41,7 +43,7 @@ public class CharacterBattle : MonoBehaviour
 
     private void Start()
     {
-        
+        animatorr = GetComponent<Animator>();
     }
     private void Update()
     {
@@ -144,6 +146,8 @@ public class CharacterBattle : MonoBehaviour
 
     public void Attack(CharacterBattle targetCharacterBattle)
     {
+        animatorr.SetTrigger("IsShooting"); 
+        characterVisuals.AttackAnimation(targetCharacterBattle);
         CharacterStats targetStats = targetCharacterBattle.GetComponent<CharacterStats>();
 
         Debug.Log(characterStats.charactername + " attacks " + targetStats.charactername);
@@ -165,20 +169,24 @@ public class CharacterBattle : MonoBehaviour
                     damage *= 2;
                 }
             }
+            targetCharacterBattle.animatorr.SetTrigger("IsHit");
             targetStats.RecieveDamage(damage);
             CheckIfKilled(targetStats);
         }
         else
         {
             Debug.Log($"Attack fails! Rolled {attackscore} aginst {defenceRoll}");
+            targetCharacterBattle.animatorr.SetTrigger("IsAvoiding");
         }
-
+       
     }
 
     public void CheckIfKilled(CharacterStats targetCharacterStats)
     {
         if(targetCharacterStats.health <= 0)
         {
+            //Dead(targetCharacterBattle);
+            targetCharacterStats.animatorr.SetTrigger("IsDead");
             targetCharacterStats.isalive = false;
             targetCharacterStats.gameObject.GetComponent<CharacterVisuals>().ChangeSpriteColor(Color.red);
             //Dodajemy expa za zabicie przeciwnika
@@ -203,4 +211,16 @@ public class CharacterBattle : MonoBehaviour
 
         }
     }
+
+    public void Dead(CharacterBattle targetCharacterBattle)
+    {
+        targetCharacterBattle.animatorr.SetTrigger("IsDead");
+    }
+
+    //to chyba bêdzie do wywalenia, ale zobaczymy.
+    /*public void AttackAnimationTrigger(bool isPlayerTeam)
+    {
+        characterVisuals.AttackAnimation(isPlayerTeam);
+    }
+    */
 }

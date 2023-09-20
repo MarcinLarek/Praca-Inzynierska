@@ -8,6 +8,15 @@ MonoImporter:
   - characterSpriteTANK: {instanceID: 0}
   - characterSpriteSUPPORT: {instanceID: 0}
   - characterSpriteDRONE: {instanceID: 0}
+  - characterSpriteBOSS: {instanceID: 0}
+  - animatorController: {instanceID: 0}
+  - DMGAnimController: {fileID: 9100000, guid: 2172a08c0d734ac428f0180484d3eb3c, type: 2}
+  - TANKAnimController: {fileID: 9100000, guid: b057f9af69654f34c88f4e01b944c665, type: 2}
+  - SUPAnimController: {fileID: 9100000, guid: 27a021b522946b3458a34b29e5063fce, type: 2}
+  - AttackDmg: {fileID: 7400000, guid: fd97cac5a365bc84ab5704ee9fa8fb2f, type: 2}
+  - AttackSup: {fileID: 7400000, guid: fd97cac5a365bc84ab5704ee9fa8fb2f, type: 2}
+  - AttackTank: {fileID: 7400000, guid: fd97cac5a365bc84ab5704ee9fa8fb2f, type: 2}
+  - Test: {fileID: 7400000, guid: c7b032142b3697e4bbd1a54ecf55735d, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
