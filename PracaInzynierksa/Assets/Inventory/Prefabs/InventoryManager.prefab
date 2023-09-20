@@ -533,7 +533,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 60
     m_Bottom: 60
-  m_ChildAlignment: 1
+  m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 100, y: 100}
@@ -1827,11 +1827,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 435987306629812625, guid: 94ca519546412c44e9f52c29f2bed394, type: 3}
       propertyPath: m_Pivot.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 435987306629812625, guid: 94ca519546412c44e9f52c29f2bed394, type: 3}
       propertyPath: m_Pivot.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 435987306629812625, guid: 94ca519546412c44e9f52c29f2bed394, type: 3}
       propertyPath: m_RootOrder

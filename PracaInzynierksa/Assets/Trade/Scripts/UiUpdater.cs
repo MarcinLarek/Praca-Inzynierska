@@ -5,21 +5,16 @@ using UnityEngine;
 
 public class UiUpdater : MonoBehaviour
 {
-    public GameObject playerMoney;
-    private TextMeshProUGUI playerMoneyText;
-
     public GameObject transactionValue;
     private TextMeshProUGUI transactionValueText;
 
     private void Awake()
     {
-        playerMoneyText = playerMoney.GetComponent<TextMeshProUGUI>();
         transactionValueText = transactionValue.GetComponent<TextMeshProUGUI>();
     }
 
     private void Update()
     {
-        playerMoneyText.text = PlayerInfo.GetInstance().playerMoney.ToString();
         TransactionValueUpdate();
     }
 

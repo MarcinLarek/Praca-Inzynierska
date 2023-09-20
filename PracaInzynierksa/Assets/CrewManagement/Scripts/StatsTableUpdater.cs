@@ -7,24 +7,15 @@ using UnityEngine;
 public class StatsTableUpdater : MonoBehaviour
 {
     private CrewManager instance;
-    private TextMeshProUGUI moneydisplay;
     private void Awake()
     {
         instance = CrewManager.GetInstance();
-        moneydisplay = GameObject.Find("Canvas/MoneyPanel/MoneyCount").GetComponent<TextMeshProUGUI>();
-
-        UpdateTeamCount();
     }
 
     // Update is called once per frame
     void Update()
     {
         UpdateTable();
-        MoneyCounterUpdater();
-    }
-    private void MoneyCounterUpdater()
-    {
-        moneydisplay.text = PlayerInfo.GetInstance().playerMoney.ToString();
     }
 
     private void UpdateTable()
@@ -41,10 +32,6 @@ public class StatsTableUpdater : MonoBehaviour
             transform.Find("Points-Agility").gameObject.GetComponent<TextMeshProUGUI>().text = stats.agility.ToString();
             transform.Find("Points-Luck").gameObject.GetComponent<TextMeshProUGUI>().text = stats.luck.ToString();
             transform.Find("Points-Inteligence").gameObject.GetComponent<TextMeshProUGUI>().text = stats.inteligence.ToString();
-
-            //To Trzeba przeniesc w inne miejsce pozniej bo tutaj nie pasuje---------
-            UpdateTeamCount();
-            //-----------------------------------------------------------------------
 
             switch (stats.classname)
             {
@@ -89,8 +76,5 @@ public class StatsTableUpdater : MonoBehaviour
         }
     }
 
-    private void UpdateTeamCount()
-    {
-        transform.Find("ActiveTeam").gameObject.GetComponent<TextMeshProUGUI>().text = $"Characters in Team: {PlayerInfo.GetInstance().CharactersInActiveTeam.Count.ToString()}/{PlayerInfo.GetInstance().teamlimit.ToString()}";
-    }
+
 }
