@@ -23,7 +23,7 @@ public class ItemInfo : MonoBehaviour
         }
     }
 
-    public void AssignStats(ItemInfo FromItem)
+    public virtual void AssignStats(ItemInfo FromItem)
     {
         this.itemId = FromItem.itemId;
         this.itemName = FromItem.itemName;

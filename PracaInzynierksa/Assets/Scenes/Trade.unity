@@ -267,6 +267,10 @@ PrefabInstance:
       propertyPath: isPlayerInventory
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 236188795476559917, guid: a54e1e961f309784387e34a22093ec43, type: 3}
+      propertyPath: inventoryItemPrefabWeapon
+      value: 
+      objectReference: {fileID: 6151260561281289824, guid: 25800d8df60fd3046b882b209bc24dc6, type: 3}
     - target: {fileID: 236188795631987051, guid: a54e1e961f309784387e34a22093ec43, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
@@ -2721,6 +2725,10 @@ PrefabInstance:
       propertyPath: isMerchantInventory
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 236188795476559917, guid: a54e1e961f309784387e34a22093ec43, type: 3}
+      propertyPath: inventoryItemPrefabWeapon
+      value: 
+      objectReference: {fileID: 6151260561281289824, guid: 25800d8df60fd3046b882b209bc24dc6, type: 3}
     - target: {fileID: 236188795631987051, guid: a54e1e961f309784387e34a22093ec43, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
@@ -3937,10 +3945,11 @@ MonoBehaviour:
   merchantInventory: {fileID: 566865709}
   barterInventory: {fileID: 167531070}
   merchantItems:
-  - {fileID: 3519487643134038422, guid: 5b3e395436ff2ee4aba2658f5ed44820, type: 3}
-  - {fileID: 3519487643134038422, guid: f4db0bb29c746804a8dc7102310b8315, type: 3}
-  - {fileID: 3519487643134038422, guid: f5b3bbcac3a9b9b459044ae37016d01b, type: 3}
+  - {fileID: 3519487643134038422, guid: 0f7cb42dd16b9584aa01c037b27c8918, type: 3}
+  - {fileID: 3519487643134038422, guid: 0f7cb42dd16b9584aa01c037b27c8918, type: 3}
+  - {fileID: 3519487643134038422, guid: 0f7cb42dd16b9584aa01c037b27c8918, type: 3}
   GHItemPrefab: {fileID: 3519487643134038422, guid: bde4c0882a617d342923a81c317e309c, type: 3}
+  GHItemPrefabWeapon: {fileID: 3519487643134038422, guid: 57f1701340a364f429724d5437ca854e, type: 3}
   merchantGeneratedItems: []
 --- !u!4 &894922463
 Transform:
@@ -5067,6 +5076,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerInventory
       objectReference: {fileID: 0}
+    - target: {fileID: 236188795476559917, guid: a54e1e961f309784387e34a22093ec43, type: 3}
+      propertyPath: inventoryItemPrefabWeapon
+      value: 
+      objectReference: {fileID: 6151260561281289824, guid: 25800d8df60fd3046b882b209bc24dc6, type: 3}
     - target: {fileID: 236188795631987051, guid: a54e1e961f309784387e34a22093ec43, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0

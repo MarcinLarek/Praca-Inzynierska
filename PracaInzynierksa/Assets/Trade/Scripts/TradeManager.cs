@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
 public class TradeManager : MonoBehaviour
@@ -11,6 +13,7 @@ public class TradeManager : MonoBehaviour
 
     public List<GameObject> merchantItems;
     public GameObject GHItemPrefab;
+    public GameObject GHItemPrefabWeapon;
 
     private static TradeManager instance;
     public List<GameObject> merchantGeneratedItems;
@@ -59,10 +62,21 @@ public class TradeManager : MonoBehaviour
             GameObject itemToSpawn = merchantItems[Random.Range(0, merchantItems.Count)];
             merchantInventory.GetComponent<InventoryManager>().AddItem(itemToSpawn);
         }
-        GameObject GHItemSpawn = GHItemPrefab;
-        ItemInfo GHItemSpawnInfo = GHItemSpawn.GetComponent<ItemInfo>();
+
+        GameObject GHItemSpawn;
+
         foreach (GameObject iventoryItem in merchantGeneratedItems)
         {
+            switch(iventoryItem.GetComponent<ItemInfo>().type)
+            {
+                case ItemInfo.ItemType.Weapon:
+                    GHItemSpawn = GHItemPrefabWeapon;
+                    break;
+                default:
+                    GHItemSpawn = GHItemPrefab;
+                    break;
+            }
+            ItemInfo GHItemSpawnInfo = GHItemSpawn.GetComponent<ItemInfo>();
             GHItemSpawnInfo.AssignStats(iventoryItem.GetComponent<ItemInfo>());
             GameObject SpawnedGhItem = Instantiate(GHItemSpawn, new Vector3(0,0), Quaternion.identity);
             InventoryHandler.GetInstance().traderItems.Add(SpawnedGhItem);
@@ -94,7 +108,17 @@ public class TradeManager : MonoBehaviour
         {
             foreach (GameObject item in barterInv.itemsList)
             {
-                GameObject ItemToSpawn = GHItemPrefab;
+                GameObject ItemToSpawn;
+                switch (item.GetComponent<ItemInfo>().type)
+                {
+                    case ItemInfo.ItemType.Weapon:
+                        ItemToSpawn = GHItemPrefabWeapon;
+                        break;
+                    default:
+                        ItemToSpawn = GHItemPrefab;
+                        break;
+                }
+
                 ItemInfo itemInfo = item.GetComponent<ItemInfo>();
                 if (itemInfo.owned)
                 {

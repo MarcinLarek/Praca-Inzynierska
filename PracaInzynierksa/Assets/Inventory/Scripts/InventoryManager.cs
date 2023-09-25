@@ -10,6 +10,7 @@ public class InventoryManager : MonoBehaviour
     public InventorySlot[] inventorySlots;
     public List<GameObject> itemsList;
     public GameObject inventoryItemPrefab;
+    public GameObject inventoryItemPrefabWeapon;
     public bool isPlayerInventory;
     public bool isMerchantInventory;
     public bool isBarterInventory;
@@ -71,7 +72,16 @@ public class InventoryManager : MonoBehaviour
     }
     void SpawnNewItem(GameObject item, InventorySlot slot)
     {
-        GameObject itemtospawn = inventoryItemPrefab;
+        GameObject itemtospawn;
+        switch (item.GetComponent<ItemInfo>().type)
+        {
+            case ItemInfo.ItemType.Weapon:
+                itemtospawn = inventoryItemPrefabWeapon;
+                break;
+            default:
+                itemtospawn = inventoryItemPrefab;
+                break;
+        }
         itemtospawn.GetComponent<ItemInfo>().AssignStats(item.GetComponent<ItemInfo>());
 
         GameObject newItemGo = Instantiate(itemtospawn, slot.transform);

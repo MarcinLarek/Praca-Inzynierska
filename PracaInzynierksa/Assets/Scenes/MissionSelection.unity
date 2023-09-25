@@ -171,7 +171,6 @@ MonoBehaviour:
   MissionMarker: {fileID: 5977488183522787368, guid: 8f3137e305cae5d46b3375f3faf138e1, type: 3}
   numberToSpawn: 0
   generatedMarkers: []
-  ActiveMission: {fileID: 0}
 --- !u!1001 &537549321
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -660,7 +659,7 @@ Canvas:
   m_GameObject: {fileID: 1129589713}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 1064718138}
   m_PlaneDistance: 100
   m_PixelPerfect: 0

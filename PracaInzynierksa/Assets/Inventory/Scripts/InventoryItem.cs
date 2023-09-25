@@ -55,7 +55,10 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     private void AddToList(GameObject inventoryItem)
     {
         InventoryManager SlotinventoryManager = inventoryItem.GetComponentInParent<InventoryManager>();
-        SlotinventoryManager.itemsList.Add(this.gameObject);
+        if (SlotinventoryManager != null)
+        {
+            SlotinventoryManager.itemsList.Add(this.gameObject);
+        }
     }
 
     private void RemoveFromList(GameObject inventoryItem)
