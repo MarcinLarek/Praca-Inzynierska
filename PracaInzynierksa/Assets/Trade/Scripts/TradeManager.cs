@@ -144,4 +144,10 @@ public class TradeManager : MonoBehaviour
         }
 
     }
+
+    public void ShowObjectInfo(GameObject item)
+    {
+        this.GetComponent<UiUpdater>().UpdatePanelInfo(item);
+    }
+
 }

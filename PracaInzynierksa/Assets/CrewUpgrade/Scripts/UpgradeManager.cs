@@ -76,7 +76,7 @@ public class UpgradeManager : MonoBehaviour
         foreach (GameObject playerCharacter in playerTeamIconList)
         {
 
-            GameObject stats = PlayerInfo.GetInstance().RecruitedCharacters.Find((x) => x.GetComponent<CharacterStats>().charactername == playerCharacter.GetComponent<CharacterStats>().charactername);
+            GameObject stats = PlayerInfo.GetInstance().RecruitedCharacters.Find((x) => x.GetComponent<CharacterStats>().characterID == playerCharacter.GetComponent<CharacterStats>().characterID);
             stats.GetComponent<CharacterStats>().CopyStats(playerCharacter.GetComponent<CharacterStats>());
         }
         GameObject.Find("Canvas/StatsPanel/AcceptChangesButton").SetActive(false);

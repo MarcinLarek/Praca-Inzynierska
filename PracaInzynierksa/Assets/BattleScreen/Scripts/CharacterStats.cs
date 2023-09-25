@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 using Random = UnityEngine.Random;
 
 public class CharacterStats : MonoBehaviour
@@ -8,6 +9,7 @@ public class CharacterStats : MonoBehaviour
     //To plik od statysytk i informacji postaci. Te statystyki bedzie sie przenosic miedzy scenami
 
     //Main stats
+    public int characterID = 0;
     public string charactername;
     public Classes classname;
     public bool isplayerteam;
@@ -27,6 +29,14 @@ public class CharacterStats : MonoBehaviour
 
     public int price;
     public int bonusDamage;
+
+    private void Awake()
+    {
+        if (characterID == 0)
+        {
+            characterID = Random.Range(0, 2147483640);
+        }
+    }
     public enum Classes
     {
         DMG,
@@ -41,6 +51,7 @@ public class CharacterStats : MonoBehaviour
     //Trzeba to ogolnie zrobic inaczej bo za kazdym razem jak cos dodajemy to trzeba to aktualizowac
     public void CopyStats(CharacterStats fromCharacter)
     {
+        this.characterID = fromCharacter.characterID;
         this.charactername = fromCharacter.charactername;
         this.classname = fromCharacter.classname;
         this.isplayerteam = fromCharacter.isplayerteam;
