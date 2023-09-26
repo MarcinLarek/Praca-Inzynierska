@@ -64,6 +64,9 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     private void RemoveFromList(GameObject inventoryItem)
     {
         InventoryManager InventoryManager = GetComponentInParent<InventoryManager>();
-        InventoryManager.itemsList.Remove(inventoryItem);
+        if(InventoryManager != null)
+        {
+            InventoryManager.itemsList.Remove(inventoryItem);
+        }
     }
 }

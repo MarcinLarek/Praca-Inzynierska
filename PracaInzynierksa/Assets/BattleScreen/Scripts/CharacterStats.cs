@@ -30,6 +30,12 @@ public class CharacterStats : MonoBehaviour
     public int price;
     public int bonusDamage;
 
+    //Items
+    public int weaponID;
+    public int armorID;
+    public int consumableID;
+
+
     private void Awake()
     {
         if (characterID == 0)
@@ -46,7 +52,7 @@ public class CharacterStats : MonoBehaviour
 
     //Kopiowanie statysytk miedzy postaciami.
     //Przypisanie bezposrednio jednego komponentu do drugiego da nam referencje poniwea¿ C#
-    //A jak jest referencja to wszystko pojdzie sie pierdolic w momencie jak usuniemy oryginal
+    //A jak jest referencja to wszystko pojdzie sie <cenzura> w momencie jak usuniemy oryginal
     //Dlatego przypisujemy wartosc po wartosci.
     //Trzeba to ogolnie zrobic inaczej bo za kazdym razem jak cos dodajemy to trzeba to aktualizowac
     public void CopyStats(CharacterStats fromCharacter)
@@ -68,6 +74,9 @@ public class CharacterStats : MonoBehaviour
         this.experience = fromCharacter.experience;
         this.price = fromCharacter.price;
         this.inactiveteam = fromCharacter.inactiveteam;
+        this.weaponID = fromCharacter.weaponID;
+        this.armorID = fromCharacter.armorID;
+        this.consumableID = fromCharacter.consumableID;
     }
 
     public void RecieveDamage(int damage)

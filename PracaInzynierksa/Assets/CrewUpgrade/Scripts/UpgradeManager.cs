@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 
 public class UpgradeManager : MonoBehaviour
 {
@@ -56,7 +58,7 @@ public class UpgradeManager : MonoBehaviour
 
     public void LoadCharacterPortrait()
     {
-        SpriteRenderer portrait = characterPortrait.GetComponent<SpriteRenderer>();
+        Image portrait = characterPortrait.GetComponent<Image>();
         switch (activeCharacter.GetComponent<CharacterStats>().classname)
         {
             case (CharacterStats.Classes.DMG):
@@ -69,6 +71,7 @@ public class UpgradeManager : MonoBehaviour
                 portrait.sprite = portraitSupport;
                 break;
         }
+        portrait.color = Color.white;
     }
 
     public void SaveCharacterStats()
