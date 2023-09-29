@@ -18,6 +18,7 @@ public class WeaponInfo : ItemInfo
         this.type = FromItem.type;
         this.price = FromItem.price;
         this.owned = FromItem.owned;
+        this.equiped = FromItem.equiped;
 
         WeaponInfo fromItemWeaponInfo = FromItem.gameObject.GetComponent<WeaponInfo>();
 

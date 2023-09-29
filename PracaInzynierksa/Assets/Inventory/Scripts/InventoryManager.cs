@@ -39,7 +39,10 @@ public class InventoryManager : MonoBehaviour
         {
             foreach (GameObject item in inventoryInstance.inventoryItems)
             {
-                AddItem(item);
+                if (!item.GetComponent<ItemInfo>().equiped)
+                {
+                    AddItem(item);
+                }
             }
         }
     }

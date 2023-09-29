@@ -17,4 +17,5 @@ public class CharacterInventorySlot : MonoBehaviour, IDropHandler
         inventoryItem.parentAfterDrag = transform;
         CharacterInventoryManager.GetInstance().EquipItem(inventoryItem.GetComponent<ItemInfo>().itemId);
     }
+
 }

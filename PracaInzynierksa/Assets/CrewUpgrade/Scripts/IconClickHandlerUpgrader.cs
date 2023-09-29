@@ -16,6 +16,7 @@ public class IconClickHandlerUpgrader : MonoBehaviour, IPointerClickHandler
         }
         UpgradeManager.GetInstance().activeCharacter = this.gameObject;
         UpgradeManager.GetInstance().LoadCharacterPortrait();
+        UpgradeManager.GetInstance().LoadCharacterEquipment();
     }
 
     private void Awake()

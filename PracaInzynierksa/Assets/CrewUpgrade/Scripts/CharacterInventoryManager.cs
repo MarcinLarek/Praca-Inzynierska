@@ -28,6 +28,7 @@ public class CharacterInventoryManager : MonoBehaviour
             }
         }
         ItemInfo itemInfo = item.GetComponent<ItemInfo>();
+        itemInfo.equiped = true;
         switch (itemInfo.type)
         {
             case ItemInfo.ItemType.Weapon:

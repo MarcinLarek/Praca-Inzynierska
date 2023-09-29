@@ -19,6 +19,9 @@ public class UpgradeManager : MonoBehaviour
     private static UpgradeManager instance;
     public GameObject crewScrollableList;
 
+    public GameObject weaponPrefab;
+    public GameObject weaponSlot;
+
     public static UpgradeManager GetInstance()
     {
         return instance;
@@ -84,6 +87,19 @@ public class UpgradeManager : MonoBehaviour
         }
         GameObject.Find("Canvas/StatsPanel/AcceptChangesButton").SetActive(false);
     } 
+
+    public void LoadCharacterEquipment()
+    {
+        CharacterStats characterStats = activeCharacter.GetComponent<CharacterStats>();
+        if (characterStats.weaponID != 0)
+        {
+            GameObject weapon = InventoryHandler.GetInstance().inventoryItems.Find((x) => x.GetComponent<ItemInfo>().itemId == characterStats.weaponID);
+            GameObject weaponToSpawn = weaponPrefab;
+            weaponToSpawn.GetComponent<WeaponInfo>().AssignStats(weapon.GetComponent<WeaponInfo>());
+            Instantiate(weaponToSpawn, weaponSlot.transform);
+
+        }
+    }
 
     public void MainHubButton()
     {
