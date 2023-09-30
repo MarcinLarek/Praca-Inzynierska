@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class IconClickHandlerUpgrader : MonoBehaviour, IPointerClickHandler
 {
     private GameObject statsTable;
+    private GameObject inventory;
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -13,6 +14,7 @@ public class IconClickHandlerUpgrader : MonoBehaviour, IPointerClickHandler
         if (!statsTable.activeSelf)
         {
             statsTable.SetActive(true);
+            inventory.SetActive(true);
         }
         UpgradeManager.GetInstance().activeCharacter = this.gameObject;
         UpgradeManager.GetInstance().LoadCharacterPortrait();
@@ -22,6 +24,7 @@ public class IconClickHandlerUpgrader : MonoBehaviour, IPointerClickHandler
     private void Awake()
     {
         statsTable = GameObject.Find("Canvas/StatsPanel");
+        inventory = GameObject.Find("Canvas/CharacterInventory");
     }
 
 }

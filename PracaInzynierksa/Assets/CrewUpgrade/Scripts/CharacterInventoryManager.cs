@@ -15,30 +15,22 @@ public class CharacterInventoryManager : MonoBehaviour
     {
         instance = this;
     }
-    public void EquipItem(int itemId)
+    public void EquipItem(GameObject item)
     {
         UpgradeManager upgradeManager = UpgradeManager.GetInstance();
-        GameObject item = null;
-        foreach(GameObject GHitem in InventoryHandler.GetInstance().inventoryItems)
-        {
-            if (GHitem.GetComponent<ItemInfo>().itemId == itemId)
-            {
-                item = GHitem;
-                break;
-            }
-        }
+
         ItemInfo itemInfo = item.GetComponent<ItemInfo>();
         itemInfo.equiped = true;
         switch (itemInfo.type)
         {
             case ItemInfo.ItemType.Weapon:
-                upgradeManager.activeCharacter.GetComponent<CharacterStats>().weaponID = itemId;
+                upgradeManager.activeCharacter.GetComponent<CharacterStats>().weaponID = itemInfo.itemId;
                 break;
             case ItemInfo.ItemType.Armor:
-                upgradeManager.activeCharacter.GetComponent<CharacterStats>().armorID = itemId;
+                upgradeManager.activeCharacter.GetComponent<CharacterStats>().armorID = itemInfo.itemId;
                 break;
             case ItemInfo.ItemType.Consumable:
-                upgradeManager.activeCharacter.GetComponent<CharacterStats>().consumableID = itemId;
+                upgradeManager.activeCharacter.GetComponent<CharacterStats>().consumableID = itemInfo.itemId;
                 break;
             default:
                 Debug.Log("Wrong Item");
@@ -46,4 +38,26 @@ public class CharacterInventoryManager : MonoBehaviour
         }
 
     }
+
+    public void UnequipItem(GameObject item)
+    {
+        CharacterStats activeCharacterInfo = UpgradeManager.GetInstance().activeCharacter.GetComponent<CharacterStats>();
+        switch (item.GetComponent<ItemInfo>().type)
+        {
+            case ItemInfo.ItemType.Weapon:
+                activeCharacterInfo.weaponID = 0;
+                break;
+            case ItemInfo.ItemType.Armor:
+                activeCharacterInfo.armorID = 0;
+                break;
+            case ItemInfo.ItemType.Consumable:
+                activeCharacterInfo.consumableID = 0;
+                break;
+            default:
+                Debug.Log("Something broke with unequiping");
+                break;
+        }
+        item.GetComponent<ItemInfo>().equiped = false;
+    }
+
 }

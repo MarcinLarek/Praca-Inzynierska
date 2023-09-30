@@ -4124,6 +4124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6339c778db91f7d46a88c94e3e7508af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventory: {fileID: 358155595}
 --- !u!1 &570796513 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1758057756056352688, guid: 865aed6c46be6cc4b8c885f81b945a05, type: 3}
@@ -4794,8 +4795,8 @@ GameObject:
   - component: {fileID: 949520878}
   - component: {fileID: 949520880}
   - component: {fileID: 949520879}
-  - component: {fileID: 949520881}
   - component: {fileID: 949520882}
+  - component: {fileID: 949520881}
   m_Layer: 5
   m_Name: Frame
   m_TagString: Untagged
@@ -5279,6 +5280,8 @@ MonoBehaviour:
   portraitTank: {fileID: 21300000, guid: bf8ee280b40c72b488c1d9cb6b3df9d9, type: 3}
   portraitSupport: {fileID: 21300000, guid: e7568fb78a0baa7409a8cad614248d2e, type: 3}
   crewScrollableList: {fileID: 570796513}
+  weaponPrefab: {fileID: 6151260561281289824, guid: 25800d8df60fd3046b882b209bc24dc6, type: 3}
+  weaponSlot: {fileID: 949520877}
 --- !u!1 &1079882055
 GameObject:
   m_ObjectHideFlags: 0

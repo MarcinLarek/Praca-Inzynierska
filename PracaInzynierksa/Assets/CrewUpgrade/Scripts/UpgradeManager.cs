@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -82,10 +83,29 @@ public class UpgradeManager : MonoBehaviour
         foreach (GameObject playerCharacter in playerTeamIconList)
         {
 
-            GameObject stats = PlayerInfo.GetInstance().RecruitedCharacters.Find((x) => x.GetComponent<CharacterStats>().characterID == playerCharacter.GetComponent<CharacterStats>().characterID);
-            stats.GetComponent<CharacterStats>().CopyStats(playerCharacter.GetComponent<CharacterStats>());
+            GameObject GHCharacter = PlayerInfo.GetInstance().RecruitedCharacters.Find((x) => x.GetComponent<CharacterStats>().characterID == playerCharacter.GetComponent<CharacterStats>().characterID);
+            CharacterStats GHCharacterStats = GHCharacter.GetComponent<CharacterStats>();
+            CharacterStats playerCharacterStats = playerCharacter.GetComponent<CharacterStats>();
+
+            if (playerCharacterStats.weaponID == 0 && GHCharacterStats.weaponID != 0)
+            {
+                InventoryHandler.GetInstance().inventoryItems.Find((x) => x.GetComponent<ItemInfo>().itemId == GHCharacterStats.weaponID).GetComponent<ItemInfo>().equiped = false;
+            }
+            else if (playerCharacterStats.weaponID != 0)
+            {
+                InventoryHandler.GetInstance().inventoryItems.Find((x) => x.GetComponent<ItemInfo>().itemId == playerCharacterStats.weaponID).GetComponent<ItemInfo>().equiped = true;
+            }
+            if (playerCharacterStats.armorID == 0 && GHCharacterStats.armorID != 0)
+            {
+                //InventoryHandler.GetInstance().inventoryItems.Find((x) => x.GetComponent<WeaponInfo>().itemId == GHCharacterStats.weaponID).GetComponent<WeaponInfo>().equiped = false;
+            }
+            if (playerCharacterStats.consumableID == 0 && GHCharacterStats.consumableID != 0)
+            {
+                //InventoryHandler.GetInstance().inventoryItems.Find((x) => x.GetComponent<WeaponInfo>().itemId == GHCharacterStats.weaponID).GetComponent<WeaponInfo>().equiped = false;
+            }
+
+            GHCharacter.GetComponent<CharacterStats>().CopyStats(playerCharacter.GetComponent<CharacterStats>());
         }
-        GameObject.Find("Canvas/StatsPanel/AcceptChangesButton").SetActive(false);
     } 
 
     public void LoadCharacterEquipment()

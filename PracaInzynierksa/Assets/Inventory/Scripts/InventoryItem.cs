@@ -19,6 +19,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        CharacterInventoryHandler();
         image.raycastTarget = false;
         RemoveFromList(this.gameObject);
         parentAfterDrag = transform.parent;
@@ -29,7 +30,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         {
             tradeManager.ShowObjectInfo(this.gameObject);
         }
-
+        CharacterInventoryHandler();
         Debug.Log("Begin");
     }
     public void OnDrag(PointerEventData eventData)
@@ -51,7 +52,6 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             tradeManager.ShowObjectInfo(this.gameObject);
         }
     }
-
     private void AddToList(GameObject inventoryItem)
     {
         InventoryManager SlotinventoryManager = inventoryItem.GetComponentInParent<InventoryManager>();
@@ -60,13 +60,20 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             SlotinventoryManager.itemsList.Add(this.gameObject);
         }
     }
-
     private void RemoveFromList(GameObject inventoryItem)
     {
         InventoryManager InventoryManager = GetComponentInParent<InventoryManager>();
         if(InventoryManager != null)
         {
             InventoryManager.itemsList.Remove(inventoryItem);
+        }
+    }
+
+    private void CharacterInventoryHandler()
+    {
+        if(transform.parent.GetComponent<CharacterInventorySlot>() != null)
+        {
+            CharacterInventoryManager.GetInstance().UnequipItem(this.gameObject);
         }
     }
 }
