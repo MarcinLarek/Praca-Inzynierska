@@ -79,10 +79,11 @@ MonoBehaviour:
   description: A specialized, cutting-edge firearm designed exclusively for elite
     military and special forces, delivering unmatched precision and firepower to
     tip the scales in the most critical operations.
-  image: {fileID: 21300000, guid: 7733856041f32314688e66dced9291d5, type: 3}
+  image: {fileID: 21300000, guid: ba087046584e9144aad0a7fcba6d473b, type: 3}
   type: 2
   price: 600
   owned: 0
+  equiped: 0
   damageRange: 12
   damageDices: 3
   damageBonus: 0

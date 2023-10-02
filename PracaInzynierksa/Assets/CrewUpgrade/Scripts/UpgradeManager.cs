@@ -22,6 +22,10 @@ public class UpgradeManager : MonoBehaviour
 
     public GameObject weaponPrefab;
     public GameObject weaponSlot;
+    public GameObject armorPrefab;
+    public GameObject armorSlot;
+    public GameObject consumablePrefab;
+    public GameObject consumableSlot;
 
     public static UpgradeManager GetInstance()
     {
@@ -95,13 +99,25 @@ public class UpgradeManager : MonoBehaviour
             {
                 InventoryHandler.GetInstance().inventoryItems.Find((x) => x.GetComponent<ItemInfo>().itemId == playerCharacterStats.weaponID).GetComponent<ItemInfo>().equiped = true;
             }
+
+
             if (playerCharacterStats.armorID == 0 && GHCharacterStats.armorID != 0)
             {
-                //InventoryHandler.GetInstance().inventoryItems.Find((x) => x.GetComponent<WeaponInfo>().itemId == GHCharacterStats.weaponID).GetComponent<WeaponInfo>().equiped = false;
+                InventoryHandler.GetInstance().inventoryItems.Find((x) => x.GetComponent<ItemInfo>().itemId == GHCharacterStats.armorID).GetComponent<ItemInfo>().equiped = false;
             }
+            else if (playerCharacterStats.armorID != 0)
+            {
+                InventoryHandler.GetInstance().inventoryItems.Find((x) => x.GetComponent<ItemInfo>().itemId == playerCharacterStats.armorID).GetComponent<ItemInfo>().equiped = true;
+            }
+
+
             if (playerCharacterStats.consumableID == 0 && GHCharacterStats.consumableID != 0)
             {
-                //InventoryHandler.GetInstance().inventoryItems.Find((x) => x.GetComponent<WeaponInfo>().itemId == GHCharacterStats.weaponID).GetComponent<WeaponInfo>().equiped = false;
+                InventoryHandler.GetInstance().inventoryItems.Find((x) => x.GetComponent<ItemInfo>().itemId == GHCharacterStats.consumableID).GetComponent<ItemInfo>().equiped = false;
+            }
+            else if (playerCharacterStats.consumableID != 0)
+            {
+                InventoryHandler.GetInstance().inventoryItems.Find((x) => x.GetComponent<ItemInfo>().itemId == playerCharacterStats.consumableID).GetComponent<ItemInfo>().equiped = true;
             }
 
             GHCharacter.GetComponent<CharacterStats>().CopyStats(playerCharacter.GetComponent<CharacterStats>());
@@ -111,12 +127,31 @@ public class UpgradeManager : MonoBehaviour
     public void LoadCharacterEquipment()
     {
         CharacterStats characterStats = activeCharacter.GetComponent<CharacterStats>();
+
         if (characterStats.weaponID != 0)
         {
             GameObject weapon = InventoryHandler.GetInstance().inventoryItems.Find((x) => x.GetComponent<ItemInfo>().itemId == characterStats.weaponID);
             GameObject weaponToSpawn = weaponPrefab;
             weaponToSpawn.GetComponent<WeaponInfo>().AssignStats(weapon.GetComponent<WeaponInfo>());
             Instantiate(weaponToSpawn, weaponSlot.transform);
+
+        }
+
+        if (characterStats.armorID != 0)
+        {
+            GameObject armor = InventoryHandler.GetInstance().inventoryItems.Find((x) => x.GetComponent<ItemInfo>().itemId == characterStats.armorID);
+            GameObject armorToSpawn = armorPrefab;
+            armorToSpawn.GetComponent<ArmorInfo>().AssignStats(armor.GetComponent<ArmorInfo>());
+            Instantiate(armorToSpawn, armorSlot.transform);
+
+        }
+
+        if (characterStats.consumableID != 0)
+        {
+            GameObject consumable = InventoryHandler.GetInstance().inventoryItems.Find((x) => x.GetComponent<ItemInfo>().itemId == characterStats.consumableID);
+            GameObject consumableToSpawn = consumablePrefab;
+            consumableToSpawn.GetComponent<ConsumableInfo>().AssignStats(consumable.GetComponent<ConsumableInfo>());
+            Instantiate(consumableToSpawn, consumableSlot.transform);
 
         }
     }

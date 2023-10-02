@@ -14,6 +14,8 @@ public class TradeManager : MonoBehaviour
     public List<GameObject> merchantItems;
     public GameObject GHItemPrefab;
     public GameObject GHItemPrefabWeapon;
+    public GameObject GHItemPrefabArmor;
+    public GameObject GHItemPrefabConsumable;
 
     private static TradeManager instance;
     public List<GameObject> merchantGeneratedItems;
@@ -72,6 +74,12 @@ public class TradeManager : MonoBehaviour
                 case ItemInfo.ItemType.Weapon:
                     GHItemSpawn = GHItemPrefabWeapon;
                     break;
+                case ItemInfo.ItemType.Armor:
+                    GHItemSpawn = GHItemPrefabArmor;
+                    break;
+                case ItemInfo.ItemType.Consumable:
+                    GHItemSpawn = GHItemPrefabConsumable;
+                    break;
                 default:
                     GHItemSpawn = GHItemPrefab;
                     break;
@@ -113,6 +121,12 @@ public class TradeManager : MonoBehaviour
                 {
                     case ItemInfo.ItemType.Weapon:
                         ItemToSpawn = GHItemPrefabWeapon;
+                        break;
+                    case ItemInfo.ItemType.Armor:
+                        ItemToSpawn = GHItemPrefabArmor;
+                        break;
+                    case ItemInfo.ItemType.Consumable:
+                        ItemToSpawn = GHItemPrefabConsumable;
                         break;
                     default:
                         ItemToSpawn = GHItemPrefab;

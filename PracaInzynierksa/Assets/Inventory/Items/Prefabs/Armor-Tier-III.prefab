@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 5103255711071153556}
   - component: {fileID: 9034622821611388557}
   - component: {fileID: 7786560903817459323}
-  - component: {fileID: -5638069853717838917}
+  - component: {fileID: -1360792114922629347}
   m_Layer: 0
-  m_Name: Rifle-Tier-II
+  m_Name: Armor-Tier-III
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ MonoBehaviour:
   character: 0
   item: 1
   mission: 0
---- !u!114 &-5638069853717838917
+--- !u!114 &-1360792114922629347
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -71,19 +71,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 3519487643134038422}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67fb1815d7e61bf488461d269da52d35, type: 3}
+  m_Script: {fileID: 11500000, guid: d22a67c39d64f6448bd9d98d9a685e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemId: 0
-  itemName: 'Military Tier Rifle '
-  description: A precision-engineered firearm designed for military units, outperforming
-    any widely available standard piece of weaponary
-  image: {fileID: 21300000, guid: fab33769cde3bd44b9b7dee04c5483ad, type: 3}
-  type: 2
-  price: 300
+  itemName: Black Ops Armor
+  description: ToDo
+  image: {fileID: 21300000, guid: e8488e11a07c22a47980301241bdf909, type: 3}
+  type: 3
+  price: 600
   owned: 0
   equiped: 0
-  damageRange: 10
-  damageDices: 2
-  damageBonus: 3
-  accuracy: 0
+  stopingPower: 5
+  balistic: 0
+  shields: 1
