@@ -197,10 +197,8 @@ public class CrewManager : MonoBehaviour
                 //Dodajemy do listy przewijanej zalogi
                 activeCharacterStats.transform.SetParent(crewScrollableList.transform);
 
-                // U W A G A
-                // Poki co szukamy po imieniu. Bedzie problem jesli 2 postaci beda mialy takie samo imie.
-                // Pozniej trzeba dodac jaki unikalny identyfikator.
-                GameObject purchasedCharacterGameHandler = CrewManagementHandler.GetInstance().generatedRecruits.Find((x) => x.GetComponent<CharacterStats>().charactername == activeCharacter.GetComponent<CharacterStats>().charactername);
+                // Szukamy odpowiednia postac po ID
+                GameObject purchasedCharacterGameHandler = CrewManagementHandler.GetInstance().generatedRecruits.Find((x) => x.GetComponent<CharacterStats>().characterID == activeCharacter.GetComponent<CharacterStats>().characterID);
                 purchasedCharacterGameHandler.GetComponent<CharacterStats>().CopyStats(activeCharacterStats);
                 //Usuwamy kupiona postac z listy postaci mozliwych do kupienia i przypisujemy do listy zrekrutowanych.
                 RecruitableCharacters.Remove(activeCharacter);
@@ -232,10 +230,8 @@ public class CrewManager : MonoBehaviour
             }
             else
             {
-                // U W A G A
-                // Poki co szukamy po imieniu. Bedzie problem jesli 2 postaci beda mialy takie samo imie.
-                // Pozniej trzeba dodac jaki unikalny identyfikator.
-                GameObject playerCharacter = PlayerInfo.GetInstance().RecruitedCharacters.Find((x) => x.GetComponent<CharacterStats>().charactername == activeCharacter.GetComponent<CharacterStats>().charactername);
+                // Szukamy postac po ID
+                GameObject playerCharacter = PlayerInfo.GetInstance().RecruitedCharacters.Find((x) => x.GetComponent<CharacterStats>().characterID == activeCharacter.GetComponent<CharacterStats>().characterID);
                 activeCharacter.GetComponent<CharacterStats>().inactiveteam = true;
                 playerCharacter.GetComponent<CharacterStats>().inactiveteam = true;
                 CharactersInActiveTeam.Add(playerCharacter);
@@ -244,10 +240,8 @@ public class CrewManager : MonoBehaviour
         }
         else
         {// Po sprawdzeniu ze postac jest juz na liscie, usuwamy ja z listy.
-         // U W A G A
-         // Poki co szukamy po imieniu. Bedzie problem jesli 2 postaci beda mialy takie samo imie.
-         // Pozniej trzeba dodac jaki unikalny identyfikator.
-            GameObject playerCharacter = PlayerInfo.GetInstance().RecruitedCharacters.Find((x) => x.GetComponent<CharacterStats>().charactername == activeCharacter.GetComponent<CharacterStats>().charactername);
+         // Szukamy postac po ID
+            GameObject playerCharacter = PlayerInfo.GetInstance().RecruitedCharacters.Find((x) => x.GetComponent<CharacterStats>().characterID == activeCharacter.GetComponent<CharacterStats>().characterID);
 
             activeCharacter.GetComponent<CharacterStats>().inactiveteam = false;
             playerCharacter.GetComponent<CharacterStats>().inactiveteam = false;

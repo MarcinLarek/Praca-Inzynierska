@@ -7,6 +7,7 @@ using UnityEngine;
 public class UpdateCharacterStatsPanel : MonoBehaviour
 {
     private UpgradeManager instance;
+    public GameObject inventory;
 
     private void Awake()
     {
@@ -52,6 +53,7 @@ public class UpdateCharacterStatsPanel : MonoBehaviour
         else
         {
             this.gameObject.SetActive(false);
+            inventory.SetActive(false);
         }
     }
 

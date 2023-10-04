@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5103255711071153556}
   - component: {fileID: 9034622821611388557}
   - component: {fileID: 7786560903817459323}
-  - component: {fileID: 7133742006886519476}
+  - component: {fileID: -5638069853717838917}
   m_Layer: 0
   m_Name: Rifle-Tier-I
   m_TagString: Untagged
@@ -62,7 +62,7 @@ MonoBehaviour:
   character: 0
   item: 1
   mission: 0
---- !u!114 &7133742006886519476
+--- !u!114 &-5638069853717838917
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -71,13 +71,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 3519487643134038422}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83a84e843afd19847835591c1038fb14, type: 3}
+  m_Script: {fileID: 11500000, guid: 67fb1815d7e61bf488461d269da52d35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemId: 0
   itemName: Standard Mercenary Rifle
   description: A dependable, all-purpose firearm favored by mercenaries for its reliability
     and adaptability in any combat scenario.
   image: {fileID: 21300000, guid: 7733856041f32314688e66dced9291d5, type: 3}
-  type: 0
-  value: 0
+  type: 2
   price: 100
+  owned: 0
+  damageRange: 10
+  damageDices: 1
+  damageBonus: 1
+  accuracy: -1

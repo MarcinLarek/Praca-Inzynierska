@@ -14,6 +14,7 @@ public class ItemInfo : MonoBehaviour
     public ItemType type;
     public int price;
     public bool owned;
+    public bool equiped;
 
     private void Awake()
     {
@@ -23,7 +24,7 @@ public class ItemInfo : MonoBehaviour
         }
     }
 
-    public void AssignStats(ItemInfo FromItem)
+    public virtual void AssignStats(ItemInfo FromItem)
     {
         this.itemId = FromItem.itemId;
         this.itemName = FromItem.itemName;
@@ -32,6 +33,7 @@ public class ItemInfo : MonoBehaviour
         this.type = FromItem.type;
         this.price = FromItem.price;
         this.owned = FromItem.owned;
+        this.equiped = FromItem.equiped;
     }
     public enum ItemType
     {
