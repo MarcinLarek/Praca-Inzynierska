@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-public class MissionSelectionHandler : MonoBehaviour
+public class MissionSelectionHandler : MonoBehaviour, IDataPersistence
 {
 
     private static MissionSelectionHandler instance;
@@ -53,4 +53,17 @@ public class MissionSelectionHandler : MonoBehaviour
         generatedMissions.Clear();
     }
 
+    public void LoadData(GameData data)
+    {
+        this.missionsGenerated = data.missionsGenerated;
+        //List
+        this.generatedMissions = data.generatedMissions;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.missionsGenerated = this.missionsGenerated;
+        //List
+        data.generatedMissions = this.generatedMissions;
+    }
 }

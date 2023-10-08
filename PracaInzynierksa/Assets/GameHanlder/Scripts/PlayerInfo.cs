@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInfo : MonoBehaviour
+public class PlayerInfo : MonoBehaviour, IDataPersistence
 {
 
     private static PlayerInfo instance;
@@ -27,5 +27,30 @@ public class PlayerInfo : MonoBehaviour
     private void Awake()
     {
         instance = this; // Singleton
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.playerMoney = data.playerMoney;
+        this.recruitslimit = data.recruitslimit;
+        this.crewlimit = data.crewlimit;
+        this.teamlimit = data.teamlimit;
+        this.betterrecruits = data.betterrecruits;
+        //Lists
+        this.CharactersInActiveTeam = data.CharactersInActiveTeam;
+        this.RecruitedCharacters = data.RecruitedCharacters;
+
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.playerMoney = this.playerMoney;
+        data.recruitslimit = this.recruitslimit;
+        data.crewlimit = this.crewlimit;
+        data.teamlimit = this.teamlimit;
+        data.betterrecruits = this.betterrecruits;
+        //Lists
+        data.CharactersInActiveTeam = this.CharactersInActiveTeam;
+        data.RecruitedCharacters = this.RecruitedCharacters;
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrewManagementHandler : MonoBehaviour
+public class CrewManagementHandler : MonoBehaviour, IDataPersistence
 {
     public List<GameObject> generatedRecruits;
     public GameObject playerCharacterPreFab;
@@ -26,5 +26,19 @@ public class CrewManagementHandler : MonoBehaviour
             Destroy(recruit);
         }
         generatedRecruits.Clear();
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.recruitsAreGenerated = data.recruitsAreGenerated;
+        //List
+        this.generatedRecruits = data.generatedRecruits;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.recruitsAreGenerated = this.recruitsAreGenerated;
+        //List
+        data.generatedRecruits = this.generatedRecruits;
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryHandler : MonoBehaviour
+public class InventoryHandler : MonoBehaviour, IDataPersistence
 {
     private static InventoryHandler instance;
     public static InventoryHandler GetInstance()
@@ -28,6 +28,19 @@ public class InventoryHandler : MonoBehaviour
         traderInventoryGenerated = false;
     }
 
-    
+    public void LoadData(GameData data)
+    {
+        this.traderInventoryGenerated = data.traderInventoryGenerated;
+        //List
+        this.traderItems = data.traderItems;
+        this.inventoryItems = data.inventoryItems;
+    }
 
+    public void SaveData(ref GameData data)
+    {
+        data.traderInventoryGenerated = this.traderInventoryGenerated;
+        //List
+        data.traderItems = this.traderItems;
+        data.inventoryItems = this.inventoryItems;
+    }
 }
