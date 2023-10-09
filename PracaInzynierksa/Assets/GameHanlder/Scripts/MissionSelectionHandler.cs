@@ -57,7 +57,8 @@ public class MissionSelectionHandler : MonoBehaviour, IDataPersistence
     {
         this.missionsGenerated = data.missionsGenerated;
         //List
-        foreach(GameDataMission datamission in data.generatedMissions)
+        this.generatedMissions.Clear();
+        foreach (GameDataMission datamission in data.generatedMissions)
         {
             GameObject mission = Instantiate(MissionInfoPrefab);
             MissionInfo missioninfo = mission.GetComponent<MissionInfo>();
@@ -77,7 +78,8 @@ public class MissionSelectionHandler : MonoBehaviour, IDataPersistence
     {
         data.missionsGenerated = this.missionsGenerated;
         //List
-        foreach(GameObject mission in generatedMissions)
+        data.generatedMissions.Clear();
+        foreach (GameObject mission in generatedMissions)
         {
             MissionInfo missioninfo = mission.GetComponent<MissionInfo>();
             data.generatedMissions.Add(new GameDataMission(

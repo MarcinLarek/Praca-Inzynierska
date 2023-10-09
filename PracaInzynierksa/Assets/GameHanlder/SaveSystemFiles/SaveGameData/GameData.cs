@@ -22,9 +22,11 @@ public class GameData
     public List<GameDataCharacter> generatedRecruits = new List<GameDataCharacter>();
     public bool recruitsAreGenerated;
     //InventoryHandler
-    public List<GameDataItem> inventoryItems = new List<GameDataItem>();
     public bool traderInventoryGenerated;
-    public List<GameDataItem> traderItems = new List<GameDataItem>();
+    public List<GameDataItem> listItems = new List<GameDataItem>();
+    public List<GameDataWeapon> listWeapons = new List<GameDataWeapon>();
+    public List<GameDataArmor> listArmors = new List<GameDataArmor>();
+    public List<GameDataConsumable> listConsumables = new List<GameDataConsumable>();
     //PlayerInfo
     public List<GameDataCharacter> CharactersInActiveTeam = new List<GameDataCharacter>();
     public List<GameDataCharacter> RecruitedCharacters = new List<GameDataCharacter>();

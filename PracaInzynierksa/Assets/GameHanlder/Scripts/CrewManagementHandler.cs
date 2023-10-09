@@ -32,13 +32,52 @@ public class CrewManagementHandler : MonoBehaviour, IDataPersistence
     {
         this.recruitsAreGenerated = data.recruitsAreGenerated;
         //List
-        //.generatedRecruits = data.generatedRecruits;
+        this.generatedRecruits.Clear();
+        foreach (GameDataCharacter dataCharacter in data.generatedRecruits)
+        {
+            GameObject character = Instantiate(playerCharacterPreFab);
+            CharacterStats characterinfo = character.GetComponent<CharacterStats>();
+            characterinfo.characterID = dataCharacter.characterID;
+            characterinfo.charactername = dataCharacter.charactername;
+            characterinfo.classname = dataCharacter.classname;
+            characterinfo.isplayerteam = dataCharacter.isplayerteam;
+            characterinfo.isalive = dataCharacter.isalive;
+            characterinfo.inactiveteam = dataCharacter.inactiveteam;
+            characterinfo.maxHealth = dataCharacter.maxHealth;
+            characterinfo.health = dataCharacter.health;
+            characterinfo.maxActionPoints = dataCharacter.maxActionPoints;
+            characterinfo.actionPoints = dataCharacter.actionPoints;
+            characterinfo.strength = dataCharacter.strength;
+            characterinfo.endurance = dataCharacter.endurance;
+            characterinfo.agility = dataCharacter.agility;
+            characterinfo.luck = dataCharacter.luck;
+            characterinfo.inteligence = dataCharacter.inteligence;
+            characterinfo.experience = dataCharacter.experience;
+            characterinfo.price = dataCharacter.price;
+            characterinfo.bonusDamage = dataCharacter.bonusDamage;
+            characterinfo.weaponID = dataCharacter.weaponID;
+            characterinfo.armorID = dataCharacter.armorID;
+            characterinfo.consumableID = dataCharacter.consumableID;
+
+            this.generatedRecruits.Add(character);
+        }
     }
 
     public void SaveData(ref GameData data)
     {
         data.recruitsAreGenerated = this.recruitsAreGenerated;
         //List
-        //data.generatedRecruits = this.generatedRecruits;
+        data.generatedRecruits.Clear();
+        foreach (GameObject character in this.generatedRecruits)
+        {
+            CharacterStats characterinfo = character.GetComponent<CharacterStats>();
+            data.generatedRecruits.Add(new GameDataCharacter(characterinfo.characterID, characterinfo.charactername,
+                characterinfo.classname, characterinfo.isplayerteam, characterinfo.isalive, characterinfo.inactiveteam,
+                characterinfo.maxHealth, characterinfo.health, characterinfo.maxActionPoints, characterinfo.actionPoints,
+                characterinfo.strength, characterinfo.endurance, characterinfo.agility, characterinfo.luck,
+                characterinfo.inteligence, characterinfo.experience, characterinfo.price, characterinfo.bonusDamage,
+                characterinfo.weaponID, characterinfo.armorID, characterinfo.consumableID
+                ));
+        }
     }
 }
