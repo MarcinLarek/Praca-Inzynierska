@@ -32,13 +32,13 @@ public class CrewManagementHandler : MonoBehaviour, IDataPersistence
     {
         this.recruitsAreGenerated = data.recruitsAreGenerated;
         //List
-        this.generatedRecruits = data.generatedRecruits;
+        //.generatedRecruits = data.generatedRecruits;
     }
 
     public void SaveData(ref GameData data)
     {
         data.recruitsAreGenerated = this.recruitsAreGenerated;
         //List
-        data.generatedRecruits = this.generatedRecruits;
+        //data.generatedRecruits = this.generatedRecruits;
     }
 }

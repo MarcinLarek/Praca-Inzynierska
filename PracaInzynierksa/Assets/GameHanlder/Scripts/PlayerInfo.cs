@@ -37,8 +37,8 @@ public class PlayerInfo : MonoBehaviour, IDataPersistence
         this.teamlimit = data.teamlimit;
         this.betterrecruits = data.betterrecruits;
         //Lists
-        this.CharactersInActiveTeam = data.CharactersInActiveTeam;
-        this.RecruitedCharacters = data.RecruitedCharacters;
+        //this.CharactersInActiveTeam = data.CharactersInActiveTeam;
+        //this.RecruitedCharacters = data.RecruitedCharacters;
 
     }
 
@@ -50,7 +50,7 @@ public class PlayerInfo : MonoBehaviour, IDataPersistence
         data.teamlimit = this.teamlimit;
         data.betterrecruits = this.betterrecruits;
         //Lists
-        data.CharactersInActiveTeam = this.CharactersInActiveTeam;
-        data.RecruitedCharacters = this.RecruitedCharacters;
+        //data.CharactersInActiveTeam = this.CharactersInActiveTeam;
+        //data.RecruitedCharacters = this.RecruitedCharacters;
     }
 }

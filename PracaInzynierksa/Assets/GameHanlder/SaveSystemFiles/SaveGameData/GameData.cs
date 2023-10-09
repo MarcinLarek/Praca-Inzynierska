@@ -5,18 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
-    /*
-    public MissionSelectionHandler MissionSelectionHandler;
-    public ShipUpgradeHandler ShipUpgradeHandler;
-    public CrewManagementHandler CrewManagementHandler;
-    public InventoryHandler InventoryHandler;
-    public PlayerInfo playerInfo;
-    */
-
-
     //MissionSelectionHandler
     public bool missionsGenerated;
-    public List<GameObject> generatedMissions;
+    public List<GameDataMission> generatedMissions = new List<GameDataMission>();
     //ShipUpgradeHandler
     public bool crewUpgrade_1;
     public bool crewUpgrade_2;
@@ -28,15 +19,15 @@ public class GameData
     public bool recruitUpgrade_3;
     public bool betterRecruitsUpgrade;
     //CrewManagementHandler
-    public List<GameObject> generatedRecruits;
+    public List<GameDataCharacter> generatedRecruits = new List<GameDataCharacter>();
     public bool recruitsAreGenerated;
     //InventoryHandler
-    public List<GameObject> inventoryItems;
+    public List<GameDataItem> inventoryItems = new List<GameDataItem>();
     public bool traderInventoryGenerated;
-    public List<GameObject> traderItems;
+    public List<GameDataItem> traderItems = new List<GameDataItem>();
     //PlayerInfo
-    public List<GameObject> CharactersInActiveTeam;
-    public List<GameObject> RecruitedCharacters;
+    public List<GameDataCharacter> CharactersInActiveTeam = new List<GameDataCharacter>();
+    public List<GameDataCharacter> RecruitedCharacters = new List<GameDataCharacter>();
     public int playerMoney;
     public int recruitslimit;
     public int crewlimit;

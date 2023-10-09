@@ -32,15 +32,15 @@ public class InventoryHandler : MonoBehaviour, IDataPersistence
     {
         this.traderInventoryGenerated = data.traderInventoryGenerated;
         //List
-        this.traderItems = data.traderItems;
-        this.inventoryItems = data.inventoryItems;
+        //this.traderItems = data.traderItems;
+        //this.inventoryItems = data.inventoryItems;
     }
 
     public void SaveData(ref GameData data)
     {
         data.traderInventoryGenerated = this.traderInventoryGenerated;
         //List
-        data.traderItems = this.traderItems;
-        data.inventoryItems = this.inventoryItems;
+        //data.traderItems = this.traderItems;
+        //data.inventoryItems = this.inventoryItems;
     }
 }
