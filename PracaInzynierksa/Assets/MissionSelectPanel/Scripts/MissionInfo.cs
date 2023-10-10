@@ -15,8 +15,7 @@ public class MissionInfo : MonoBehaviour
     private void Awake()
     {
         missionType = (MissionType)Random.Range(0, System.Enum.GetValues(typeof(MissionType)).Length);
-        //dungeonType = (DungeonType)Random.Range(0, System.Enum.GetValues(typeof(DungeonType)).Length);
-        dungeonType = DungeonType.ScavengerBase;
+        dungeonType = (DungeonType)Random.Range(0, System.Enum.GetValues(typeof(DungeonType)).Length);
         rewardMoney = Random.Range(5, 15) * 100;
         rewardEXP = Random.Range(10, 20) * 10;
     }
