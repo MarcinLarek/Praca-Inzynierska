@@ -8,10 +8,58 @@ using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour
 {
     public InventorySlot[] inventorySlots;
+    public List<GameObject> itemsList;
     public GameObject inventoryItemPrefab;
+    public GameObject inventoryItemPrefabWeapon;
+    public bool isPlayerInventory;
+    public bool isMerchantInventory;
+    public bool isBarterInventory;
 
+    private void Awake()
+    {
+        if (isPlayerInventory)
+        {
+            LoadFromGameHandler();
+        }
+        else if (isMerchantInventory)
+        {
+            LoadTraderItemsFromGameHandler();
+        }
+        else if (isBarterInventory)
+        {
 
-    public void AddItem(Item item)
+        }
+        
+    }
+
+    private void LoadFromGameHandler()
+    {
+        InventoryHandler inventoryInstance = InventoryHandler.GetInstance();
+        if(inventoryInstance != null)
+        {
+            foreach (GameObject item in inventoryInstance.inventoryItems)
+            {
+                if (!item.GetComponent<ItemInfo>().equiped)
+                {
+                    AddItem(item);
+                }
+            }
+        }
+    }
+
+    private void LoadTraderItemsFromGameHandler()
+    {
+        InventoryHandler inventoryInstance = InventoryHandler.GetInstance();
+        if (inventoryInstance != null)
+        {
+            foreach (GameObject item in inventoryInstance.traderItems)
+            {
+                AddItem(item);
+            }
+        }
+    }
+
+    public void AddItem(GameObject item)
     {
         for (int i = 0; i < inventorySlots.Length; i++)
         {
@@ -25,11 +73,28 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
-    void SpawnNewItem(Item item, InventorySlot slot)
+    void SpawnNewItem(GameObject item, InventorySlot slot)
     {
-        GameObject newItemGo = Instantiate(inventoryItemPrefab, slot.transform);
-        InventoryItem inventoryItem = newItemGo.GetComponent<InventoryItem>();
-        inventoryItem.InitialiseItem(item);
+        GameObject itemtospawn;
+        switch (item.GetComponent<ItemInfo>().type)
+        {
+            case ItemInfo.ItemType.Weapon:
+                itemtospawn = inventoryItemPrefabWeapon;
+                break;
+            default:
+                itemtospawn = inventoryItemPrefab;
+                break;
+        }
+        itemtospawn.GetComponent<ItemInfo>().AssignStats(item.GetComponent<ItemInfo>());
+
+        GameObject newItemGo = Instantiate(itemtospawn, slot.transform);
+        itemsList.Add(newItemGo);
+
+        if (isMerchantInventory)
+        {
+            TradeManager.GetInstance().merchantGeneratedItems.Add(newItemGo);
+        }
+
     }
 }
 

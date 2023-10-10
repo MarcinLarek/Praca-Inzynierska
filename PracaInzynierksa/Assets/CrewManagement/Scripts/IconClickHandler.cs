@@ -1,16 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class IconClickHandler : MonoBehaviour
+public class IconClickHandler : MonoBehaviour, IPointerClickHandler
 {
     private GameObject statsTable;
-    private void Awake()
-    {
-        statsTable = GameObject.Find("Canvas/StatsTable");
-    }
 
-    private void OnMouseDown()
+    public void OnPointerClick(PointerEventData eventData)
     {
         CrewManager.GetInstance().activeCharacter = this.gameObject;
         //Jesli tabela ze statystykami jest ukryta (Nie bylo wczesniej wybranej zadnej postaci) to teraz ja odkrywamy
@@ -18,6 +15,11 @@ public class IconClickHandler : MonoBehaviour
         {
             statsTable.SetActive(true);
         }
+    }
+
+    private void Awake()
+    {
+        statsTable = GameObject.Find("Canvas/StatsTable");
     }
 
 }

@@ -6,24 +6,17 @@ using UnityEngine.EventSystems;
 
 public class UIUpdater : MonoBehaviour
 {
-    private TextMeshProUGUI moneydisplay;
     public List<GameObject> upgradeButtons;
 
     private void Awake()
     {
-        moneydisplay = GameObject.Find("Canvas/MoneyPanel/MoneyCount").GetComponent<TextMeshProUGUI>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        MoneyCounterUpdater();
         ButtonsUpdater();
-    }
-
-    private void MoneyCounterUpdater()
-    {
-        moneydisplay.text = PlayerInfo.GetInstance().playerMoney.ToString();
     }
 
     private void ButtonsUpdater()

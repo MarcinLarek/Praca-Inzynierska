@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 using Random = UnityEngine.Random;
 
 public class CharacterStats : MonoBehaviour
@@ -9,6 +10,7 @@ public class CharacterStats : MonoBehaviour
     //To plik od statysytk i informacji postaci. Te statystyki bedzie sie przenosic miedzy scenami
 
     //Main stats
+    public int characterID = 0;
     public string charactername;
     public Classes classname;
     public bool isplayerteam;
@@ -29,6 +31,20 @@ public class CharacterStats : MonoBehaviour
 
     public int price;
     public int bonusDamage;
+
+    //Items
+    public int weaponID;
+    public int armorID;
+    public int consumableID;
+
+
+    private void Awake()
+    {
+        if (characterID == 0)
+        {
+            characterID = Random.Range(0, 2147483640);
+        }
+    }
     public enum Classes
     {
         DMG,
@@ -41,11 +57,12 @@ public class CharacterStats : MonoBehaviour
     }
     //Kopiowanie statysytk miedzy postaciami.
     //Przypisanie bezposrednio jednego komponentu do drugiego da nam referencje poniwea¿ C#
-    //A jak jest referencja to wszystko pojdzie sie pierdolic w momencie jak usuniemy oryginal
+    //A jak jest referencja to wszystko pojdzie sie <cenzura> w momencie jak usuniemy oryginal
     //Dlatego przypisujemy wartosc po wartosci.
     //Trzeba to ogolnie zrobic inaczej bo za kazdym razem jak cos dodajemy to trzeba to aktualizowac
     public void CopyStats(CharacterStats fromCharacter)
     {
+        this.characterID = fromCharacter.characterID;
         this.charactername = fromCharacter.charactername;
         this.classname = fromCharacter.classname;
         this.isplayerteam = fromCharacter.isplayerteam;
@@ -62,6 +79,9 @@ public class CharacterStats : MonoBehaviour
         this.experience = fromCharacter.experience;
         this.price = fromCharacter.price;
         this.inactiveteam = fromCharacter.inactiveteam;
+        this.weaponID = fromCharacter.weaponID;
+        this.armorID = fromCharacter.armorID;
+        this.consumableID = fromCharacter.consumableID;
     }
 
     public void RecieveDamage(int damage)

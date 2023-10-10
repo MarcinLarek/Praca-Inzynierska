@@ -171,7 +171,6 @@ MonoBehaviour:
   MissionMarker: {fileID: 5977488183522787368, guid: 8f3137e305cae5d46b3375f3faf138e1, type: 3}
   numberToSpawn: 0
   generatedMarkers: []
-  ActiveMission: {fileID: 0}
 --- !u!1001 &537549321
 PrefabInstance:
   m_ObjectHideFlags: 0

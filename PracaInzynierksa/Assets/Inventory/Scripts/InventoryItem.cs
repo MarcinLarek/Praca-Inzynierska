@@ -3,45 +3,77 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
-public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
-    [HideInInspector] public Item item;
     [Header("UI")]
     public Image image;
     [HideInInspector] public Transform parentAfterDrag;
 
-    private void Start()
+    private void Awake()
     {
-        InitialiseItem(item);
-    }
-
-    public void InitialiseItem(Item newItem)
-    {
-        item = newItem;
-        image.sprite = newItem.image;
+        Image iconimage = this.GetComponent<Image>();
+        iconimage.sprite = this.GetComponent<ItemInfo>().image;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        CharacterInventoryHandler();
         image.raycastTarget = false;
+        RemoveFromList(this.gameObject);
         parentAfterDrag = transform.parent;
         transform.SetParent(transform.root);
+
+        TradeManager tradeManager = TradeManager.GetInstance();
+        if (tradeManager != null)
+        {
+            tradeManager.ShowObjectInfo(this.gameObject);
+        }
+        CharacterInventoryHandler();
         Debug.Log("Begin");
     }
     public void OnDrag(PointerEventData eventData)
     {
         transform.position = Input.mousePosition;
-        Debug.Log("Dragging");
     }
     public void OnEndDrag(PointerEventData eventData)
     {
         Debug.Log("End");
         image.raycastTarget = true;
         transform.SetParent(parentAfterDrag);
+        AddToList(parentAfterDrag.gameObject);
     }
-    public void OnItemClick()
+    public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("TEST");
+        TradeManager tradeManager = TradeManager.GetInstance();
+        if(tradeManager != null)
+        {
+            tradeManager.ShowObjectInfo(this.gameObject);
+        }
+    }
+    private void AddToList(GameObject inventoryItem)
+    {
+        InventoryManager SlotinventoryManager = inventoryItem.GetComponentInParent<InventoryManager>();
+        if (SlotinventoryManager != null)
+        {
+            SlotinventoryManager.itemsList.Add(this.gameObject);
+        }
+    }
+    private void RemoveFromList(GameObject inventoryItem)
+    {
+        InventoryManager InventoryManager = GetComponentInParent<InventoryManager>();
+        if(InventoryManager != null)
+        {
+            InventoryManager.itemsList.Remove(inventoryItem);
+        }
+    }
+
+    private void CharacterInventoryHandler()
+    {
+        if(transform.parent.GetComponent<CharacterInventorySlot>() != null)
+        {
+            CharacterInventoryManager.GetInstance().UnequipItem(this.gameObject);
+        }
     }
 }
