@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.Device;
 
@@ -75,6 +76,13 @@ public class MissionHandler : MonoBehaviour
         {
             GameObject spawnedMarker = Instantiate(MissionMarker, missions.transform.position, missions.transform.rotation);
             spawnedMarker.GetComponent<MissionMarkerBehaviour>().spawnedNumber = missions.GetComponent<MissionInfo>().missionID;
+            MissionInfo spawnedMarkerinfo = spawnedMarker.GetComponent<MissionInfo>();
+            MissionInfo missionsInfo = missions.GetComponent<MissionInfo>();
+            spawnedMarkerinfo.dungeonType = missionsInfo.dungeonType;
+            spawnedMarkerinfo.missionType = missionsInfo.missionType;
+            spawnedMarkerinfo.missionID = missionsInfo.missionID;
+            spawnedMarkerinfo.rewardEXP = missionsInfo.rewardEXP    ;
+            spawnedMarkerinfo.rewardMoney = missionsInfo.rewardMoney;
             generatedMarkers.Add(spawnedMarker);
         }
     }
@@ -113,6 +121,15 @@ public class MissionHandler : MonoBehaviour
         GameObject spawnedMarker = Instantiate(markerToSpawn, spawnposition, markerToSpawn.transform.rotation);
         generatedMarkers.Add(spawnedMarker);
         GameObject spawnedMission = Instantiate(missionToSpawn, spawnposition, missionToSpawn.transform.rotation);
+
+        MissionInfo spawnedMarkerinfo = spawnedMarker.GetComponent<MissionInfo>();
+        MissionInfo missionsInfo = spawnedMission.GetComponent<MissionInfo>();
+        missionsInfo.dungeonType = spawnedMarkerinfo.dungeonType;
+        missionsInfo.missionType = spawnedMarkerinfo.missionType;
+        missionsInfo.missionID = spawnedMarkerinfo.missionID;
+        missionsInfo.rewardEXP = spawnedMarkerinfo.rewardEXP;
+        missionsInfo.rewardMoney = spawnedMarkerinfo.rewardMoney;
+
         missionSelectionHandler.generatedMissions.Add(spawnedMission);
 
         numberOfSpawned += 1;
