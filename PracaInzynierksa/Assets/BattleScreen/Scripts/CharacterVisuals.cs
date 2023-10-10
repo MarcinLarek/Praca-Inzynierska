@@ -16,6 +16,28 @@ public class CharacterVisuals : MonoBehaviour
     public Sprite characterSpriteDRONE;
     public Sprite characterSpriteBOSS;
 
+    private Animator attack;
+    public Animator animatorController;
+    public RuntimeAnimatorController DMGAnimController;
+    public RuntimeAnimatorController TANKAnimController;
+    public RuntimeAnimatorController SUPAnimController;
+
+
+    public AnimationClip AttackDmg;
+    public AnimationClip AttackSup;
+    public AnimationClip AttackTank;
+    public AnimationClip Test;
+
+    
+    
+    public void Start()
+    {
+        // Pobierz komponent Animator
+        Debug.Log("Animator Controllers:");
+        Debug.Log("DMGAnimController: " + DMGAnimController);
+        Debug.Log("TANKAnimController: " + TANKAnimController);
+        Debug.Log("SUPAnimController: " + SUPAnimController);
+    }
 
     private void Awake()
     {
@@ -33,18 +55,22 @@ public class CharacterVisuals : MonoBehaviour
 
     public void ChangeSpriteImage(bool isplayerTeam)
     {
+        animatorController = GetComponent<Animator>();
         if (isplayerTeam)
         {
             switch (GetComponent<CharacterStats>().classname)
             {
                 case (CharacterStats.Classes.DMG):
                     spriteRenderer.sprite = characterSpriteDPS;
+                 animatorController.runtimeAnimatorController = DMGAnimController;
                     break;
                 case (CharacterStats.Classes.TANK):
                     spriteRenderer.sprite = characterSpriteTANK;
+                  animatorController.runtimeAnimatorController = TANKAnimController;
                     break;
                 case (CharacterStats.Classes.SUPPORT):
                     spriteRenderer.sprite = characterSpriteSUPPORT;
+                  animatorController.runtimeAnimatorController = SUPAnimController;
                     break;
             }
         }
@@ -65,6 +91,51 @@ public class CharacterVisuals : MonoBehaviour
         }
 
         
+    }
+
+    public void AttackAnimation (bool isplayerTeam)
+    {
+        attack = GetComponent<Animator>();
+        string layerName = "Base Layer";
+        int layerIndex = attack.GetLayerIndex(layerName);
+
+        Debug.Log(Test);
+        if (isplayerTeam)
+        {
+            switch (GetComponent<CharacterStats>().classname)
+            {
+                case (CharacterStats.Classes.DMG):
+                    Debug.Log(AttackDmg);
+                    attack.Play("AttackDmg", layerIndex);
+                    Debug.Log("Próba udana");
+                    break;
+                case (CharacterStats.Classes.TANK):
+                    Debug.Log(AttackTank);
+                    attack.Play("AttackTank", layerIndex);
+                    Debug.Log("Próba udana");
+                    break;
+                case (CharacterStats.Classes.SUPPORT):
+                    Debug.Log(AttackSup);
+                    attack.Play("AttackSup", layerIndex);
+                    Debug.Log("Próba udana");
+                    break;
+            }
+        }
+        else
+        {
+            switch (GetComponent<CharacterStats>().classname)
+            {
+                case (CharacterStats.Classes.DMG):
+                    Debug.Log("Brak animacji");
+                    break;
+                case (CharacterStats.Classes.TANK):
+                    Debug.Log("Brak animacji");
+                    break;
+                case (CharacterStats.Classes.SUPPORT):
+                    Debug.Log("Brak animacji");
+                    break;
+            }
+        }
     }
 
 }

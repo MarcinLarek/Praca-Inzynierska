@@ -5,6 +5,7 @@ using static UnityEditor.Progress;
 using Random = UnityEngine.Random;
 
 public class CharacterStats : MonoBehaviour
+  
 {
     //To plik od statysytk i informacji postaci. Te statystyki bedzie sie przenosic miedzy scenami
 
@@ -26,6 +27,7 @@ public class CharacterStats : MonoBehaviour
     public int inteligence;
     //other stats
     public int experience;
+    public Animator animatorr;
 
     public int price;
     public int bonusDamage;
@@ -49,7 +51,10 @@ public class CharacterStats : MonoBehaviour
         SUPPORT,
         TANK,
     }
-
+    private void Start()
+    {
+        animatorr = GetComponent<Animator>();
+    }
     //Kopiowanie statysytk miedzy postaciami.
     //Przypisanie bezposrednio jednego komponentu do drugiego da nam referencje poniwea¿ C#
     //A jak jest referencja to wszystko pojdzie sie <cenzura> w momencie jak usuniemy oryginal
