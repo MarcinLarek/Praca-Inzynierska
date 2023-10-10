@@ -71,6 +71,7 @@ Transform:
   - {fileID: 6227141844590134273}
   - {fileID: 6827357591406962588}
   - {fileID: 617997098790935609}
+  - {fileID: 1668427183768808604}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -290,6 +291,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryItems: []
+  traderInventoryGenerated: 0
+  traderItems: []
+  itemPrefab: {fileID: 3519487643134038422, guid: bde4c0882a617d342923a81c317e309c, type: 3}
+  weaponPrefab: {fileID: 3519487643134038422, guid: 57f1701340a364f429724d5437ca854e, type: 3}
+  armorPrefab: {fileID: 3519487643134038422, guid: 3648ed864728ca74a8eedb3eef81aa88, type: 3}
+  consumablePrefab: {fileID: 3519487643134038422, guid: 65609db680279004681ebe88b4f0599d, type: 3}
 --- !u!1 &6944564432626486138
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,6 +328,51 @@ Transform:
   m_Father: {fileID: 8649222064627548241}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7694341591174868444
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1668427183768808604}
+  - component: {fileID: 8470156887365736207}
+  m_Layer: 0
+  m_Name: DataPersistenceManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1668427183768808604
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694341591174868444}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8649222064627548241}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8470156887365736207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694341591174868444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 221cd5db6ca1c0943a98736ff746d08c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileName: SaveFile1.js
 --- !u!1 &8868923946999975297
 GameObject:
   m_ObjectHideFlags: 0

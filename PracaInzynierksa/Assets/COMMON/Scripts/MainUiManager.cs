@@ -12,7 +12,12 @@ public class MainUiManager : MonoBehaviour
 
     public void SaveGameButton()
     {
-        //ToDo
+        DataPersistanceManager.GetInstance().SaveGame();
+    }
+
+    public void LoadGameButton()
+    {
+        DataPersistanceManager.GetInstance().LoadGame();
     }
 
 }
