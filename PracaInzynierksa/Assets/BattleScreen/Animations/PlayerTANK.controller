@@ -112,7 +112,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_DMG_Attack
+  m_Name: Player_TNK_Attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -127,7 +127,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: fd97cac5a365bc84ab5704ee9fa8fb2f, type: 2}
+  m_Motion: {fileID: 7400000, guid: f3bf61345d42d6e4689098f6049a05be, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -165,7 +165,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_DMG_Idle
+  m_Name: Player_TNK_Idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -178,7 +178,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: c7b032142b3697e4bbd1a54ecf55735d, type: 2}
+  m_Motion: {fileID: 7400000, guid: 87f9641d8d1e4f8499638eeb81e20f39, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -266,7 +266,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_DMG_Dead
+  m_Name: Player_TNK_Dead
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -340,7 +340,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_DMG_Hit
+  m_Name: Player_TNK_Hit
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -355,7 +355,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: c7b032142b3697e4bbd1a54ecf55735d, type: 2}
+  m_Motion: {fileID: 7400000, guid: 87f9641d8d1e4f8499638eeb81e20f39, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -415,7 +415,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_DMG_Avoid
+  m_Name: Player_TNK_Avoid
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -430,7 +430,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: c7b032142b3697e4bbd1a54ecf55735d, type: 2}
+  m_Motion: {fileID: 7400000, guid: 6ec8140f8fc54a949b12d053ced8e5a0, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
