@@ -361,7 +361,6 @@ public class BattleHandler : MonoBehaviour
         }
         if (playerWin)
         {
-            SceneManager.LoadScene(sceneName: "MapGenerator");
             if (battleScreenHandler.bossFight)
             {
                 battleScreenHandler.bossFight = false;
@@ -369,6 +368,10 @@ public class BattleHandler : MonoBehaviour
                 Destroy(MapGeneratorHandler.GetInstance().player);
                 MissionSelectionHandler.GetInstance().CompleteMission(true);
                 SceneManager.LoadScene(sceneName: "MainHub");
+            }
+            else
+            {
+                SceneManager.LoadScene(sceneName: "MapGenerator");
             }
         }
         else
