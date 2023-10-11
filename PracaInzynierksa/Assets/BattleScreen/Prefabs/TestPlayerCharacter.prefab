@@ -310,8 +310,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea63d4dfb9a4f24ab1d4b7e6c8809d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterID: 0
   charactername: Player DPS
-  classname: 2
+  classname: 1
   isplayerteam: 1
   isalive: 1
   inactiveteam: 0
@@ -328,6 +329,9 @@ MonoBehaviour:
   animatorr: {fileID: 0}
   price: 0
   bonusDamage: 0
+  weaponID: 0
+  armorID: 0
+  consumableID: 0
 --- !u!61 &-3393864668293507667
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -379,7 +383,7 @@ Animator:
   m_GameObject: {fileID: 4714675202154540973}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: dfc696c596bdc484fa905d967e03f40f, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5d384d3b34b956a45a0feb941a402bca, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
