@@ -184,6 +184,9 @@ GameObject:
   - component: {fileID: -3393864668293507667}
   - component: {fileID: 6054053882221684674}
   - component: {fileID: 6812618906485391229}
+  - component: {fileID: 3618207821743814906}
+  - component: {fileID: 2664755652074337229}
+  - component: {fileID: 3116502018912562600}
   m_Layer: 10
   m_Name: TestPlayerCharacter
   m_TagString: CharacterInBattle
@@ -394,6 +397,76 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3618207821743814906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4714675202154540973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67fb1815d7e61bf488461d269da52d35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 0
+  itemName: Fist
+  description: 
+  image: {fileID: 0}
+  type: 0
+  price: 0
+  owned: 0
+  equiped: 0
+  damageRange: 4
+  damageDices: 1
+  damageBonus: 0
+  accuracy: 0
+--- !u!114 &2664755652074337229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4714675202154540973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d22a67c39d64f6448bd9d98d9a685e0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 0
+  itemName: 
+  description: 
+  image: {fileID: 0}
+  type: 0
+  price: 0
+  owned: 0
+  equiped: 0
+  stopingPower: 0
+  balistic: 0
+  shields: 0
+--- !u!114 &3116502018912562600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4714675202154540973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f51d643e8b7defa45821d04244838b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 0
+  itemName: 
+  description: 
+  image: {fileID: 0}
+  type: 0
+  price: 0
+  owned: 0
+  equiped: 0
+  quantity: 0
+  maxQuantity: 0
+  boostValue: 0
 --- !u!1 &6923752124011403975
 GameObject:
   m_ObjectHideFlags: 0

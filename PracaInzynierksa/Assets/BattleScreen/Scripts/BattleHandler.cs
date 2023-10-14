@@ -200,7 +200,25 @@ public class BattleHandler : MonoBehaviour
         }
 
         //Kopiujemy statystyki naszej postaci przyciagnietej z GameHandlera do tej na planszy
-        spawnedCharacter.GetComponent<CharacterStats>().CopyStats(singlecharacter.GetComponent<CharacterStats>());
+        CharacterStats singlecharacterstats = singlecharacter.GetComponent<CharacterStats>();
+        spawnedCharacter.GetComponent<CharacterStats>().CopyStats(singlecharacterstats);
+
+        if(singlecharacterstats.weaponID != 0)
+        {
+            WeaponInfo weapon = InventoryHandler.GetInstance().inventoryItems.Find((x) => x.GetComponent<ItemInfo>().itemId == singlecharacterstats.weaponID).GetComponent<WeaponInfo>();
+            spawnedCharacter.GetComponent<WeaponInfo>().AssignStats(weapon);
+        }
+        if(singlecharacterstats.armorID != 0)
+        {
+            ArmorInfo armor = InventoryHandler.GetInstance().inventoryItems.Find((x) => x.GetComponent<ItemInfo>().itemId == singlecharacterstats.armorID).GetComponent<ArmorInfo>();
+            spawnedCharacter.GetComponent<ArmorInfo>().AssignStats(armor);
+        }
+        if (singlecharacterstats.consumableID != 0)
+        {
+            ConsumableInfo consumable = InventoryHandler.GetInstance().inventoryItems.Find((x) => x.GetComponent<ItemInfo>().itemId == singlecharacterstats.consumableID).GetComponent<ConsumableInfo>();
+            spawnedCharacter.GetComponent<ConsumableInfo>().AssignStats(consumable);
+        }
+        
         CharacterBattle characterBattle = spawnedCharacter.GetComponent<CharacterBattle>();
         characterBattle.Setup(isPlayerTeam);
         charactersListinbattle.Add(spawnedCharacter);

@@ -358,6 +358,8 @@ MonoBehaviour:
   itemsList: []
   inventoryItemPrefab: {fileID: 6151260561281289824, guid: ae7c960317867bf4c88860cbdbb928eb, type: 3}
   inventoryItemPrefabWeapon: {fileID: 6151260561281289824, guid: 25800d8df60fd3046b882b209bc24dc6, type: 3}
+  inventoryItemPrefabArmor: {fileID: 6151260561281289824, guid: a7a7a77e1d3de174e9a5b8b0978447ee, type: 3}
+  inventoryItemPrefabConsumable: {fileID: 6151260561281289824, guid: 599bbb230dbc2364abbdef7c09a6980d, type: 3}
   isPlayerInventory: 1
   isMerchantInventory: 0
   isBarterInventory: 0

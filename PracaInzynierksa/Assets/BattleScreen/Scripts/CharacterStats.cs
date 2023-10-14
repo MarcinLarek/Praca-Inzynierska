@@ -99,70 +99,16 @@ public class CharacterStats : MonoBehaviour
                 finaldamage -= (endurance + 4);
                 break;
         }
+        ArmorInfo armorinfo = this.gameObject.GetComponent<ArmorInfo>();
+        if (armorinfo != null)
+        {
+            finaldamage -= armorinfo.stopingPower;
+        }
         if (finaldamage < 0) finaldamage = 0;
         this.health -= finaldamage;
         Debug.Log(charactername + " blocks " + (damage - finaldamage) + " out of " + damage + " total damage");
 
     }
 
-    public int CalculateDamage()
-    {
-        int damage = 0;
-        switch (classname)
-        {
-            case Classes.DMG:
-                damage = CalculateDamageForDMG();
-                break;
-            case Classes.SUPPORT:
-                damage = CalculateDamageForSupport();
-                break;
-            case Classes.TANK:
-                damage = CalculateDamageForTank();
-                break;
-        }
-        Debug.Log(charactername + " deals " + damage + " damage");
-
-        damage += CheckBonusDamage();
-
-        return damage;
-    }
-
-    private int CalculateDamageForDMG()
-    {
-        int roll1 = Random.Range(1, 10);
-        int roll2 = Random.Range(1, 10);
-        int damage = roll1 + roll2 + 4;
-        Debug.Log($"{charactername} rolling 2d10+4  - {roll1}, {roll2} - Total roll - {damage}");
-        return damage;
-    }
-    private int CalculateDamageForSupport()
-    {
-        int roll1 = Random.Range(1, 8);
-        int roll2 = Random.Range(1, 8);
-        int damage = roll1 + roll2;
-        Debug.Log($"{charactername} rolling 2d8  - {roll1}, {roll2} - Total roll - {damage}");
-        return damage;
-    }
-    private int CalculateDamageForTank()
-    {
-        int TANroll1 = Random.Range(1, 4);
-        int TANroll2 = Random.Range(1, 4);
-        int TANroll3 = Random.Range(1, 4);
-        int damage = TANroll1 + TANroll2 + TANroll3;
-        Debug.Log($"{charactername} rolling 3d4  - {TANroll1}, {TANroll2}, {TANroll3} - Total roll - {damage}");
-        return damage;
-    }
-    
-    private int CheckBonusDamage()
-    {
-        if(bonusDamage > 0)
-        {
-            Debug.Log($"Adding {bonusDamage} as bonus damage");
-            int returnvalue = bonusDamage;
-            bonusDamage = 0;
-            return returnvalue;
-        }
-        return 0;
-    }
 
 }
