@@ -19,6 +19,7 @@ public class BattleHud : MonoBehaviour
     private TextMeshProUGUI armorNameText;
     public GameObject stoppingNumber;
     private TextMeshProUGUI stoppingNumberText;
+    public TextMeshProUGUI characterName;
 
     private BattleHandler battleHandler;
 
@@ -73,7 +74,7 @@ public class BattleHud : MonoBehaviour
             }
             armorNameText.text = ACArmor.itemName;
             stoppingNumberText.text = $"Armor:{ACArmor.stopingPower} Endurance:{ACStats.endurance} Total: {ACStats.endurance + ACArmor.stopingPower}";
-
+            characterName.text = ACStats.charactername;
             switch (ACStats.classname)
             {
                 case CharacterStats.Classes.DMG:
