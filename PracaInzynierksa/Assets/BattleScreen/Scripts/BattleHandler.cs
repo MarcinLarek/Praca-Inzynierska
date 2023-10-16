@@ -24,7 +24,6 @@ public class BattleHandler : MonoBehaviour
     public List<GameObject> charactersListinbattle;
     public GameObject activeCharacter;
     public GameObject selectedCharacter;
-    public GameObject ActionPointsDisplay;
     public CharacterStats.Classes activecharacterclass;
     private BattleScreenHandler battleScreenHandler;
     public GameObject enemySpawnPrefab;
@@ -53,11 +52,6 @@ public class BattleHandler : MonoBehaviour
         CharacterSpawner();
         SetActiveCharacter();
         activeCharacter.GetComponent<ClassAbilities>().PrepareButtons(activecharacterclass);
-    }
-
-    private void Update()
-    {
-        ActionPointsDisplay.GetComponent<TextMeshProUGUI>().text = $"Action Points: {activeCharacter.GetComponent<CharacterStats>().actionPoints}/{activeCharacter.GetComponent<CharacterStats>().maxActionPoints}";
     }
 
     //Funkcja obslugujaca spawnowanie wszystkich postaci. Obsluguje od 2 do 10 postaci, po 5 na team.
@@ -260,6 +254,8 @@ public class BattleHandler : MonoBehaviour
             //Tutaj koniec tego sprawdzamia. Wszystko co do gory trzeba jakos przeniesc do EndTurn()
             CharacterBattle activeCharacterBattle = activeCharacter.GetComponent<CharacterBattle>();
             activeCharacterBattle.ShowActiveCircle();
+            //Updatujemy UI przy zmianie aktywnego characteru, zeby nie wykonywac tych wszystkich funkcji w funkcji Update
+            BattleHud.GetInstance().UpdateUi();
         }
     }
 

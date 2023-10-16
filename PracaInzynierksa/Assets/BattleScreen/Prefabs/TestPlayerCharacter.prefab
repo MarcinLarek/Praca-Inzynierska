@@ -410,7 +410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemId: 0
-  itemName: Fist
+  itemName: Discount Rifle
   description: 
   image: {fileID: 0}
   type: 0
@@ -434,7 +434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemId: 0
-  itemName: 
+  itemName: Rookie Rags
   description: 
   image: {fileID: 0}
   type: 0

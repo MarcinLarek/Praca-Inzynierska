@@ -6,7 +6,6 @@ using UnityEngine;
 public class UIScripts : MonoBehaviour
 {
     private BattleHandler battlehandler;
-    public GameObject ActionPointsDisplay;
 
     private int attackCost = 2;
     private int givePointCost = 2;
@@ -14,11 +13,6 @@ public class UIScripts : MonoBehaviour
     private void Awake()
     {
         battlehandler = BattleHandler.GetInstance();
-    }
-
-    private void Update()
-    {
-        ActionPointsDisplay.GetComponent<TextMeshProUGUI>().text = $"Action Points: {battlehandler.activeCharacter.GetComponent<CharacterStats>().actionPoints}/{battlehandler.activeCharacter.GetComponent<CharacterStats>().maxActionPoints}";
     }
 
     public void AttackButton()
