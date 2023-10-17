@@ -27,5 +27,28 @@ public class ConsumableInfo : ItemInfo
             this.maxQuantity = fromItemConsumableInfo.maxQuantity;
             this.boostValue = fromItemConsumableInfo.boostValue;
         }
+
+    }
+
+    public bool ReduceQuantity(int ammount)
+    {
+        if(quantity > 0)
+        {
+            this.quantity -= ammount;
+            if (quantity == 0)
+            {
+                this.price = 10;
+            }
+            else if(quantity < maxQuantity / 2)
+            {
+                this.price = price / 2;
+            }
+            return true;
+        }
+        else
+        {
+            Debug.Log("You don't have more uses");
+            return false;
+        }
     }
 }

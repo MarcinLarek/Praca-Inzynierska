@@ -7,19 +7,16 @@ using UnityEngine.UI;
 public class BattleHud : MonoBehaviour
 {
     public Image characterIcon;
-    public GameObject health;
-    private TextMeshProUGUI healthText;
-    public GameObject actionPoints;
-    private TextMeshProUGUI actionPointsText;
-    public GameObject weaponName;
-    private TextMeshProUGUI weaponNameText;
-    public GameObject damageNumber;
-    private TextMeshProUGUI damageNumberText;
-    public GameObject armorName;
-    private TextMeshProUGUI armorNameText;
-    public GameObject stoppingNumber;
-    private TextMeshProUGUI stoppingNumberText;
+    public TextMeshProUGUI healthText;
+    public TextMeshProUGUI actionPointsText;
+    public TextMeshProUGUI weaponNameText;
+    public TextMeshProUGUI damageNumberText;
+    public TextMeshProUGUI armorNameText;
+    public TextMeshProUGUI stoppingNumberText;
     public TextMeshProUGUI characterName;
+
+    public Button consumableButton;
+    public TextMeshProUGUI consumableButtonText;
 
     private BattleHandler battleHandler;
 
@@ -36,12 +33,6 @@ public class BattleHud : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        healthText = health.GetComponent<TextMeshProUGUI>();
-        actionPointsText = actionPoints.GetComponent<TextMeshProUGUI>();
-        weaponNameText = weaponName.GetComponent<TextMeshProUGUI>();
-        damageNumberText = damageNumber.GetComponent<TextMeshProUGUI>();
-        armorNameText = armorName.GetComponent<TextMeshProUGUI>();
-        stoppingNumberText = stoppingNumber.GetComponent<TextMeshProUGUI>();
         battleHandler = BattleHandler.GetInstance();
     }
 
@@ -58,6 +49,18 @@ public class BattleHud : MonoBehaviour
         CharacterStats ACStats = activeCharacter.GetComponent<CharacterStats>();
         WeaponInfo ACWeapon = activeCharacter.GetComponent<WeaponInfo>();
         ArmorInfo ACArmor = activeCharacter.GetComponent<ArmorInfo>();
+        ConsumableInfo ACConsumable = activeCharacter.GetComponent<ConsumableInfo>();
+
+        if(ACConsumable.itemName != "")
+        {
+            consumableButton.enabled = true;
+            consumableButtonText.text = ACConsumable.itemName;
+        }
+        else
+        {
+            consumableButton.enabled = false;
+            consumableButtonText.text = "No Item";
+        }
 
         if (ACStats.isplayerteam)
         {
