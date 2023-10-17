@@ -128,6 +128,10 @@ public class UpgradeManager : MonoBehaviour
     {
         CharacterStats characterStats = activeCharacter.GetComponent<CharacterStats>();
 
+        foreach (Transform child in weaponSlot.transform) { GameObject.Destroy(child.gameObject); }
+        foreach (Transform child in armorSlot.transform) { GameObject.Destroy(child.gameObject); }
+        foreach (Transform child in consumableSlot.transform) { GameObject.Destroy(child.gameObject); }
+
         if (characterStats.weaponID != 0)
         {
             GameObject weapon = InventoryHandler.GetInstance().inventoryItems.Find((x) => x.GetComponent<ItemInfo>().itemId == characterStats.weaponID);

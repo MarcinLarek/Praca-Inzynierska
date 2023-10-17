@@ -49,7 +49,15 @@ public class CharacterBattle : MonoBehaviour
     }
     private void Update()
     {
-        healthbar.GetComponent<TextMeshPro>().text = characterStats.health + "/" + characterStats.maxHealth;
+        if(characterStats.health > 0)
+        {
+            healthbar.GetComponent<TextMeshPro>().text = characterStats.health + "/" + characterStats.maxHealth;
+        }
+        else
+        {
+            healthbar.GetComponent<TextMeshPro>().text = "";
+        }
+        
     }
 
     //Przelaczamy obecnie wybrana postac
