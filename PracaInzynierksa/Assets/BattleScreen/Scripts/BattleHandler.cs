@@ -24,7 +24,6 @@ public class BattleHandler : MonoBehaviour
     public List<GameObject> charactersListinbattle;
     public GameObject activeCharacter;
     public GameObject selectedCharacter;
-    public GameObject ActionPointsDisplay;
     public CharacterStats.Classes activecharacterclass;
     private BattleScreenHandler battleScreenHandler;
     public GameObject enemySpawnPrefab;
@@ -53,11 +52,6 @@ public class BattleHandler : MonoBehaviour
         CharacterSpawner();
         SetActiveCharacter();
         activeCharacter.GetComponent<ClassAbilities>().PrepareButtons(activecharacterclass);
-    }
-
-    private void Update()
-    {
-        ActionPointsDisplay.GetComponent<TextMeshProUGUI>().text = $"Action Points: {activeCharacter.GetComponent<CharacterStats>().actionPoints}/{activeCharacter.GetComponent<CharacterStats>().maxActionPoints}";
     }
 
     //Funkcja obslugujaca spawnowanie wszystkich postaci. Obsluguje od 2 do 10 postaci, po 5 na team.
@@ -200,7 +194,25 @@ public class BattleHandler : MonoBehaviour
         }
 
         //Kopiujemy statystyki naszej postaci przyciagnietej z GameHandlera do tej na planszy
-        spawnedCharacter.GetComponent<CharacterStats>().CopyStats(singlecharacter.GetComponent<CharacterStats>());
+        CharacterStats singlecharacterstats = singlecharacter.GetComponent<CharacterStats>();
+        spawnedCharacter.GetComponent<CharacterStats>().CopyStats(singlecharacterstats);
+
+        if(singlecharacterstats.weaponID != 0)
+        {
+            WeaponInfo weapon = InventoryHandler.GetInstance().inventoryItems.Find((x) => x.GetComponent<ItemInfo>().itemId == singlecharacterstats.weaponID).GetComponent<WeaponInfo>();
+            spawnedCharacter.GetComponent<WeaponInfo>().AssignStats(weapon);
+        }
+        if(singlecharacterstats.armorID != 0)
+        {
+            ArmorInfo armor = InventoryHandler.GetInstance().inventoryItems.Find((x) => x.GetComponent<ItemInfo>().itemId == singlecharacterstats.armorID).GetComponent<ArmorInfo>();
+            spawnedCharacter.GetComponent<ArmorInfo>().AssignStats(armor);
+        }
+        if (singlecharacterstats.consumableID != 0)
+        {
+            ConsumableInfo consumable = InventoryHandler.GetInstance().inventoryItems.Find((x) => x.GetComponent<ItemInfo>().itemId == singlecharacterstats.consumableID).GetComponent<ConsumableInfo>();
+            spawnedCharacter.GetComponent<ConsumableInfo>().AssignStats(consumable);
+        }
+        
         CharacterBattle characterBattle = spawnedCharacter.GetComponent<CharacterBattle>();
         characterBattle.Setup(isPlayerTeam);
         charactersListinbattle.Add(spawnedCharacter);
@@ -242,6 +254,8 @@ public class BattleHandler : MonoBehaviour
             //Tutaj koniec tego sprawdzamia. Wszystko co do gory trzeba jakos przeniesc do EndTurn()
             CharacterBattle activeCharacterBattle = activeCharacter.GetComponent<CharacterBattle>();
             activeCharacterBattle.ShowActiveCircle();
+            //Updatujemy UI przy zmianie aktywnego characteru, zeby nie wykonywac tych wszystkich funkcji w funkcji Update
+            BattleHud.GetInstance().UpdateUi();
         }
     }
 

@@ -268,9 +268,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 236188795476559917, guid: a54e1e961f309784387e34a22093ec43, type: 3}
+      propertyPath: inventoryItemPrefabArmor
+      value: 
+      objectReference: {fileID: 6151260561281289824, guid: a7a7a77e1d3de174e9a5b8b0978447ee, type: 3}
+    - target: {fileID: 236188795476559917, guid: a54e1e961f309784387e34a22093ec43, type: 3}
       propertyPath: inventoryItemPrefabWeapon
       value: 
       objectReference: {fileID: 6151260561281289824, guid: 25800d8df60fd3046b882b209bc24dc6, type: 3}
+    - target: {fileID: 236188795476559917, guid: a54e1e961f309784387e34a22093ec43, type: 3}
+      propertyPath: inventoryItemPrefabConsumable
+      value: 
+      objectReference: {fileID: 6151260561281289824, guid: 599bbb230dbc2364abbdef7c09a6980d, type: 3}
     - target: {fileID: 236188795631987051, guid: a54e1e961f309784387e34a22093ec43, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
@@ -3462,9 +3470,17 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 236188795476559917, guid: a54e1e961f309784387e34a22093ec43, type: 3}
+      propertyPath: inventoryItemPrefabArmor
+      value: 
+      objectReference: {fileID: 6151260561281289824, guid: a7a7a77e1d3de174e9a5b8b0978447ee, type: 3}
+    - target: {fileID: 236188795476559917, guid: a54e1e961f309784387e34a22093ec43, type: 3}
       propertyPath: inventoryItemPrefabWeapon
       value: 
       objectReference: {fileID: 6151260561281289824, guid: 25800d8df60fd3046b882b209bc24dc6, type: 3}
+    - target: {fileID: 236188795476559917, guid: a54e1e961f309784387e34a22093ec43, type: 3}
+      propertyPath: inventoryItemPrefabConsumable
+      value: 
+      objectReference: {fileID: 6151260561281289824, guid: 599bbb230dbc2364abbdef7c09a6980d, type: 3}
     - target: {fileID: 236188795631987051, guid: a54e1e961f309784387e34a22093ec43, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
@@ -5819,9 +5835,17 @@ PrefabInstance:
       value: PlayerInventory
       objectReference: {fileID: 0}
     - target: {fileID: 236188795476559917, guid: a54e1e961f309784387e34a22093ec43, type: 3}
+      propertyPath: inventoryItemPrefabArmor
+      value: 
+      objectReference: {fileID: 6151260561281289824, guid: a7a7a77e1d3de174e9a5b8b0978447ee, type: 3}
+    - target: {fileID: 236188795476559917, guid: a54e1e961f309784387e34a22093ec43, type: 3}
       propertyPath: inventoryItemPrefabWeapon
       value: 
       objectReference: {fileID: 6151260561281289824, guid: 25800d8df60fd3046b882b209bc24dc6, type: 3}
+    - target: {fileID: 236188795476559917, guid: a54e1e961f309784387e34a22093ec43, type: 3}
+      propertyPath: inventoryItemPrefabConsumable
+      value: 
+      objectReference: {fileID: 6151260561281289824, guid: 599bbb230dbc2364abbdef7c09a6980d, type: 3}
     - target: {fileID: 236188795631987051, guid: a54e1e961f309784387e34a22093ec43, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0

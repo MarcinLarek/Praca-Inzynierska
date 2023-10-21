@@ -11,6 +11,8 @@ public class InventoryManager : MonoBehaviour
     public List<GameObject> itemsList;
     public GameObject inventoryItemPrefab;
     public GameObject inventoryItemPrefabWeapon;
+    public GameObject inventoryItemPrefabArmor;
+    public GameObject inventoryItemPrefabConsumable;
     public bool isPlayerInventory;
     public bool isMerchantInventory;
     public bool isBarterInventory;
@@ -80,6 +82,12 @@ public class InventoryManager : MonoBehaviour
         {
             case ItemInfo.ItemType.Weapon:
                 itemtospawn = inventoryItemPrefabWeapon;
+                break;
+            case ItemInfo.ItemType.Armor:
+                itemtospawn = inventoryItemPrefabArmor;
+                break;
+            case ItemInfo.ItemType.Consumable:
+                itemtospawn = inventoryItemPrefabConsumable;
                 break;
             default:
                 itemtospawn = inventoryItemPrefab;

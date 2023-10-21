@@ -14,6 +14,7 @@ public class CharacterBattle : MonoBehaviour
 
     private CharacterVisuals characterVisuals;
     private CharacterStats characterStats;
+    private WeaponInfo weaponInfo;
 
     private GameObject slectionCircleGameObject;
     private GameObject activeCircleGameObject;
@@ -34,6 +35,7 @@ public class CharacterBattle : MonoBehaviour
     {
         characterVisuals = GetComponent<CharacterVisuals>();
         characterStats = GetComponent<CharacterStats>();
+        weaponInfo = GetComponent<WeaponInfo>();
         slectionCircleGameObject = transform.Find("SelectionCircle").gameObject;
         activeCircleGameObject = transform.Find("ActiveCircle").gameObject;
         healthbar = transform.Find("HealthBar").gameObject;
@@ -47,7 +49,15 @@ public class CharacterBattle : MonoBehaviour
     }
     private void Update()
     {
-        healthbar.GetComponent<TextMeshPro>().text = characterStats.health + "/" + characterStats.maxHealth;
+        if(characterStats.health > 0)
+        {
+            healthbar.GetComponent<TextMeshPro>().text = characterStats.health + "/" + characterStats.maxHealth;
+        }
+        else
+        {
+            healthbar.GetComponent<TextMeshPro>().text = "";
+        }
+        
     }
 
     //Przelaczamy obecnie wybrana postac
@@ -150,15 +160,15 @@ public class CharacterBattle : MonoBehaviour
         characterVisuals.AttackAnimation(targetCharacterBattle);
         CharacterStats targetStats = targetCharacterBattle.GetComponent<CharacterStats>();
 
-        Debug.Log(characterStats.charactername + " attacks " + targetStats.charactername);
+        Debug.Log(characterStats.charactername + " attacks " + targetStats.charactername + " with " + weaponInfo.itemName);
         int attackRoll = Random.Range(1, 11);
-        int attackscore = characterStats.agility + attackRoll;
+        int attackscore = characterStats.agility + attackRoll + weaponInfo.accuracy;
 
         int defenceRoll = targetStats.agility + Random.Range(1, 11);
         if(attackscore > defenceRoll)
         {
             Debug.Log($"Attack succed! Rolled {attackscore} aginst {defenceRoll}");
-            int damage = characterStats.CalculateDamage();
+            int damage = CalculateDamage();
             if(attackRoll == 10)
             {
                 int luckcheck = Random.Range(1, 11) + characterStats.luck - targetStats.luck;
@@ -179,6 +189,21 @@ public class CharacterBattle : MonoBehaviour
             targetCharacterBattle.animatorr.SetTrigger("IsAvoiding");
         }
        
+    }
+
+    private int CalculateDamage()
+    {
+        int damage = 0;
+        int dice = weaponInfo.damageDices;
+        int range = weaponInfo.damageRange;
+        int bonus = weaponInfo.damageBonus;
+        for(int i = 0; i < dice; i++)
+        {
+            damage += Random.Range(1, range);
+        }
+        damage += bonus;
+        Debug.Log($"Rolling {dice}d{range}+{bonus} for damage. Result: {damage}");
+        return damage;
     }
 
     public void CheckIfKilled(CharacterStats targetCharacterStats)

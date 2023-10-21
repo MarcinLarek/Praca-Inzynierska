@@ -100,6 +100,9 @@ GameObject:
   - component: {fileID: 8864456758990345721}
   - component: {fileID: 8004794195615632802}
   - component: {fileID: 957586714}
+  - component: {fileID: 1089379849208382165}
+  - component: {fileID: 7972237699546488832}
+  - component: {fileID: 1087883900140197368}
   m_Layer: 10
   m_Name: TestEnemyCharacter
   m_TagString: CharacterInBattle
@@ -226,6 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea63d4dfb9a4f24ab1d4b7e6c8809d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterID: 0
   charactername: Enemy Drone
   classname: 0
   isplayerteam: 0
@@ -244,6 +248,9 @@ MonoBehaviour:
   animatorr: {fileID: 0}
   price: 0
   bonusDamage: 0
+  weaponID: 0
+  armorID: 0
+  consumableID: 0
 --- !u!61 &8864456758990345721
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -306,6 +313,76 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1089379849208382165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4714675202154540973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d22a67c39d64f6448bd9d98d9a685e0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 0
+  itemName: 
+  description: 
+  image: {fileID: 0}
+  type: 0
+  price: 0
+  owned: 0
+  equiped: 0
+  stopingPower: 0
+  balistic: 0
+  shields: 0
+--- !u!114 &7972237699546488832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4714675202154540973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f51d643e8b7defa45821d04244838b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 0
+  itemName: 
+  description: 
+  image: {fileID: 0}
+  type: 0
+  price: 0
+  owned: 0
+  equiped: 0
+  quantity: 0
+  maxQuantity: 0
+  boostValue: 0
+--- !u!114 &1087883900140197368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4714675202154540973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67fb1815d7e61bf488461d269da52d35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 0
+  itemName: Torch
+  description: 
+  image: {fileID: 0}
+  type: 2
+  price: 0
+  owned: 0
+  equiped: 0
+  damageRange: 6
+  damageDices: 3
+  damageBonus: 0
+  accuracy: 0
 --- !u!1 &5146918992306435370
 GameObject:
   m_ObjectHideFlags: 0
