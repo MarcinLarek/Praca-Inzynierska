@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
@@ -19,6 +20,9 @@ public class CrewManager : MonoBehaviour
     public GameObject recruitsScrollableList;
     public GameObject crewScrollableList;
     private CrewManagementHandler crewManagementHandler;
+
+    public TextMeshProUGUI header;
+    public TextMeshProUGUI description;
 
     public static CrewManager GetInstance()
     {
@@ -120,6 +124,14 @@ public class CrewManager : MonoBehaviour
                 (characterstats.maxHealth * 10);
 
             GameObject spawnedCharacter = Instantiate(character, new Vector3(0, 0), Quaternion.identity);
+
+            //Start - HooverInfoThings
+            //Robimy referencje aby wiedzialo ktore teksty zmieniac przy najechaniu myszka
+            HooverEvent spawnedCharacterHooverInfo = spawnedCharacter.GetComponent<HooverEvent>();
+            spawnedCharacterHooverInfo.header = header;
+            spawnedCharacterHooverInfo.description = description;
+            //End - HooverInfoThings
+
             //Dodajemy do listy przewijanej rekrutow
             spawnedCharacter.transform.SetParent(recruitsScrollableList.transform);
 
@@ -147,6 +159,14 @@ public class CrewManager : MonoBehaviour
             GameObject character = CharacterTemplate;
             //Respimy gaeombejct z ikona i danymi naszej postaci
             GameObject spawnedCharacter = Instantiate(character, new Vector3(0, 0), Quaternion.identity);
+
+            //Start - HooverInfoThings
+            //Robimy referencje aby wiedzialo ktore teksty zmieniac przy najechaniu myszka
+            HooverEvent spawnedCharacterHooverInfo = spawnedCharacter.GetComponent<HooverEvent>();
+            spawnedCharacterHooverInfo.header = header;
+            spawnedCharacterHooverInfo.description = description;
+            //End - HooverInfoThings
+
             spawnedCharacter.transform.SetParent(recruitsScrollableList.transform);
 
             spawnedCharacter.name = character.name;
@@ -167,6 +187,14 @@ public class CrewManager : MonoBehaviour
             GameObject character = CharacterTemplate;
             //Respimy gaeombejct z ikona i danymi naszej postaci
             GameObject spawnedCharacter = Instantiate(character, new Vector3(0, 0), Quaternion.identity);
+
+            //Start - HooverInfoThings
+            //Robimy referencje aby wiedzialo ktore teksty zmieniac przy najechaniu myszka
+            HooverEvent spawnedCharacterHooverInfo = spawnedCharacter.GetComponent<HooverEvent>();
+            spawnedCharacterHooverInfo.header = header;
+            spawnedCharacterHooverInfo.description = description;
+            //End - HooverInfoThings
+
             spawnedCharacter.transform.SetParent(crewScrollableList.transform);
 
             spawnedCharacter.name = character.name;

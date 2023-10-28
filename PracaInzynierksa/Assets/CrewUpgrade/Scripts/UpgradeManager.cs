@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -27,6 +28,9 @@ public class UpgradeManager : MonoBehaviour
     public GameObject consumablePrefab;
     public GameObject consumableSlot;
 
+    public TextMeshProUGUI header;
+    public TextMeshProUGUI description;
+
     public static UpgradeManager GetInstance()
     {
         return instance;
@@ -44,6 +48,7 @@ public class UpgradeManager : MonoBehaviour
         {
             GameObject character = CharacterTemplate;
             GameObject spawnedCharacter = Instantiate(character, new Vector3(0, 0), Quaternion.identity);
+
             spawnedCharacter.transform.SetParent(crewScrollableList.transform);
 
             spawnedCharacter.name = character.name;
@@ -58,6 +63,13 @@ public class UpgradeManager : MonoBehaviour
             Debug.Log(spawnedCharacter.GetComponent<CharacterStats>().classname.ToString());
             spawnedCharacter.GetComponent<CharacterIcon>().SetIcon();
             playerTeamIconList.Add(spawnedCharacter);
+
+            //Start - HooverInfoThings
+            //Robimy referencje aby wiedzialo ktore teksty zmieniac przy najechaniu myszka
+            HooverEvent spawnedCharacterHooverInfo = spawnedCharacter.GetComponent<HooverEvent>();
+            spawnedCharacterHooverInfo.header = header;
+            spawnedCharacterHooverInfo.description = description;
+            //End - HooverInfoThings
 
         }
 

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using static CharacterStats;
 
 public class StatsTableUpdater : MonoBehaviour
 {
     private CrewManager instance;
+    public HooverEvent classnamelabel;
     private void Awake()
     {
         instance = CrewManager.GetInstance();
@@ -24,6 +26,13 @@ public class StatsTableUpdater : MonoBehaviour
         if (activeCharacter)
         {
             CharacterStats stats = activeCharacter.GetComponent<CharacterStats>();
+            switch (stats.classname)
+            {
+                case Classes.DMG: classnamelabel.info = HooverEvent.InfoType.ClassDPS; break;
+                case Classes.SUPPORT: classnamelabel.info = HooverEvent.InfoType.ClassSUPPORT;break;
+                case Classes.TANK: classnamelabel.info = HooverEvent.InfoType.ClassTANK; break;
+            }
+
             transform.Find("CharacterName").gameObject.GetComponent<TextMeshProUGUI>().text = stats.charactername;
             transform.Find("Points-Health").gameObject.GetComponent<TextMeshProUGUI>().text = stats.maxHealth.ToString();
             transform.Find("Points-ActionPoints").gameObject.GetComponent<TextMeshProUGUI>().text = stats.maxActionPoints.ToString();

@@ -119,7 +119,7 @@ public class ClassAbilities : MonoBehaviour
         }
     }
 
-    //Heals ally for 1d10 +3 to his maximum HP. AP cost: 3
+    //Heals ally for 1d10 +INT to his maximum HP. AP cost: 3
     private void SupportAbilityOne()
     {
         BattleHandler battlehandler = BattleHandler.GetInstance();
@@ -128,6 +128,7 @@ public class ClassAbilities : MonoBehaviour
         if (battlehandler.selectedCharacter != null)//Sprawdzamy czy ktos wybrany
         {
             CharacterStats selectescharacter = battlehandler.selectedCharacter.GetComponent<CharacterStats>();
+            CharacterStats acvtivecharacter = battlehandler.activeCharacter.GetComponent<CharacterStats>();
             if (selectescharacter.isplayerteam == true)//Sprawdzamy czy przeciwnik czy swoj
             {
                 if (characterStats.actionPoints >= abilityCost)//Sprawdzamy ilosc Action Pointow
@@ -135,8 +136,8 @@ public class ClassAbilities : MonoBehaviour
                     if (selectescharacter.health != selectescharacter.maxHealth)//Sprawdzamy czy nie ma juz max HP
                     {
                         int roll = Random.Range(1, 10);
-                        int totalheal = roll + 3;
-                        Debug.Log($"{characterStats.name} healing {selectescharacter.name} for 1d10+3  - {roll}- Total roll - {totalheal}");
+                        int totalheal = roll + acvtivecharacter.inteligence;
+                        Debug.Log($"{characterStats.name} healing {selectescharacter.name} for 1d10+{acvtivecharacter.inteligence}  - {roll}- Total roll - {totalheal}");
                         selectescharacter.health += totalheal;
                         if (selectescharacter.health > selectescharacter.maxHealth)//Jesli uleczyliscmy o za duzo, zmniejszamy do limitu.
                         {
@@ -165,7 +166,7 @@ public class ClassAbilities : MonoBehaviour
         }
 
     }
-    //Heals all others allies for 2d4 to thier max HP. Ap cost: 4
+    //Heals all others allies for 2d4 + INT/2 to thier max HP. Ap cost: 4
     private void SupportAbilityTwo()
     {
         BattleHandler battlehandler = BattleHandler.GetInstance();
@@ -176,6 +177,7 @@ public class ClassAbilities : MonoBehaviour
             foreach (GameObject singlecharacter in battlehandler.charactersListinbattle)
             {
                 CharacterStats singlecharacterstats = singlecharacter.GetComponent<CharacterStats>();
+                CharacterStats acvtivecharacter = battlehandler.activeCharacter.GetComponent<CharacterStats>();
                 //Sprawdzamy czy:
                 //- Postac jest w naszej druzynie
                 //- Postac zyje
@@ -185,8 +187,8 @@ public class ClassAbilities : MonoBehaviour
                 {
                     int roll1 = Random.Range(1, 4);
                     int roll2 = Random.Range(1, 4);
-                    int totalheal = roll1 + roll2;
-                    Debug.Log($"{characterStats.name} healing {singlecharacterstats.name} for 2d4  - {roll1} , {roll2}- Total roll - {totalheal}");
+                    int totalheal = roll1 + roll2 + (acvtivecharacter.inteligence/2);
+                    Debug.Log($"{characterStats.name} healing {singlecharacterstats.name} for 2d4 + {acvtivecharacter.inteligence/2}  - {roll1} , {roll2}- Total roll - {totalheal}");
                     singlecharacterstats.health += totalheal;
                     if (singlecharacterstats.health > singlecharacterstats.maxHealth)//Jesli uleczyliscmy o za duzo, zmniejszamy do limitu.
                     {

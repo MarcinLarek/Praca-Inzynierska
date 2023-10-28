@@ -27,4 +27,5 @@ public class IconClickHandlerUpgrader : MonoBehaviour, IPointerClickHandler
         inventory = GameObject.Find("Canvas/CharacterInventory");
     }
 
+
 }

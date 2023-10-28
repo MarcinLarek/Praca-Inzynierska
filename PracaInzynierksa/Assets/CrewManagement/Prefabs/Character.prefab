@@ -243,6 +243,7 @@ GameObject:
   - component: {fileID: 8887152601300634531}
   - component: {fileID: 7415302884951898160}
   - component: {fileID: 6160194235972603110}
+  - component: {fileID: 6258411283403077387}
   m_Layer: 5
   m_Name: Character
   m_TagString: Untagged
@@ -301,6 +302,7 @@ MonoBehaviour:
   luck: 2
   inteligence: 3
   experience: 0
+  animatorr: {fileID: 0}
   price: 270
   bonusDamage: 0
   weaponID: 0
@@ -388,3 +390,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8267634638017998019}
   m_CullTransparentMesh: 1
+--- !u!114 &6258411283403077387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8267634638017998019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5625952019b4931499ce24efacc23921, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: {fileID: 0}
+  description: {fileID: 0}
+  info: 0
