@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 53117300}
   - component: {fileID: 53117299}
   m_Layer: 0
-  m_Name: InputField (TMP) (2)
+  m_Name: Label-Merchant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,18 +149,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 53117297}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 84.48875}
+  m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1376792621}
-  m_Father: {fileID: 206270547}
-  m_RootOrder: 8
+  m_Father: {fileID: 566865708}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 715.96, y: 514.88}
+  m_AnchoredPosition: {x: -159.68, y: 21.626617}
   m_SizeDelta: {x: 488.0834, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &53117299
@@ -397,7 +397,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 236188795476559914, guid: a54e1e961f309784387e34a22093ec43, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 450
+      value: 417
       objectReference: {fileID: 0}
     - target: {fileID: 236188795476559914, guid: a54e1e961f309784387e34a22093ec43, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1521,9 +1521,6 @@ RectTransform:
   - {fileID: 167531069}
   - {fileID: 457332860}
   - {fileID: 1883355890}
-  - {fileID: 490209964}
-  - {fileID: 978422786}
-  - {fileID: 53117298}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3608,7 +3605,7 @@ GameObject:
   - component: {fileID: 490209966}
   - component: {fileID: 490209965}
   m_Layer: 0
-  m_Name: InputField (TMP)
+  m_Name: Label-Inventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3621,18 +3618,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 490209963}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 84.48875}
+  m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1859823256}
-  m_Father: {fileID: 206270547}
-  m_RootOrder: 6
+  m_Father: {fileID: 8929504426769183571}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -715.96, y: 514.88}
+  m_AnchoredPosition: {x: -159.65326, y: 21.626617}
   m_SizeDelta: {x: 488.0834, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &490209965
@@ -3812,7 +3809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 236188795476559914, guid: a54e1e961f309784387e34a22093ec43, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 450
+      value: 417
       objectReference: {fileID: 0}
     - target: {fileID: 236188795476559914, guid: a54e1e961f309784387e34a22093ec43, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5085,7 +5082,7 @@ RectTransform:
   m_GameObject: {fileID: 793882580}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -17.103298}
-  m_LocalScale: {x: 1.6, y: 3, z: 0.9000001}
+  m_LocalScale: {x: 1.3595841, y: 2.54922, z: 0.7647661}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1891309986}
@@ -5094,7 +5091,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1112, y: 565}
+  m_AnchoredPosition: {x: -484, y: 100}
   m_SizeDelta: {x: 290, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &793882582
@@ -5351,7 +5348,7 @@ GameObject:
   - component: {fileID: 978422788}
   - component: {fileID: 978422787}
   m_Layer: 0
-  m_Name: InputField (TMP) (1)
+  m_Name: Label-Trade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5364,18 +5361,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 978422785}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1762869344}
-  m_Father: {fileID: 206270547}
-  m_RootOrder: 7
+  m_Father: {fileID: 167531069}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -35, y: 514.88}
+  m_AnchoredPosition: {x: -160, y: 21.626617}
   m_SizeDelta: {x: 488.0834, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &978422787
@@ -6629,7 +6626,7 @@ RectTransform:
   m_GameObject: {fileID: 1883355889}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.77017, y: 0.77017, z: 0.77017}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1408051823}
@@ -6638,7 +6635,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 642, y: -364}
+  m_AnchoredPosition: {x: -25, y: -142}
   m_SizeDelta: {x: 639.1229, y: 349.8854}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1883355891
@@ -6939,7 +6936,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 236188795476559914, guid: a54e1e961f309784387e34a22093ec43, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 450
+      value: 417
       objectReference: {fileID: 0}
     - target: {fileID: 236188795476559914, guid: a54e1e961f309784387e34a22093ec43, type: 3}
       propertyPath: m_LocalPosition.z
