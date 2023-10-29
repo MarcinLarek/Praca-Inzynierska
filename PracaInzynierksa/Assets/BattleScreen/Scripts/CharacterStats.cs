@@ -96,7 +96,7 @@ public class CharacterStats : MonoBehaviour
                 finaldamage -= (endurance - 2);
                 break;
             case Classes.TANK:
-                finaldamage -= (endurance + 4);
+                finaldamage -= (endurance + 3);
                 break;
         }
         ArmorInfo armorinfo = this.gameObject.GetComponent<ArmorInfo>();

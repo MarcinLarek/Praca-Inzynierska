@@ -14,6 +14,15 @@ public class CharacterIcon : MonoBehaviour
     {
         image = transform.Find("Icon").GetComponent<Image>();
     }
+    private void Start()
+    {
+        switch (this.gameObject.GetComponent<CharacterStats>().classname)
+        {
+            case CharacterStats.Classes.DMG: this.gameObject.GetComponent<HooverEvent>().info = HooverEvent.InfoType.ClassDPS; break;
+            case CharacterStats.Classes.SUPPORT: this.gameObject.GetComponent<HooverEvent>().info = HooverEvent.InfoType.ClassSUPPORT; break;
+            case CharacterStats.Classes.TANK: this.gameObject.GetComponent<HooverEvent>().info = HooverEvent.InfoType.ClassTANK; break;
+        }
+    }
 
     //Wczytujemy grafike ikony przypisanej do klasy
     public void SetIcon()
