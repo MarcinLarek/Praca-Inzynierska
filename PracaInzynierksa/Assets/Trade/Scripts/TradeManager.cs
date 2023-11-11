@@ -117,7 +117,8 @@ public class TradeManager : MonoBehaviour
             foreach (GameObject item in barterInv.itemsList)
             {
                 GameObject ItemToSpawn;
-                switch (item.GetComponent<ItemInfo>().type)
+                ItemInfo itemInfo = item.GetComponent<ItemInfo>();
+                switch (itemInfo.type)
                 {
                     case ItemInfo.ItemType.Weapon:
                         ItemToSpawn = GHItemPrefabWeapon;
@@ -133,42 +134,37 @@ public class TradeManager : MonoBehaviour
                         break;
                 }
 
-                ItemInfo itemInfo = item.GetComponent<ItemInfo>();
                 if (itemInfo.owned)
                 {
                     playerInfo.playerMoney += itemInfo.price;
                     itemInfo.owned = false;
 
-                    ItemToSpawn.GetComponent<ItemInfo>().AssignStats(item.GetComponent<ItemInfo>());
-                    merchantInv.AddItem(ItemToSpawn);
+                    GameObject GHItem = InventoryHandler.GetInstance().inventoryItems.
+                        Find((x) => x.GetComponent<ItemInfo>().itemId == itemInfo.itemId);
+                    InventoryHandler.GetInstance().inventoryItems.Remove(GHItem);
+                    Destroy(GHItem);
 
-                    foreach (GameObject GHItem in InventoryHandler.GetInstance().inventoryItems)
-                    {
-                        if (GHItem.GetComponent<ItemInfo>().itemId == itemInfo.itemId)
-                        {
-                            InventoryHandler.GetInstance().inventoryItems.Remove(GHItem);
-                            Destroy(GHItem);
-                            break;
-                        }
-                    }
+                    GameObject SpawnedGHItem = Instantiate(ItemToSpawn, new Vector3(0, 0), Quaternion.identity);
+                    SpawnedGHItem.GetComponent<ItemInfo>().AssignStats(itemInfo);
+                    InventoryHandler.GetInstance().traderItems.Add(SpawnedGHItem);
+                    merchantInv.AddItem(SpawnedGHItem);
                     Destroy(item);
+
                 }
                 else
                 {
                     playerInfo.playerMoney -= itemInfo.price;
                     itemInfo.owned = true;
+
                     ItemToSpawn.GetComponent<ItemInfo>().AssignStats(item.GetComponent<ItemInfo>());
                     GameObject SpawnedGHItem = Instantiate(ItemToSpawn, new Vector3(0, 0), Quaternion.identity);
                     InventoryHandler.GetInstance().inventoryItems.Add(SpawnedGHItem);
-                    foreach(GameObject Traderitem in InventoryHandler.GetInstance().traderItems)
-                    {
-                        if (Traderitem.GetComponent<ItemInfo>().itemId == itemInfo.itemId)
-                        {
-                            InventoryHandler.GetInstance().traderItems.Remove(Traderitem);
-                            Destroy(Traderitem);
-                            break;
-                        }
-                    }
+
+                    GameObject Traderitem = InventoryHandler.GetInstance().traderItems.
+                        Find((x) => x.GetComponent<ItemInfo>().itemId == itemInfo.itemId);
+                    InventoryHandler.GetInstance().traderItems.Remove(Traderitem);
+                    Destroy(Traderitem);
+
                     playerInv.AddItem(ItemToSpawn);
                     Destroy(item);
 

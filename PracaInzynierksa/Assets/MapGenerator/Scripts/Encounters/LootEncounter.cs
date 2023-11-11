@@ -21,6 +21,7 @@ public class LootEncounter : MonoBehaviour
     {
         GameObject ghItem = Instantiate(GHItemPrefab, new Vector3(0,0), Quaternion.identity);
         ghItem.GetComponent<ItemInfo>().AssignStats(itemToGive.GetComponent<ItemInfo>());
+        ghItem.GetComponent<ItemInfo>().owned = true;
         InventoryHandler.GetInstance().inventoryItems.Add(ghItem);
     }
 
@@ -28,10 +29,14 @@ public class LootEncounter : MonoBehaviour
     {
         if (collision.gameObject.name == "Player")
         {
-            GameObject newPopUpPanel = Instantiate(popUpPanel, new Vector3(8, -13), Quaternion.identity);
-            newPopUpPanel.transform.SetParent(GameObject.Find("Canvas").transform);
-            newPopUpPanel.GetComponent<RectTransform>().localPosition = new Vector3(8, 13);
-            newPopUpPanel.GetComponent<EncounterPopUp>().EncnounterEntry(this.gameObject);
+            if (PlayerMovement.GetInstance().enableMovement)
+            {
+                PlayerMovement.GetInstance().enableMovement = false;
+                GameObject newPopUpPanel = Instantiate(popUpPanel, new Vector3(8, -13), Quaternion.identity);
+                newPopUpPanel.transform.SetParent(GameObject.Find("Canvas").transform);
+                newPopUpPanel.GetComponent<RectTransform>().localPosition = new Vector3(8, 13);
+                newPopUpPanel.GetComponent<EncounterPopUp>().EncnounterEntry(this.gameObject);
+            }
         }
     }
 }

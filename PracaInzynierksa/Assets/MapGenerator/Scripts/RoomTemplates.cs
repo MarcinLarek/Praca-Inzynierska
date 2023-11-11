@@ -123,7 +123,7 @@ public class RoomTemplates : MonoBehaviour
         //Kazde pomieszczenie ma 50% szany na wygenerowanie
         foreach (GameObject room in rooms)
         {
-            if(room.name != "closedRoom(Clone)")
+            if(room.name != "closedRoom(Clone)" && room.name.Substring(0, 5) != "Spawn")
             {
                 if (room.name.Substring(0,4) == "Boss") //Spawnujemy Ecnountery do pomieszczenia z bossem
                 {

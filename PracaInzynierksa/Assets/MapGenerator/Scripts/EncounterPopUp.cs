@@ -25,12 +25,14 @@ public class EncounterPopUp : MonoBehaviour
     {
         encounter.GetComponent<LootEncounter>().GiveItem();
         Destroy(encounter);
+        PlayerMovement.GetInstance().enableMovement = true;
         Destroy(this.gameObject);
     }
 
     public void ThrowItemButton()
     {
         Destroy(encounter);
+        PlayerMovement.GetInstance().enableMovement = true;
         Destroy(this.gameObject);
     }
 }

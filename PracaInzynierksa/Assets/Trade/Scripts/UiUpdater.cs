@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -14,6 +15,8 @@ public class UiUpdater : MonoBehaviour
     public GameObject InfoPanelItemName;
     public GameObject InfoPanelItemDescription;
     public GameObject InfoPanelPrice;
+    public TextMeshProUGUI Stats;
+
 
     private void Awake()
     {
@@ -51,5 +54,27 @@ public class UiUpdater : MonoBehaviour
         InfoPanelItemName.GetComponent<TextMeshProUGUI>().text = itemInfo.itemName;
         InfoPanelItemDescription.GetComponent<TextMeshProUGUI>().text = itemInfo.description;
         InfoPanelPrice.GetComponent<TextMeshProUGUI>().text = itemInfo.price.ToString();
+        switch (itemInfo.type)
+        {
+            case ItemInfo.ItemType.Weapon:
+                WeaponInfo weaponInfo = item.GetComponent<WeaponInfo>();
+                Stats.text = $"Damage: {weaponInfo.damageDices}d{weaponInfo.damageRange}";
+                if (weaponInfo.damageBonus > 0) Stats.text += $"+{weaponInfo.damageBonus}";
+                Stats.text += $"{Environment.NewLine}Accuracy: +{weaponInfo.accuracy}";
+                break;
+            case ItemInfo.ItemType.Armor:
+                ArmorInfo armorInfo = item.GetComponent<ArmorInfo>();
+                Stats.text = $"Stopping Power: {armorInfo.stopingPower}";
+                break;
+            case ItemInfo.ItemType.Consumable:
+                ConsumableInfo consumableInfo = item.GetComponent<ConsumableInfo>();
+                Stats.text = $"Action: Heal {Environment.NewLine}" +
+                    $"Boost Value: {consumableInfo.boostValue} {Environment.NewLine}" +
+                    $"Uses: {consumableInfo.quantity}/{consumableInfo.maxQuantity}";
+                break;
+            default:
+                Stats.text = "";
+                break;
+        }
     }
 }
