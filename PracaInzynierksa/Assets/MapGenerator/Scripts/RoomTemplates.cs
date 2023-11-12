@@ -100,7 +100,7 @@ public class RoomTemplates : MonoBehaviour
                 //|--- To jest otstatnia rzecz jaka sie wykona wiec po jej wykonaniu chowamy LoadingScreena
                 // i wlaczamy kontrole gracza
                 LoadingScreen.GetInstance().StartFadeOutAndDisable();
-                PlayerMovement.GetInstance().enableMovement = true;
+                
 
 
             }
@@ -112,7 +112,7 @@ public class RoomTemplates : MonoBehaviour
         else
         {
             LoadingScreen.GetInstance().StartFadeOutAndDisable();
-            PlayerMovement.GetInstance().enableMovement = true;
+            
         }
     }
 

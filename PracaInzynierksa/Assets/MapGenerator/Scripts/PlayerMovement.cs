@@ -9,7 +9,8 @@ public class PlayerMovement : MonoBehaviour
     {
         return instance;
     }
-    private void Awake()
+
+    private void Start()
     {
         instance = this; // Singleton
     }
@@ -38,4 +39,13 @@ public class PlayerMovement : MonoBehaviour
         transform.position = pos;
     }
 
+    public void DisableMovement()
+    {
+        enableMovement = false;
+    }
+
+    public void EnableleMovement()
+    {
+        enableMovement=true;
+    }
 }

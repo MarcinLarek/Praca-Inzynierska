@@ -68,6 +68,10 @@ public class LoadingScreen : MonoBehaviour
         }
 
         // Disable the GameObject after fading out
-        visuals.SetActive(false);
+        if (visuals.activeSelf)
+        {
+            visuals.SetActive(false);
+            PlayerMovement.GetInstance().enableMovement = true;
+        }
     }
 }
