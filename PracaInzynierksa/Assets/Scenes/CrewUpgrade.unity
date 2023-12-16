@@ -2811,19 +2811,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4833777354095347984, guid: 465ce1f41e1a50441ad344510c667234, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4833777354095347984, guid: 465ce1f41e1a50441ad344510c667234, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4833777354095347984, guid: 465ce1f41e1a50441ad344510c667234, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 67.735
       objectReference: {fileID: 0}
     - target: {fileID: 4833777354095347984, guid: 465ce1f41e1a50441ad344510c667234, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 4916091062553392119, guid: 465ce1f41e1a50441ad344510c667234, type: 3}
       propertyPath: m_SizeDelta.y
@@ -3683,19 +3683,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7653408377659684178, guid: 465ce1f41e1a50441ad344510c667234, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7653408377659684178, guid: 465ce1f41e1a50441ad344510c667234, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7653408377659684178, guid: 465ce1f41e1a50441ad344510c667234, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 67.735
       objectReference: {fileID: 0}
     - target: {fileID: 7653408377659684178, guid: 465ce1f41e1a50441ad344510c667234, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 7670515167775397125, guid: 465ce1f41e1a50441ad344510c667234, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4305,7 +4305,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 12e0b1eb1bc8ecb4880bbac6c0120b4a, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 81e759e6833d54c15ac89e4d80555b97, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 27dd66278508aeb4cb6c3fe6d0bb6673, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
