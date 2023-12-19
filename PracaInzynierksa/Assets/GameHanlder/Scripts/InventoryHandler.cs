@@ -4,7 +4,6 @@ using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
 using static ItemInfo;
-using static UnityEditor.Progress;
 
 public class InventoryHandler : MonoBehaviour, IDataPersistence
 {
